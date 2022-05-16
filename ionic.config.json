@@ -1,0 +1,7 @@
+{
+  "name": "Mimbo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
