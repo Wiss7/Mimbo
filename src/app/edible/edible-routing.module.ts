@@ -9,7 +9,7 @@ const routes: Routes = [
     component: EdiblePage,
   },
   {
-    path: 'details/:id',
+    path: 'details/:name',
     loadChildren: () =>
       import('./details/details.module').then((m) => m.DetailsPageModule),
   },

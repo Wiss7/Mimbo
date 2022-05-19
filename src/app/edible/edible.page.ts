@@ -9,27 +9,32 @@ import { foodlist } from './foodlist';
 export class EdiblePage implements OnInit {
   foodList = [];
   filteredFoodList = [];
+  isLoading = false;
   constructor() {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.foodList = foodlist;
     this.filteredFoodList = [
-      ...this.foodList.sort((a, b) => a.food.localeCompare(b.food)),
+      ...this.foodList.sort((a, b) => a.name.localeCompare(b.name)),
     ];
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 700);
   }
 
   onFilterChanged(searchBar) {
     if (searchBar.value.trim().length <= 0) {
       this.filteredFoodList = [
-        ...this.foodList.sort((a, b) => a.food.localeCompare(b.food)),
+        ...this.foodList.sort((a, b) => a.name.localeCompare(b.name)),
       ];
     }
     this.filteredFoodList = [
       ...this.foodList
         .filter((f) =>
-          f.food.toLowerCase().includes(searchBar.value.toLowerCase())
+          f.name.toLowerCase().includes(searchBar.value.toLowerCase())
         )
-        .sort((a, b) => a.food.localeCompare(b.food)),
+        .sort((a, b) => a.name.localeCompare(b.name)),
     ];
   }
 }

@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>details</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/edible"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{selectedFood.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content fullscreen>
+  <div class="ion-text-center ion-padding" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div *ngIf="!isLoading" class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2"
+          ><ion-card class="ion-text-center">
+            <img [src]="imageUrl" />
+            <ion-card-header>
+              <ion-card-title
+                >Can dogs eat
+                {{selectedFood.name.toLowerCase()}}?</ion-card-title
+              >
+            </ion-card-header>
+            <ion-card-content>
+              <ion-label [color]="answerClass">
+                <h1>{{answerText}}</h1></ion-label
+              >
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <h2><u>What You Should Know</u></h2>
+          <ion-text color="medium"><h4>{{selectedFood.notes}}</h4></ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

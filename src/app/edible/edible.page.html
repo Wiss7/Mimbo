@@ -14,21 +14,27 @@
   ></ion-searchbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-text-center ion-padding" *ngIf="filteredFoodList.length<=0">
+<ion-content fullscreen>
+  <div class="ion-text-center ion-padding" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div
+    class="ion-text-center ion-padding"
+    *ngIf="!isLoading && filteredFoodList.length<=0"
+  >
     <ion-text color="primary">No Results Found.</ion-text>
   </div>
   <ion-virtual-scroll
     [items]="filteredFoodList"
     approxItemHeight="48"
-    *ngIf="filteredFoodList.length>0"
+    *ngIf="!isLoading && filteredFoodList.length>0"
   >
     <ion-item
       *virtualItem="let foodItem"
-      [routerLink]="['/edible/details/',foodItem.food]"
+      [routerLink]="['/edible/details/',foodItem.name]"
       detail
     >
-      <ion-label>{{foodItem.food}}</ion-label>
+      <ion-label>{{foodItem.name}}</ion-label>
     </ion-item>
   </ion-virtual-scroll>
 </ion-content>
