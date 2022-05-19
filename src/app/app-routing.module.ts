@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'edible',
+    loadChildren: () => import('./edible/edible.module').then( m => m.EdiblePageModule)
+  },
 ];
 
 @NgModule({
