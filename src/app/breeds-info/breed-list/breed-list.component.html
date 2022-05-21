@@ -1,0 +1,31 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="onClose()"
+        ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+      ></ion-button>
+    </ion-buttons>
+    <ion-title>Select Breed</ion-title>
+  </ion-toolbar>
+  <ion-searchbar
+    (ionChange)="onFilterChanged(searchBar)"
+    #searchBar
+    *ngIf="!isLoading"
+  ></ion-searchbar>
+</ion-header>
+<ion-content>
+  <div class="ion-text-center ion-padding" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <ion-list *ngIf="!isLoading">
+    <ion-item
+      *ngFor="let breed of filteredBreedsList"
+      (click)="onSelect(breed)"
+    >
+      <ion-avatar slot="start">
+        <ion-img [src]="breed.image.url"></ion-img
+      ></ion-avatar>
+      <ion-text> {{ breed.name }}</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

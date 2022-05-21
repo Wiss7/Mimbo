@@ -1,0 +1,66 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dog Breeds</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div class="ion-text-center" *ngIf="!isLoading">
+    <ion-button color="primary" (click)="randomizeBreed()">
+      <ion-icon name="shuffle-outline" slot="start"></ion-icon>
+      Random Breed
+    </ion-button>
+    <ion-button color="primary" (click)="selectBreed()">
+      <ion-icon name="list-outline" slot="start"></ion-icon>
+      Select Breed
+    </ion-button>
+  </div>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col sizeSm="8" offsetSm="2">
+        <ion-card>
+          <img [src]="selectedBreed.imageUrl" width="100%" />
+          <ion-card-header>
+            <ion-card-subtitle>Breed Name</ion-card-subtitle>
+            <ion-card-title>{{selectedBreed.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.breedGroup">
+              <h5>Breed Group:</h5>
+              <ion-label>{{selectedBreed.breedGroup}}</ion-label>
+            </div>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.lifeSpan">
+              <h5>Life Span:</h5>
+              <ion-label>{{selectedBreed.lifeSpan}} on average</ion-label>
+            </div>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.origin">
+              <h5>Origin:</h5>
+              <ion-label>{{selectedBreed.origin}}</ion-label>
+            </div>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.weightKg">
+              <h5>Weight:</h5>
+              <ion-label>Around {{selectedBreed.weightKg}} kg </ion-label>
+            </div>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.heightCM">
+              <h5>Height:</h5>
+              <ion-label>Around {{selectedBreed.heightCM}} cm</ion-label>
+            </div>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.temperament">
+              <h5>Temperament:</h5>
+              <ion-label>{{selectedBreed.temperament}} </ion-label>
+            </div>
+            <div class="ion-padding-bottom" *ngIf="selectedBreed.bredFor">
+              <h5>Bred For:</h5>
+              <ion-label>{{selectedBreed.bredFor}}</ion-label>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
