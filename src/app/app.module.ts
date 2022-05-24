@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { Network } from '@awesome-cordova-plugins/network';
+import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,10 @@ import { Network } from '@awesome-cordova-plugins/network';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    NativeAudio,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

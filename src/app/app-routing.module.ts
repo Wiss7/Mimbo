@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'breeds-info',
     loadChildren: () => import('./breeds-info/breeds-info.module').then( m => m.BreedsInfoPageModule)
   },
+  {
+    path: 'training-tools',
+    loadChildren: () => import('./training-tools/training-tools.module').then( m => m.TrainingToolsPageModule)
+  },
 ];
 
 @NgModule({

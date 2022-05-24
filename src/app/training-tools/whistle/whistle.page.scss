@@ -1,0 +1,12 @@
+.toggle {
+  width: 150px;
+  height: 70px;
+}
+.toggle i {
+  font-size: 48px;
+  color: var(--ion-color-light);
+}
+
+.toggle i.active {
+  color: var(--ion-color-success);
+}
