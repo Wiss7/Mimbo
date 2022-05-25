@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'training-tools',
     loadChildren: () => import('./training-tools/training-tools.module').then( m => m.TrainingToolsPageModule)
   },
+  {
+    path: 'body-language',
+    loadChildren: () => import('./body-language/body-language.module').then( m => m.BodyLanguagePageModule)
+  },
 ];
 
 @NgModule({

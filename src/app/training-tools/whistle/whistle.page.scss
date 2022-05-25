@@ -2,11 +2,11 @@
   width: 150px;
   height: 70px;
 }
-.toggle i {
+.toggle ion-icon {
   font-size: 48px;
   color: var(--ion-color-light);
 }
 
-.toggle i.active {
+.toggle ion-icon.active {
   color: var(--ion-color-success);
 }
