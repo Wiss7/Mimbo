@@ -11,13 +11,13 @@
     <ion-spinner color="primary"></ion-spinner>
   </div>
   <div class="ion-text-center" *ngIf="!isLoading">
-    <ion-button color="primary" (click)="randomizeBreed()">
-      <ion-icon name="shuffle-outline" slot="start"></ion-icon>
-      Random Breed
-    </ion-button>
     <ion-button color="primary" (click)="selectBreed()">
       <ion-icon name="list-outline" slot="start"></ion-icon>
       Select Breed
+    </ion-button>
+    <ion-button color="primary" (click)="randomizeBreed()">
+      <ion-icon name="shuffle-outline" slot="start"></ion-icon>
+      Random Breed
     </ion-button>
   </div>
   <ion-grid *ngIf="!isLoading">
