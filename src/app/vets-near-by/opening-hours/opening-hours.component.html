@@ -1,0 +1,17 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="onClose()"
+        ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+      ></ion-button>
+    </ion-buttons>
+    <ion-title>{{ vet.name }}</ion-title>
+  </ion-toolbar></ion-header
+>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let day of vet.openingHours">
+      <ion-text>{{ day }}</ion-text>
+    </ion-item>
+  </ion-list>
+</ion-content>

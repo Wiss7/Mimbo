@@ -19,15 +19,31 @@ const routes: Routes = [
   },
   {
     path: 'breeds-info',
-    loadChildren: () => import('./breeds-info/breeds-info.module').then( m => m.BreedsInfoPageModule)
+    loadChildren: () =>
+      import('./breeds-info/breeds-info.module').then(
+        (m) => m.BreedsInfoPageModule
+      ),
   },
   {
     path: 'training-tools',
-    loadChildren: () => import('./training-tools/training-tools.module').then( m => m.TrainingToolsPageModule)
+    loadChildren: () =>
+      import('./training-tools/training-tools.module').then(
+        (m) => m.TrainingToolsPageModule
+      ),
   },
   {
     path: 'body-language',
-    loadChildren: () => import('./body-language/body-language.module').then( m => m.BodyLanguagePageModule)
+    loadChildren: () =>
+      import('./body-language/body-language.module').then(
+        (m) => m.BodyLanguagePageModule
+      ),
+  },
+  {
+    path: 'vets-near-by',
+    loadChildren: () =>
+      import('./vets-near-by/vets-near-by.module').then(
+        (m) => m.VetsNearByPageModule
+      ),
   },
 ];
 

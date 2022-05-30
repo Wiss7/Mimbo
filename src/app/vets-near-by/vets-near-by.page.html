@@ -1,0 +1,92 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Find a Vet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <app-location-picker
+          (locationSet)="findVets($event)"
+        ></app-location-picker>
+      </ion-col>
+    </ion-row>
+    <ion-row
+      *ngIf="isLocationSelected && !isLoading"
+      class="ion-text-center ion-padding"
+    >
+      <ion-col>
+        <div *ngIf="vetsDetails.length>0">
+          <ion-card *ngFor="let vet of vetsDetails">
+            <ion-card-header>
+              <ion-card-title>{{vet.name}}</ion-card-title>
+              <ion-card-subtitle *ngIf="vet.rating"
+                >Rating: {{vet.rating + "/5"}} ({{vet.ratingsTotal}} reviews)
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button
+                fill="clear"
+                size="small"
+                (click)="goToDirections(vet.location)"
+                ><ion-icon name="compass-outline" slot="start"></ion-icon
+                >Directions</ion-button
+              >
+              <ion-button
+                *ngIf="vet.website"
+                size="small"
+                fill="clear"
+                (click)="goToWebsite(vet.website)"
+                ><ion-icon name="compass-outline" slot="start"></ion-icon
+                >Website</ion-button
+              >
+              <ion-button
+                *ngIf="vet.phoneNumber"
+                size="small"
+                fill="clear"
+                (click)="callVet(vet.phoneNumber)"
+                ><ion-icon name="call-outline" slot="start"></ion-icon
+                >{{vet.phoneNumber}}</ion-button
+              >
+              <ion-button
+                *ngIf="vet.openingHours"
+                size="small"
+                fill="clear"
+                (click)="viewOpeningHours(vet)"
+                ><ion-icon name="compass-outline" slot="start"></ion-icon>View
+                Opening Hours</ion-button
+              >
+            </ion-card-content>
+          </ion-card>
+        </div>
+        <div
+          *ngIf=" vetsDetails.length <= 0"
+          class="ion-text-center ion-padding"
+        >
+          <ion-text>No vets near this location are found.</ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div
+          *ngIf="!isLocationSelected && !isLoading"
+          class="ion-text-center ion-padding"
+        >
+          <ion-text>Select a location to find vets near you.</ion-text>
+        </div>
+        <div
+          *ngIf="isLocationSelected && isLoading"
+          class="ion-text-center ion-padding"
+        >
+          <ion-spinner color="primary"></ion-spinner>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
