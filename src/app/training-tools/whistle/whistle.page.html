@@ -10,6 +10,32 @@
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-label color="primary"
+          ><small>Choose the frequency your dog responds to</small></ion-label
+        >
+        <ion-segment
+          value="11200"
+          scrollable
+          color="primary"
+          (ionChange)="segmentChanged($event)"
+        >
+          <ion-segment-button value="11200">
+            <small>11200Hz</small>
+          </ion-segment-button>
+          <ion-segment-button value="12200">
+            <small>12200Hz</small>
+          </ion-segment-button>
+          <ion-segment-button value="16000">
+            <small>16000Hz</small>
+          </ion-segment-button>
+          <ion-segment-button value="20000">
+            <small>20000Hz</small>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col
         size="10"
         offset="1"

@@ -81,6 +81,7 @@ export class LocationPickerComponent implements OnInit {
       .create({
         header: 'Could not fetch location',
         message: 'Please use the map to pick a location.',
+        buttons: [{ text: 'Okay' }],
       })
       .then((alertEl) => alertEl.present());
   }
