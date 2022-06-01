@@ -45,6 +45,18 @@ const routes: Routes = [
         (m) => m.VetsNearByPageModule
       ),
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'signin',
+    loadChildren: () => import('./auth/signin/signin.module').then( m => m.SigninPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./auth/signup/signup.module').then( m => m.SignupPageModule)
+  },
 ];
 
 @NgModule({
