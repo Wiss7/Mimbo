@@ -2,8 +2,5 @@
 	"appId": "com.mimbo.app",
 	"appName": "Mimbo",
 	"webDir": "www",
-	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://192.168.50.25:8100"
-	}
+	"bundledWebRuntime": false
 }

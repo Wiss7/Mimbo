@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { RegistrationDto } from '../auth.dto';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +12,14 @@ import { Router } from '@angular/router';
 })
 export class SignupPage implements OnInit {
   passwordsMatch = true;
-  constructor(private router: Router) {}
+  redirectURL: UrlTree;
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private alertCtrl: AlertController,
+    private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
+  ) {}
 
   ngOnInit() {}
   goToSignin() {
@@ -24,5 +34,54 @@ export class SignupPage implements OnInit {
       return;
     }
     this.passwordsMatch = true;
+    this.loadingCtrl.create({ keyboardClose: true }).then((loadingEl) => {
+      loadingEl.present();
+      const registerDTO: RegistrationDto = {
+        email: form.value.email.replace(/\s/g, '').toLowerCase(),
+        username: form.value.username.replace(/\s/g, '').toLowerCase(),
+        password: form.value.password,
+        confirmPassword: form.value.confirmPassword,
+        firstName: form.value.firstName,
+        lastName: form.value.lastName,
+      };
+      this.authService.register(registerDTO).subscribe(
+        (resp) => {
+          if (resp.isRegistrationSuccessful) {
+            loadingEl.dismiss();
+            const params = this.route.snapshot.queryParams;
+            if (params.redirectURL) {
+              this.redirectURL = params.redirectURL;
+            }
+
+            if (this.redirectURL) {
+              this.router
+                .navigateByUrl(this.redirectURL)
+                .catch(() => this.router.navigate(['home']));
+            } else {
+              this.router.navigate(['home']);
+            }
+          } else {
+            loadingEl.dismiss();
+            this.alertCtrl
+              .create({
+                header: 'Registration Failed',
+                message: resp.error,
+                buttons: [{ text: 'Okay' }],
+              })
+              .then((alertEl) => alertEl.present());
+          }
+        },
+        (err) => {
+          loadingEl.dismiss();
+          this.alertCtrl
+            .create({
+              header: 'Bad Request',
+              message: 'Oops! Something went wrong. Try again later.',
+              buttons: [{ text: 'Okay' }],
+            })
+            .then((alertEl) => alertEl.present());
+        }
+      );
+    });
   }
 }

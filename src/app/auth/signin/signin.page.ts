@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { AlertController, LoadingController } from '@ionic/angular';
+import { LoginDTO } from '../auth.dto';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -9,7 +11,14 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-  constructor(private loadingCtrl: LoadingController, private router: Router) {}
+  redirectURL: UrlTree;
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private alertCtrl: AlertController,
+    private route: ActivatedRoute,
+    private loadingCtrl: LoadingController
+  ) {}
 
   ngOnInit() {}
 
@@ -20,14 +29,54 @@ export class SigninPage implements OnInit {
     this.loadingCtrl
       .create({
         keyboardClose: true,
-        message: 'Logging In',
       })
-      .then((loadingEl) => loadingEl.present());
+      .then((loadingEl) => {
+        loadingEl.present();
+        const loginDto: LoginDTO = {
+          username: form.value.email,
+          password: form.value.password,
+        };
+        this.authService.login(loginDto).subscribe(
+          (resp) => {
+            if (resp.isLoginSuccessful) {
+              loadingEl.dismiss();
+              const params = this.route.snapshot.queryParams;
+              if (params.redirectURL) {
+                this.redirectURL = params.redirectURL;
+              }
 
-    setTimeout(() => {
-      this.loadingCtrl.dismiss();
-      this.router.navigateByUrl('/profile');
-    }, 1000);
+              if (this.redirectURL) {
+                this.router
+                  .navigateByUrl(this.redirectURL)
+                  .catch(() => this.router.navigate(['home']));
+              } else {
+                this.router.navigate(['home']);
+              }
+            } else {
+              loadingEl.dismiss();
+              this.alertCtrl
+                .create({
+                  header: 'Login Failed',
+                  message: resp.error,
+                  buttons: [{ text: 'Okay' }],
+                })
+                .then((alerEl) => {
+                  alerEl.present();
+                });
+            }
+          },
+          (err) => {
+            loadingEl.dismiss();
+            this.alertCtrl
+              .create({
+                header: 'Bad Request',
+                message: 'Oops! Something went wrong. Try again later.',
+                buttons: [{ text: 'Okay' }],
+              })
+              .then((alertEl) => alertEl.present());
+          }
+        );
+      });
   }
 
   goToSignup() {
