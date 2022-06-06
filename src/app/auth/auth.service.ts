@@ -22,7 +22,7 @@ export class AuthService {
     return this._user.asObservable().pipe(
       map((user) => {
         if (user) {
-          return !!user.token;
+          return !!user._token;
         } else {
           return false;
         }
@@ -99,11 +99,15 @@ export class AuthService {
           this._user.next(user);
         }
       }),
-      map((user) => !!user)
+      // eslint-disable-next-line arrow-body-style
+      map((user) => {
+        return !!user;
+      })
     );
   }
   logout() {
     this._user.next(null);
+    Storage.remove({ key: 'authData' });
   }
 
   private storeAuthData(user: User) {
