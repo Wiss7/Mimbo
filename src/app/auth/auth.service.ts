@@ -1,14 +1,20 @@
 /* eslint-disable no-underscore-dangle */
-import { HttpClient, JsonpClientBackend } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  JsonpClientBackend,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap, take } from 'rxjs/operators';
 import {
   LoginDTO,
   LoginResponseDTO,
   RegistrationDto,
   RegistrationResponseDto,
+  UpdateProfileDTO,
+  UpdateProfileResponseDTO,
 } from './auth.dto';
 import { User } from './user.model';
 import { Storage } from '@capacitor/storage';
@@ -40,6 +46,23 @@ export class AuthService {
       })
     );
   }
+
+  get token() {
+    return this._user.asObservable().pipe(
+      map((user) => {
+        if (user) {
+          return user._token;
+        } else {
+          return null;
+        }
+      })
+    );
+  }
+
+  get user() {
+    return this._user.asObservable();
+  }
+
   register(body: RegistrationDto) {
     const url = environment.apiUrl + '/api/auth/register';
     return this.http.post<RegistrationResponseDto>(url, body).pipe(
@@ -108,6 +131,33 @@ export class AuthService {
   logout() {
     this._user.next(null);
     Storage.remove({ key: 'authData' });
+  }
+
+  updateProfile(data: UpdateProfileDTO) {
+    const url = environment.apiUrl + '/api/auth/update';
+    return this.token.pipe(
+      take(1),
+      map((res) => {
+        const token = res;
+        const headers: HttpHeaders = new HttpHeaders();
+        headers.append(
+          'Content-Type',
+          'application/x-www-form-urlencoded; charset=UTF-8'
+        );
+        headers.append('Authorization', token);
+        return this.http.post(url, data, { headers }).pipe(
+          catchError((err) => {
+            alert('hi');
+            return throwError(err);
+          })
+        );
+      })
+    );
+  }
+
+  deleteProfile(id: number) {
+    const url = environment.apiUrl + '/api/auth/update?userId=' + id;
+    return this.http.delete<boolean>(url);
   }
 
   private storeAuthData(user: User) {

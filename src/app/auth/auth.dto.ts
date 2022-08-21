@@ -36,3 +36,20 @@ export interface LoginResponseDTO {
   username: string;
   tokenExpirationDate: Date;
 }
+
+export interface UpdateProfileDTO {
+  id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+}
+
+export interface UpdateProfileResponseDTO {
+  isUpdateSuccessful: boolean;
+  error: string;
+  userId: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  newToken: string;
+}
