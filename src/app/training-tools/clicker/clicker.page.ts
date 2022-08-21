@@ -16,10 +16,8 @@ export class ClickerPage implements OnInit, OnDestroy {
   }
   playAudio() {
     this.nativeAudio.play('clicker').then(
-      () => console.log('success'),
-      (err) => {
-        console.log('error');
-      }
+      () => {},
+      (err) => {}
     );
   }
 }

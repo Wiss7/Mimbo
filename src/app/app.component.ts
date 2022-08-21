@@ -37,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
       script.type = 'text/javascript';
       script.src = name;
       document.getElementsByTagName('head')[0].appendChild(script);
-      console.log('Script Loaded');
       resolve(script);
     });
   }

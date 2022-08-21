@@ -21,19 +21,16 @@ export class ProfilePage implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.userSub = this.authService.user
-      .pipe(
-        take(1),
-        tap((user) => {
-          this.user = user;
-          this.email = user.email;
-          this.username = user.username;
-          this.firstName = user.firstName;
-          this.lastName = user.lastName;
-          this.userId = user.id;
-        })
-      )
-      .subscribe();
+    this.userSub = this.authService.user.subscribe((user) => {
+      if (user) {
+        this.user = user;
+        this.email = user.email;
+        this.username = user.username;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.userId = user.id;
+      }
+    });
   }
   logout() {
     this.authService.logout();
@@ -52,7 +49,7 @@ export class ProfilePage implements OnInit, OnDestroy {
     };
     this.updateSub = this.authService.updateProfile(dto).subscribe(
       (res) => {
-        console.log('success');
+        console.log(res);
       },
       () => {
         console.log('error');

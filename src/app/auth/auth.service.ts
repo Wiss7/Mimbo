@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { catchError, map, tap, take } from 'rxjs/operators';
+import { catchError, map, tap, take, switchMap } from 'rxjs/operators';
 import {
   LoginDTO,
   LoginResponseDTO,
@@ -77,8 +77,8 @@ export class AuthService {
             resp.token,
             resp.tokenExpirationDate
           );
-          this._user.next(user);
           this.storeAuthData(user);
+          this._user.next(user);
         }
       })
     );
@@ -98,8 +98,8 @@ export class AuthService {
             resp.token,
             resp.tokenExpirationDate
           );
-          this._user.next(user);
           this.storeAuthData(user);
+          this._user.next(user);
         }
       })
     );
@@ -137,20 +137,35 @@ export class AuthService {
     const url = environment.apiUrl + '/api/auth/update';
     return this.token.pipe(
       take(1),
-      map((res) => {
+      switchMap((res) => {
         const token = res;
-        const headers: HttpHeaders = new HttpHeaders();
-        headers.append(
-          'Content-Type',
-          'application/x-www-form-urlencoded; charset=UTF-8'
-        );
-        headers.append('Authorization', token);
-        return this.http.post(url, data, { headers }).pipe(
-          catchError((err) => {
-            alert('hi');
-            return throwError(err);
+        return this.http
+          .post(url, data, {
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'Content-Type': 'application/json',
+              authorization: `Bearer ${token}`,
+            },
           })
-        );
+          .pipe(
+            tap((resp: UpdateProfileResponseDTO) => {
+              const user = new User(
+                resp.userId,
+                resp.email,
+                resp.username,
+                resp.firstName,
+                resp.lastName,
+                resp.token,
+                resp.tokenExpirationDate
+              );
+              this.storeAuthData(user);
+              this._user.next(user);
+            }),
+            catchError((err) => {
+              console.log(err);
+              return throwError(err);
+            })
+          );
       })
     );
   }

@@ -46,10 +46,12 @@ export interface UpdateProfileDTO {
 
 export interface UpdateProfileResponseDTO {
   isUpdateSuccessful: boolean;
+  token: string;
   error: string;
   userId: number;
   firstName: string;
   lastName: string;
+  email: string;
   username: string;
-  newToken: string;
+  tokenExpirationDate: Date;
 }
