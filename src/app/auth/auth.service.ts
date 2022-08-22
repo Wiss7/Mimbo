@@ -139,39 +139,27 @@ export class AuthService {
       take(1),
       switchMap((res) => {
         const token = res;
-        return this.http
-          .post(url, data, {
-            headers: {
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              'Content-Type': 'application/json',
-              authorization: `Bearer ${token}`,
-            },
+        return this.http.post(url, data).pipe(
+          tap((resp: UpdateProfileResponseDTO) => {
+            const user = new User(
+              resp.userId,
+              resp.email,
+              resp.username,
+              resp.firstName,
+              resp.lastName,
+              resp.token,
+              resp.tokenExpirationDate
+            );
+            this.storeAuthData(user);
+            this._user.next(user);
           })
-          .pipe(
-            tap((resp: UpdateProfileResponseDTO) => {
-              const user = new User(
-                resp.userId,
-                resp.email,
-                resp.username,
-                resp.firstName,
-                resp.lastName,
-                resp.token,
-                resp.tokenExpirationDate
-              );
-              this.storeAuthData(user);
-              this._user.next(user);
-            }),
-            catchError((err) => {
-              console.log(err);
-              return throwError(err);
-            })
-          );
+        );
       })
     );
   }
 
   deleteProfile(id: number) {
-    const url = environment.apiUrl + '/api/auth/update?userId=' + id;
+    const url = environment.apiUrl + '/api/autsh/update?userId=' + id;
     return this.http.delete<boolean>(url);
   }
 

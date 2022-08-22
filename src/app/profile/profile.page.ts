@@ -51,7 +51,7 @@ export class ProfilePage implements OnInit, OnDestroy {
       (res) => {
         console.log(res);
       },
-      () => {
+      (err) => {
         console.log('error');
       }
     );

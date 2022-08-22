@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Injectable, OnDestroy } from '@angular/core';
 import {
   HttpRequest,
@@ -5,9 +6,12 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { from, Observable, Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-
+import { environment } from 'src/environments/environment';
+import { Storage } from '@capacitor/storage';
+import { User } from '../auth/user.model';
+import { map, switchMap } from 'rxjs/operators';
 @Injectable()
 export class AuthinterceptorInterceptor implements HttpInterceptor, OnDestroy {
   tokenSubscription: Subscription;
@@ -17,13 +21,35 @@ export class AuthinterceptorInterceptor implements HttpInterceptor, OnDestroy {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    this.tokenSubscription = this.authService.token.subscribe((res) => {
-      if (res) {
-        console.log('success', res);
-        return next.handle(request);
-      }
-    });
-    return next.handle(request);
+    if (request.url.indexOf(environment.apiUrl) === -1) {
+      return next.handle(request);
+    }
+    return from(Storage.get({ key: 'authData' })).pipe(
+      map((storedData) => {
+        if (!storedData || !storedData.value) {
+          return null;
+        }
+        const user = JSON.parse(storedData.value) as User;
+        if (user.tokenExpirationDate <= new Date()) {
+          return null;
+        }
+        return user;
+      }),
+      switchMap((user) => {
+        if (!user) {
+          return next.handle(request);
+        } else {
+          if (!user._token) {
+            return next.handle(request);
+          } else {
+            request = request.clone({
+              setHeaders: { authorization: `Bearer ${user._token}` },
+            });
+            return next.handle(request);
+          }
+        }
+      })
+    );
   }
   ngOnDestroy() {
     if (this.tokenSubscription) {
