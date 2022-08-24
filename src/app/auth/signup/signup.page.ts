@@ -34,54 +34,56 @@ export class SignupPage implements OnInit {
       return;
     }
     this.passwordsMatch = true;
-    this.loadingCtrl.create({ keyboardClose: true }).then((loadingEl) => {
-      loadingEl.present();
-      const registerDTO: RegistrationDto = {
-        email: form.value.email.replace(/\s/g, '').toLowerCase(),
-        username: form.value.username.replace(/\s/g, '').toLowerCase(),
-        password: form.value.password,
-        confirmPassword: form.value.confirmPassword,
-        firstName: form.value.firstName,
-        lastName: form.value.lastName,
-      };
-      this.authService.register(registerDTO).subscribe(
-        (resp) => {
-          if (resp.isRegistrationSuccessful) {
-            loadingEl.dismiss();
-            const params = this.route.snapshot.queryParams;
-            if (params.redirectURL) {
-              this.redirectURL = params.redirectURL;
-            }
+    this.loadingCtrl
+      .create({ keyboardClose: true, message: 'Please wait...' })
+      .then((loadingEl) => {
+        loadingEl.present();
+        const registerDTO: RegistrationDto = {
+          email: form.value.email.replace(/\s/g, '').toLowerCase(),
+          username: form.value.username.replace(/\s/g, '').toLowerCase(),
+          password: form.value.password,
+          confirmPassword: form.value.confirmPassword,
+          firstName: form.value.firstName,
+          lastName: form.value.lastName,
+        };
+        this.authService.register(registerDTO).subscribe(
+          (resp) => {
+            if (resp.isRegistrationSuccessful) {
+              loadingEl.dismiss();
+              const params = this.route.snapshot.queryParams;
+              if (params.redirectURL) {
+                this.redirectURL = params.redirectURL;
+              }
 
-            if (this.redirectURL) {
-              this.router
-                .navigateByUrl(this.redirectURL)
-                .catch(() => this.router.navigate(['home']));
+              if (this.redirectURL) {
+                this.router
+                  .navigateByUrl(this.redirectURL)
+                  .catch(() => this.router.navigate(['home']));
+              } else {
+                this.router.navigate(['home']);
+              }
             } else {
-              this.router.navigate(['home']);
+              loadingEl.dismiss();
+              this.alertCtrl
+                .create({
+                  header: 'Registration Failed',
+                  message: resp.error,
+                  buttons: [{ text: 'Okay' }],
+                })
+                .then((alertEl) => alertEl.present());
             }
-          } else {
+          },
+          (err) => {
             loadingEl.dismiss();
             this.alertCtrl
               .create({
-                header: 'Registration Failed',
-                message: resp.error,
+                header: 'Bad Request',
+                message: 'Oops! Something went wrong. Try again later.',
                 buttons: [{ text: 'Okay' }],
               })
               .then((alertEl) => alertEl.present());
           }
-        },
-        (err) => {
-          loadingEl.dismiss();
-          this.alertCtrl
-            .create({
-              header: 'Bad Request',
-              message: 'Oops! Something went wrong. Try again later.',
-              buttons: [{ text: 'Okay' }],
-            })
-            .then((alertEl) => alertEl.present());
-        }
-      );
-    });
+        );
+      });
   }
 }

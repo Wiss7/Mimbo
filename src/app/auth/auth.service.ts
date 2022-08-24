@@ -159,7 +159,7 @@ export class AuthService {
   }
 
   deleteProfile(id: number) {
-    const url = environment.apiUrl + '/api/autsh/update?userId=' + id;
+    const url = environment.apiUrl + '/api/auth/delete?userId=' + id;
     return this.http.delete<boolean>(url);
   }
 

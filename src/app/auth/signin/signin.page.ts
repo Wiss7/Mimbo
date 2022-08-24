@@ -29,6 +29,7 @@ export class SigninPage implements OnInit {
     this.loadingCtrl
       .create({
         keyboardClose: true,
+        message: 'Please wait...',
       })
       .then((loadingEl) => {
         loadingEl.present();
