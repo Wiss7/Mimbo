@@ -1,14 +1,9 @@
 <ion-header class="background-primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/account"></ion-back-button>
     </ion-buttons>
     <ion-title>My Profile</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button [routerLink]="['/profile']"
-        ><ion-icon name="person-outline" slot="icon-only"></ion-icon
-      ></ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -17,7 +12,7 @@
       <ion-row>
         <ion-col sizeSm="6" offsetSm="3">
           <ion-list>
-            <ion-item lines="none">
+            <ion-item>
               <ion-label position="floating">E-Mail</ion-label>
               <ion-input
                 name="email"
@@ -26,7 +21,7 @@
                 [value]="email"
               ></ion-input>
             </ion-item>
-            <ion-item lines="none">
+            <ion-item>
               <ion-label position="floating">Username</ion-label>
               <ion-input
                 type="text"
@@ -36,7 +31,7 @@
                 #usernameCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item lines="none">
+            <ion-item>
               <ion-label position="floating">First Name</ion-label>
               <ion-input
                 type="text"
@@ -45,7 +40,7 @@
                 required
               ></ion-input>
             </ion-item>
-            <ion-item lines="none">
+            <ion-item>
               <ion-label position="floating">Last Name</ion-label>
               <ion-input
                 type="text"
@@ -58,6 +53,8 @@
           </ion-list>
         </ion-col>
       </ion-row>
+    </ion-grid>
+    <ion-grid>
       <ion-row>
         <ion-col sizeSm="6" offsetSm="3">
           <ion-button
@@ -67,34 +64,6 @@
             [disabled]="!f.valid"
             ><ion-icon name="save-outline" slot="start"></ion-icon>Update
             Profile</ion-button
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col sizeSm="6" offsetSm="3">
-          <ion-button
-            color="primary"
-            expand="full"
-            (click)="updateProfile()"
-            [disabled]="!f.valid"
-            ><ion-icon name="lock-closed-outline" slot="start"></ion-icon>Change
-            Password</ion-button
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col sizeSm="6" offsetSm="3">
-          <ion-button color="danger" expand="full" (click)="logout()"
-            ><ion-icon name="log-out-outline" slot="start"></ion-icon>Log
-            Out</ion-button
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col sizeSm="6" offsetSm="3">
-          <ion-button color="danger" expand="full" (click)="deleteProfile()"
-            ><ion-icon name="close-circle-outline" slot="start"></ion-icon>
-            Delete Account</ion-button
           >
         </ion-col>
       </ion-row>

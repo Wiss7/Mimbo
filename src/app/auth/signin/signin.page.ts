@@ -68,13 +68,6 @@ export class SigninPage implements OnInit {
           },
           (err) => {
             loadingEl.dismiss();
-            this.alertCtrl
-              .create({
-                header: 'Bad Request',
-                message: 'Oops! Something went wrong. Try again later.',
-                buttons: [{ text: 'Okay' }],
-              })
-              .then((alertEl) => alertEl.present());
           }
         );
       });

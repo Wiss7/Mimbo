@@ -1,0 +1,70 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Account Settings</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [routerLink]="['/account']"
+        ><ion-icon name="settings-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item detail
+      ><ion-icon
+        src="../../assets/images/icons/dog.svg"
+        class="ion-item-left ion-margin-end"
+      ></ion-icon>
+      <ion-label>My Dogs</ion-label></ion-item
+    >
+    <ion-item detail routerLink="profile"
+      ><ion-icon
+        name="person-outline"
+        class="ion-item-left ion-margin-end"
+      ></ion-icon
+      ><ion-label>My Profile</ion-label></ion-item
+    >
+    <ion-item detail
+      ><ion-icon
+        name="lock-closed-outline"
+        class="ion-item-left ion-margin-end"
+      ></ion-icon
+      ><ion-label>Change Password</ion-label></ion-item
+    >
+    <ion-item detail
+      ><ion-icon
+        name="mail-outline"
+        class="ion-item-left ion-margin-end"
+      ></ion-icon
+      ><ion-label>Contact Us</ion-label></ion-item
+    >
+    <ion-item detail
+      ><ion-icon
+        name="share-social-outline"
+        class="ion-item-left ion-margin-end"
+      ></ion-icon
+      ><ion-label>Invite Friends</ion-label></ion-item
+    >
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-button color="danger" expand="full" (click)="logout()"
+          ><ion-icon name="log-out-outline" slot="start"></ion-icon>Log
+          Out</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeSm="6" offsetSm="3">
+        <ion-button color="danger" expand="full" (click)="deleteProfile()"
+          ><ion-icon name="close-circle-outline" slot="start"></ion-icon> Delete
+          Account</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

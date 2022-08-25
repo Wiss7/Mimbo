@@ -47,12 +47,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'profile',
-    loadChildren: () =>
-      import('./profile/profile.module').then((m) => m.ProfilePageModule),
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'signin',
     loadChildren: () =>
       import('./auth/signin/signin.module').then((m) => m.SigninPageModule),
@@ -61,6 +55,12 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () =>
       import('./auth/signup/signup.module').then((m) => m.SignupPageModule),
+  },
+  {
+    path: 'account',
+    loadChildren: () =>
+      import('./account/account.module').then((m) => m.AccountPageModule),
+    canActivate: [AuthGuard],
   },
 ];
 
