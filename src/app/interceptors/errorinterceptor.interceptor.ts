@@ -37,7 +37,6 @@ export class ErrorinterceptorInterceptor implements HttpInterceptor {
             buttons: [{ text: 'Dismiss' }],
           })
           .then((alerEl) => {
-            debugger;
             alerEl.present();
           });
         return throwError(error);
