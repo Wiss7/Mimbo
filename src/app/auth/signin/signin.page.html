@@ -11,6 +11,14 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="ion-padding">
     <ion-grid>
       <ion-row>
+        <ion-col>
+          <ion-img
+            class="logo"
+            src="../../../assets/images/MimboLogo.png"
+          ></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
         <ion-col sizeSm="6" offsetSm="3">
           <ion-list>
             <ion-item>
@@ -67,6 +75,13 @@
         </ion-col>
       </ion-row>
       <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-text color="primary" (click)="goToChangePassword()"
+            >Forgot Password?</ion-text
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-vertical">
         <ion-col sizeSm="6" offsetSm="3">
           <ion-text color="primary" (click)="goToSignup()"
             >Dont have an account? Click here to sign up!</ion-text

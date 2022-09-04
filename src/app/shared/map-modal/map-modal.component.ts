@@ -66,7 +66,7 @@ export class MapModalComponent implements OnInit, AfterViewInit, OnDestroy {
             'Google maps is not available at the moment. Please try again later!',
           buttons: [
             {
-              text: 'Okay',
+              text: 'Dismiss',
               handler: () => {
                 this.modalCtrl.dismiss();
               },

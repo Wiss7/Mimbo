@@ -59,7 +59,7 @@ export class SigninPage implements OnInit {
                 .create({
                   header: 'Login Failed',
                   message: resp.error,
-                  buttons: [{ text: 'Okay' }],
+                  buttons: [{ text: 'Dismiss' }],
                 })
                 .then((alerEl) => {
                   alerEl.present();
@@ -75,5 +75,9 @@ export class SigninPage implements OnInit {
 
   goToSignup() {
     this.router.navigateByUrl('/signup');
+  }
+
+  goToChangePassword() {
+    this.router.navigateByUrl('/change-password');
   }
 }

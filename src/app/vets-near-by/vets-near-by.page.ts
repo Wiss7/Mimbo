@@ -79,7 +79,7 @@ export class VetsNearByPage implements OnInit {
             .create({
               header: 'Could not fetch data',
               message: 'Please try again later or try a different location.',
-              buttons: [{ text: 'Okay' }],
+              buttons: [{ text: 'Dismiss' }],
             })
             .then((alerEl) => {
               this.isLoading = false;

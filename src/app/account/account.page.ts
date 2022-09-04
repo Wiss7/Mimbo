@@ -90,7 +90,7 @@ export class AccountPage implements OnInit, OnDestroy {
                     'We cannot perform this action at the moment. Please try again later.',
                   buttons: [
                     {
-                      text: 'Okay',
+                      text: 'Dismiss',
                       handler: () => {
                         this.alertCtrl.dismiss();
                       },

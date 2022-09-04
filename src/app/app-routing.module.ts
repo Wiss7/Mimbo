@@ -62,6 +62,10 @@ const routes: Routes = [
       import('./account/account.module').then((m) => m.AccountPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'change-password',
+    loadChildren: () => import('./auth/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+  },
 ];
 
 @NgModule({

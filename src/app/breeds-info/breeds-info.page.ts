@@ -40,7 +40,7 @@ export class BreedsInfoPage implements OnInit, OnDestroy {
             message: 'An error occured!! Please try again later.',
             buttons: [
               {
-                text: 'Okay',
+                text: 'Dismiss',
                 handler: () => {
                   this.isLoading = false;
                   this.router.navigate(['/home']);

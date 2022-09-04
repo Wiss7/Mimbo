@@ -41,7 +41,7 @@ export class DetailsPage implements OnInit {
             message: 'This food does not exist. Select one from the list.',
             buttons: [
               {
-                text: 'Okay',
+                text: 'Dismiss',
                 handler: () => this.navCtrl.navigateBack('/edible'),
               },
             ],

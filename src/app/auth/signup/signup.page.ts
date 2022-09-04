@@ -68,7 +68,7 @@ export class SignupPage implements OnInit {
                 .create({
                   header: 'Registration Failed',
                   message: resp.error,
-                  buttons: [{ text: 'Okay' }],
+                  buttons: [{ text: 'Dismiss' }],
                 })
                 .then((alertEl) => alertEl.present());
             }

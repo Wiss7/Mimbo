@@ -34,9 +34,10 @@ export class ErrorinterceptorInterceptor implements HttpInterceptor {
           .create({
             header: 'Oops!!',
             message,
-            buttons: [{ text: 'Okay' }],
+            buttons: [{ text: 'Dismiss' }],
           })
           .then((alerEl) => {
+            debugger;
             alerEl.present();
           });
         return throwError(error);

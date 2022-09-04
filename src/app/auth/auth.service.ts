@@ -2,6 +2,7 @@
 import {
   HttpClient,
   HttpHeaders,
+  HttpParams,
   JsonpClientBackend,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -161,6 +162,17 @@ export class AuthService {
   deleteProfile(id: number) {
     const url = environment.apiUrl + '/api/auth/delete?userId=' + id;
     return this.http.delete<boolean>(url);
+  }
+
+  resetPassword(email: string) {
+    const url = environment.apiUrl + '/api/auth/resetpassword';
+    const headers = new HttpHeaders({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'Content-Type': 'application/json',
+    });
+
+    const json = JSON.stringify(email);
+    return this.http.post<boolean>(url, json, { headers });
   }
 
   private storeAuthData(user: User) {
