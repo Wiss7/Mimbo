@@ -55,3 +55,9 @@ export interface UpdateProfileResponseDTO {
   username: string;
   tokenExpirationDate: Date;
 }
+
+export interface ChangePasswordDTO {
+  email: string;
+  newPassword: string;
+  currentPassword: string;
+}

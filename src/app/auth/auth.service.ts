@@ -10,6 +10,7 @@ import { BehaviorSubject, from, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, map, tap, take, switchMap } from 'rxjs/operators';
 import {
+  ChangePasswordDTO,
   LoginDTO,
   LoginResponseDTO,
   RegistrationDto,
@@ -175,6 +176,10 @@ export class AuthService {
     return this.http.post<boolean>(url, json, { headers });
   }
 
+  changePassword(data: ChangePasswordDTO) {
+    const url = environment.apiUrl + '/api/auth/changepassword';
+    return this.http.post(url, data);
+  }
   private storeAuthData(user: User) {
     Storage.set({ key: 'authData', value: JSON.stringify(user) });
   }
