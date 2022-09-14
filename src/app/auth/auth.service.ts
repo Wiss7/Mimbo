@@ -14,7 +14,7 @@ import {
   UpdateProfileResponseDTO,
 } from './auth.dto';
 import { User } from './user.model';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -103,7 +103,7 @@ export class AuthService {
   }
 
   autoLogin() {
-    return from(Storage.get({ key: 'authData' })).pipe(
+    return from(Preferences.get({ key: 'authData' })).pipe(
       map((storedData) => {
         if (!storedData || !storedData.value) {
           return null;
@@ -127,7 +127,7 @@ export class AuthService {
   }
   logout() {
     this._user.next(null);
-    Storage.remove({ key: 'authData' });
+    Preferences.remove({ key: 'authData' });
   }
 
   updateProfile(data: UpdateProfileDTO) {
@@ -176,6 +176,6 @@ export class AuthService {
     return this.http.post(url, data);
   }
   private storeAuthData(user: User) {
-    Storage.set({ key: 'authData', value: JSON.stringify(user) });
+    Preferences.set({ key: 'authData', value: JSON.stringify(user) });
   }
 }

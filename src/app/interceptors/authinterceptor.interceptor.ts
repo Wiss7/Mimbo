@@ -9,7 +9,7 @@ import {
 import { from, Observable, Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { User } from '../auth/user.model';
 import { map, switchMap } from 'rxjs/operators';
 @Injectable()
@@ -24,7 +24,7 @@ export class AuthinterceptorInterceptor implements HttpInterceptor, OnDestroy {
     if (request.url.indexOf(environment.apiUrl) === -1) {
       return next.handle(request);
     }
-    return from(Storage.get({ key: 'authData' })).pipe(
+    return from(Preferences.get({ key: 'authData' })).pipe(
       map((storedData) => {
         if (!storedData || !storedData.value) {
           return null;
