@@ -1,14 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  JsonpClientBackend,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { catchError, map, tap, take, switchMap } from 'rxjs/operators';
+import { map, tap, take, switchMap } from 'rxjs/operators';
 import {
   ChangePasswordDTO,
   LoginDTO,

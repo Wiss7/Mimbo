@@ -1,9 +1,57 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>contact-us</ion-title>
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Contact Us</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-img
+          src="../../../assets/images/MimboLogo.png"
+          class="logo"
+        ></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-title color="primary"
+          ><div class="ion-text-wrap">
+            Got any questions or requests? We are happy to help!
+          </div></ion-title
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeMd="8" offsetMd="2">
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input #title></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeMd="8" offsetMd="2">
+        <ion-item>
+          <ion-label position="floating">Message</ion-label>
+          <ion-textarea
+            #message
+            rows="10"
+            placeholder="Enter your message here..."
+          ></ion-textarea
+        ></ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col sizeMd="8" offsetMd="2" class="ion-text-center">
+        <ion-button (click)="sendMessage(title.value,message.value)"
+          >Send Message</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

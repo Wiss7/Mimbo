@@ -6,7 +6,7 @@ import {
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
