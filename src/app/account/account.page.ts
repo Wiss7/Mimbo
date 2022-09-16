@@ -6,7 +6,7 @@ import {
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { environment } from '../../environments/environment';
+import { Share } from '@capacitor/share';
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
@@ -31,7 +31,14 @@ export class AccountPage implements OnInit, OnDestroy {
       }
     });
   }
-
+  async shareApp() {
+    await Share.share({
+      title: 'See cool stuff',
+      text: 'Are you a doggo mom or dad? Check out this really cool app ',
+      url: 'https://play.google.com/store/apps/details?id=com.mimbo.app',
+      dialogTitle: 'Share with buddies',
+    }).then((res) => console.log(res));
+  }
   logout() {
     this.authService.logout();
   }
