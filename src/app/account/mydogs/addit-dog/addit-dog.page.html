@@ -1,0 +1,172 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account/mydogs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #f="ngForm" class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Dog Name</ion-label>
+              <ion-input
+                name="dogname"
+                [(ngModel)]="name"
+                required
+                dogname
+                #dognameCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item
+              *ngIf="!dognameCtrl.valid && dognameCtrl.touched"
+              lines="none"
+            >
+              <ion-text color="danger"
+                ><small>Your doggo needs a name.</small></ion-text
+              >
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Breed</ion-label>
+              <ion-input
+                name="breed"
+                [(ngModel)]="breed"
+                required
+                #breedCtrl="ngModel"
+                id="breed-modal"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Gender</ion-label>
+              <ion-input
+                name="gender"
+                [(ngModel)]="gender"
+                dogname
+                required
+                readonly="true"
+                id="gender-modal"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Date of Birth</ion-label>
+              <ion-input
+                name="dob"
+                required
+                id="date-modal"
+                readonly="true"
+                [(ngModel)]="dob"
+                #dobCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="6" offsetSm="3">
+          <ion-button
+            color="primary"
+            expand="block"
+            type="submit"
+            (click)="save()"
+            [disabled]="!f.valid"
+            ><ion-icon name="save" slot="start"></ion-icon>Save</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <ion-modal
+    trigger="date-modal"
+    #dobpopup
+    (willDismiss)="onDOBWillDismiss($event)"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelDOB()"
+              ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+            ></ion-button>
+          </ion-buttons>
+          <ion-title>Set Date of Birth</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="question">
+          <ion-text class="modal-text">When was your dog born?</ion-text>
+        </div>
+        <div class="calendar">
+          <ion-datetime
+            presentation="date"
+            [max]="dateToday"
+            [(ngModel)]="dobPopupVal"
+          ></ion-datetime>
+          <ion-button (click)="setDOB()"
+            ><ion-icon name="calendar-outline" slot="start"></ion-icon>Set
+            Date</ion-button
+          >
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <ion-modal
+    trigger="gender-modal"
+    #genderpopup
+    (willDismiss)="onGenderWillDismiss($event)"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelGender()"
+              ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+            ></ion-button>
+          </ion-buttons>
+          <ion-title>Set Gender</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="question">
+          <ion-text class="modal-text">What is your dog's gender?</ion-text>
+        </div>
+        <div class="gender">
+          <ion-list>
+            <ion-radio-group [(ngModel)]="genderPopupVal">
+              <ion-list-header>
+                <ion-label>Gender</ion-label>
+              </ion-list-header>
+
+              <ion-item>
+                <ion-label>Female</ion-label>
+                <ion-radio slot="end" value="Female"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Male</ion-label>
+                <ion-radio slot="end" value="Male"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Non-Binary</ion-label>
+                <ion-radio slot="end" value="Non-Binary"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Other</ion-label>
+                <ion-radio slot="end" value="Other"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+          <ion-button (click)="setGender()"
+            ><ion-icon name="transgender-outline" slot="start"></ion-icon>Set
+            Gender</ion-button
+          >
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

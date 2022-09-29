@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { RegistrationDto } from '../auth.dto';
 import { AuthService } from '../auth.service';
 
@@ -10,9 +11,10 @@ import { AuthService } from '../auth.service';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage implements OnInit, OnDestroy {
   passwordsMatch = true;
   redirectURL: UrlTree;
+  registerSub: Subscription;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -22,6 +24,11 @@ export class SignupPage implements OnInit {
   ) {}
 
   ngOnInit() {}
+  ngOnDestroy() {
+    if (this.registerSub) {
+      this.registerSub.unsubscribe();
+    }
+  }
   goToSignin() {
     this.router.navigateByUrl('/signin');
   }
@@ -46,7 +53,7 @@ export class SignupPage implements OnInit {
           firstName: form.value.firstName,
           lastName: form.value.lastName,
         };
-        this.authService.register(registerDTO).subscribe(
+        this.registerSub = this.authService.register(registerDTO).subscribe(
           (resp) => {
             if (resp.isRegistrationSuccessful) {
               loadingEl.dismiss();

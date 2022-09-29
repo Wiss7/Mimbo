@@ -1,0 +1,32 @@
+.calendar {
+  padding-top: 24px;
+  width: 100%;
+  text-align: center;
+}
+.calendar ion-datetime {
+  margin: auto;
+}
+.calendar ion-button {
+  width: 100%;
+  max-width: 350px;
+  margin-top: 16px;
+}
+.question {
+  text-align: center;
+  font-size: 35px;
+  font-family: monospace;
+  font-style: italic;
+  padding: 24px;
+  color: var(--ion-color-primary);
+}
+
+.gender ion-button {
+  width: 100%;
+  max-width: 350px;
+  margin-top: 16px;
+}
+.gender {
+  padding-top: 24px;
+  width: 100%;
+  text-align: center;
+}

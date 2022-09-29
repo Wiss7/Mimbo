@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   AlertController,
   IonInput,
@@ -16,7 +22,7 @@ import { SendMessageDTO } from '../profile/account.dto';
   templateUrl: './contact-us.page.html',
   styleUrls: ['./contact-us.page.scss'],
 })
-export class ContactUsPage implements OnInit {
+export class ContactUsPage implements OnInit, OnDestroy {
   @ViewChild('title') titleInput: IonInput;
   @ViewChild('message') messageInput: IonTextarea;
   userSub: Subscription;
@@ -36,6 +42,14 @@ export class ContactUsPage implements OnInit {
         this.userId = user.id;
       }
     });
+  }
+  ngOnDestroy() {
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
+    if (this.sendSub) {
+      this.sendSub.unsubscribe();
+    }
   }
 
   sendMessage(title, message) {

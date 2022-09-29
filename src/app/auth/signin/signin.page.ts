@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { LoginDTO } from '../auth.dto';
 import { AuthService } from '../auth.service';
 
@@ -10,8 +11,9 @@ import { AuthService } from '../auth.service';
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
 })
-export class SigninPage implements OnInit {
+export class SigninPage implements OnInit, OnDestroy {
   redirectURL: UrlTree;
+  loginSub: Subscription;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -21,7 +23,11 @@ export class SigninPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-
+  ngOnDestroy() {
+    if (this.loginSub) {
+      this.loginSub.unsubscribe();
+    }
+  }
   onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
@@ -37,7 +43,7 @@ export class SigninPage implements OnInit {
           username: form.value.email,
           password: form.value.password,
         };
-        this.authService.login(loginDto).subscribe(
+        this.loginSub = this.authService.login(loginDto).subscribe(
           (resp) => {
             if (resp.isLoginSuccessful) {
               loadingEl.dismiss();

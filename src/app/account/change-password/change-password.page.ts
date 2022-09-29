@@ -14,6 +14,7 @@ export class ChangePasswordPage implements OnInit, OnDestroy {
   passwordsMatch = true;
   email: string;
   userSub: Subscription;
+  changePasswordSub: Subscription;
   constructor(
     private authService: AuthService,
     private loadingCtrl: LoadingController,
@@ -29,6 +30,9 @@ export class ChangePasswordPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.userSub) {
       this.userSub.unsubscribe();
+    }
+    if (this.changePasswordSub) {
+      this.changePasswordSub.unsubscribe();
     }
   }
   updatePassword(form: NgForm) {
@@ -49,7 +53,7 @@ export class ChangePasswordPage implements OnInit, OnDestroy {
           currentPassword: currentPass,
           newPassword: password,
         };
-        this.authService.changePassword(dto).subscribe(
+        this.changePasswordSub = this.authService.changePassword(dto).subscribe(
           (resp) => {
             if (resp) {
               loadingEl.dismiss();

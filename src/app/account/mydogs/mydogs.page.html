@@ -1,9 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>mydogs</ion-title>
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Dogs</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="ion-text-center ion-padding" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div
+    class="ion-text-center ion-padding"
+    *ngIf="!isLoading && loadedDogs.length===0"
+  >
+    <ion-text color="primary"
+      >You have not added any dogs yet. <br />
+      <br />Press the add button in the bottom right corner to get
+      started.</ion-text
+    >
+  </div>
+  <ion-list *ngIf="!isLoading && loadedDogs.length>0">
+    <ion-item-sliding *ngFor="let dog of loadedDogs">
+      <ion-item [routerLink]="'addit-dog/' + dog.id">{{dog.name}}</ion-item>
+      <ion-item-options>
+        <ion-item-option color="danger" (click)="deleteDog(dog.id)"
+          ><ion-icon name="trash-outline" slot="start"></ion-icon
+          >Delete</ion-item-option
+        >
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab-button
+    ><ion-icon
+      name="add-outline"
+      class="add-outline"
+      routerLink="addit-dog"
+    ></ion-icon
+  ></ion-fab-button>
 </ion-content>
