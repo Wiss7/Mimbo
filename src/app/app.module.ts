@@ -11,6 +11,7 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { AuthinterceptorInterceptor } from './interceptors/authinterceptor.interceptor';
 import { ErrorinterceptorInterceptor } from './interceptors/errorinterceptor.interceptor';
+import { CloudinaryModule } from '@cloudinary/ng';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -19,6 +20,7 @@ import { ErrorinterceptorInterceptor } from './interceptors/errorinterceptor.int
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    CloudinaryModule,
   ],
   providers: [
     NativeAudio,
