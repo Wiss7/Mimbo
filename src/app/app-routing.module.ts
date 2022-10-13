@@ -66,6 +66,10 @@ const routes: Routes = [
     path: 'change-password',
     loadChildren: () => import('./auth/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
   },
+  {
+    path: 'reminders',
+    loadChildren: () => import('./reminders/reminders.module').then( m => m.RemindersPageModule)
+  },
 ];
 
 @NgModule({

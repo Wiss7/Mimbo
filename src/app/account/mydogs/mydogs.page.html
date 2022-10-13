@@ -11,10 +11,21 @@
   <div class="ion-text-center ion-padding" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
+
   <div
     class="ion-text-center ion-padding"
     *ngIf="!isLoading && loadedDogs.length===0"
   >
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img
+            src="../../../assets/images/MimboLogo.png"
+            class="logo"
+          ></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-text color="primary"
       >You have not added any dogs yet. <br />
       <br />Press the add button in the bottom right corner to get

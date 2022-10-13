@@ -64,6 +64,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
         this.dob = formatDate(dog.dateOfBirth, format, locale);
         this.dobPopupVal = dog.dateOfBirth;
         this.title = `Edit ${this.name}'s Info`;
+        this.isLoading = false;
       });
     } else {
       this.title = 'Add New Dog';
