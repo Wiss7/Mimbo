@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { iif } from 'rxjs';
 @Component({
   selector: 'app-reminders',
   templateUrl: './reminders.page.html',
@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemindersPage implements OnInit {
   isLoading = false;
-  filter = 'Upcoming';
+  filter = 'All';
   loadedReminders = [];
+  AllReminders =
   constructor() {}
 
   ngOnInit() {}

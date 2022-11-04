@@ -151,7 +151,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
                 const toast = await this.toastController.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Added successfully',
+                  message: 'Updated successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();
@@ -190,7 +190,15 @@ export class AdditDogPage implements OnInit, OnDestroy {
                 });
                 loadingEl.dismiss();
                 await toast.present();
-                this.router.navigate(['account', 'mydogs']);
+                if (
+                  this.activatedRoute.snapshot.queryParamMap.get(
+                    'fromReminder'
+                  ) === '1'
+                ) {
+                  this.router.navigate(['/reminders/addit-reminders']);
+                } else {
+                  this.router.navigate(['account', 'mydogs']);
+                }
               }
             },
             () => loadingEl.dismiss()

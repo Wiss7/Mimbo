@@ -62,7 +62,7 @@
                 <ion-input
                   name="dob"
                   required
-                  id="date-modal"
+                  id="dob-modal"
                   readonly="true"
                   [(ngModel)]="dob"
                   #dobCtrl="ngModel"
@@ -87,7 +87,7 @@
     </form>
 
     <ion-modal
-      trigger="date-modal"
+      trigger="dob-modal"
       #dobpopup
       (willDismiss)="onDOBWillDismiss($event)"
     >

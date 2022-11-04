@@ -13,6 +13,7 @@ import { DogService } from './dogs.service';
 export class MydogsPage implements OnInit, OnDestroy {
   userSub: Subscription;
   dogsSub: Subscription;
+  allDogsSub: Subscription;
   userId: number;
   isLoading = true;
   loadedDogs: Dog[];
@@ -35,15 +36,20 @@ export class MydogsPage implements OnInit, OnDestroy {
     if (this.userSub) {
       this.userSub.unsubscribe();
     }
+    if (this.allDogsSub) {
+      this.allDogsSub.unsubscribe();
+    }
   }
 
   ionViewWillEnter() {
     this.userSub = this.authService.user.subscribe((user) => {
       if (user) {
         this.userId = user.id;
-        this.dogService.getAllDogs(this.userId).subscribe(() => {
-          this.isLoading = false;
-        });
+        this.allDogsSub = this.dogService
+          .getAllDogs(this.userId)
+          .subscribe(() => {
+            this.isLoading = false;
+          });
       }
     });
   }

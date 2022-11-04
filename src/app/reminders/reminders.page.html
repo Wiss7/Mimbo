@@ -13,7 +13,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment value="Upcoming" [(ngModel)]="filter">
+  <ion-segment value="All" [(ngModel)]="filter">
+    <ion-segment-button value="All">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
     <ion-segment-button value="Upcoming">
       <ion-label>Upcoming</ion-label>
     </ion-segment-button>
@@ -26,7 +29,8 @@
     *ngIf="!isLoading && loadedReminders.length ===0"
   >
     <ion-text color="primary"
-      >You have no {{filter.toLowerCase()}} events</ion-text
+      >You do not have any {{filter!=='All' ? filter.toLowerCase()+' ' :
+      ''}}events</ion-text
     >
   </div>
   <ion-fab-button
