@@ -14,8 +14,9 @@ import { Dog } from 'src/app/account/mydogs/dog.model';
 import { DogService } from 'src/app/account/mydogs/dogs.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { AddReminderDTO } from '../reminder.dto';
+import { AddReminderDTO, UpdateReminderDTO } from '../reminder.dto';
 import { ReminderService } from '../reminder.service';
+import { Reminder } from '../reminder.model';
 @Component({
   selector: 'app-addit-reminders',
   templateUrl: './addit-reminders.page.html',
@@ -43,7 +44,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   dogName = '';
   dogId = 0;
   reminderMins = '0';
-  notes: '';
+  notes = '';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -56,6 +57,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.reminderTypes = [...reminderTypes];
     this.dogsSub = this.dogService.dogs.subscribe((dogs) => {
       this.loadedDogs = dogs;
     });
@@ -76,7 +78,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   }
   ionViewWillEnter() {
     this.dateToday = new Date().toISOString();
-    this.reminderTypes = [...reminderTypes];
+
     this.userSub = this.authService.user.subscribe((user) => {
       if (user) {
         this.userId = user.id;
@@ -86,6 +88,33 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
             this.eventId = +this.activatedRoute.snapshot.params.id;
             if (this.eventId > 0) {
               this.title = 'Edit Event';
+              this.reminderService
+                .getReminderById(this.eventId)
+                .subscribe((reminder: Reminder) => {
+                  this.dogName = reminder.dogName;
+                  this.dogId = reminder.dogId;
+                  this.notes = reminder.notes;
+                  this.typeId = reminder.typeId;
+                  this.reminderType = this.reminderTypes.find(
+                    (r) => r.id === this.typeId.toString()
+                  ).name;
+                  this.datePopupVal = reminder.reminderDateTime;
+                  this.reminderMins = reminder.remindMeBefore.toString();
+                  const format = 'dd-MMM-yyyy h:mm a';
+                  const locale = 'en-US';
+                  const formattedDate = formatDate(
+                    reminder.reminderDateTime,
+                    format,
+                    locale
+                  ).split(' ');
+                  this.reminderDate =
+                    formattedDate[0] +
+                    ' At ' +
+                    formattedDate[1] +
+                    ' ' +
+                    formattedDate[2];
+                  this.isLoading = false;
+                });
             } else {
               this.isLoading = false;
             }
@@ -108,6 +137,9 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     this.typeModal.dismiss(id, 'confirm');
   }
   setDate() {
+    if (!this.datePopupVal) {
+      this.datePopupVal = new Date();
+    }
     this.dateModal.dismiss(this.datePopupVal, 'confirm');
   }
   setDog(id: number) {
@@ -153,6 +185,14 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     this.router.navigateByUrl('/account/mydogs/addit-dog?fromReminder=1');
   }
   save(f: NgForm) {
+    if (this.eventId > 0) {
+      this.updateReminder();
+    } else {
+      this.addReminder();
+    }
+  }
+
+  addReminder() {
     const addReminderDTO: AddReminderDTO = {
       dogId: this.dogId,
       userId: this.userId,
@@ -165,7 +205,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
       .create({
         keyboardClose: true,
         showBackdrop: false,
-        message: 'Deleting...',
+        message: 'Please Wait...',
       })
       .then((loadingEl) => {
         loadingEl.present();
@@ -191,6 +231,57 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                   color: 'primary',
                   duration: 2000,
                   message: 'Added successfully',
+                });
+                loadingEl.dismiss();
+                await toast.present();
+                this.router.navigate(['/reminders']);
+              }
+            },
+            () => loadingEl.dismiss()
+          );
+      });
+  }
+
+  updateReminder() {
+    const updateReminderDTO: UpdateReminderDTO = {
+      id: this.eventId,
+      dogId: this.dogId,
+      userId: this.userId,
+      remindBefore: +this.reminderMins,
+      reminderDate: this.datePopupVal,
+      typeId: this.typeId,
+      notes: this.notes,
+    };
+    this.loadingCtrl
+      .create({
+        keyboardClose: true,
+        showBackdrop: false,
+        message: 'Please Wait...',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.addReminderSub = this.reminderService
+          .updateReminder(updateReminderDTO)
+          .subscribe(
+            async (res) => {
+              if (!res) {
+                loadingEl.dismiss();
+                this.alertCtrl
+                  .create({
+                    header: 'An Error Occurred',
+                    message:
+                      'Could not perform this action at the moment. Please try again later.',
+                    buttons: [{ text: 'Dismiss' }],
+                  })
+                  .then((alerEl) => {
+                    loadingEl.dismiss();
+                    alerEl.present();
+                  });
+              } else {
+                const toast = await this.toastController.create({
+                  color: 'primary',
+                  duration: 2000,
+                  message: 'Updated successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();

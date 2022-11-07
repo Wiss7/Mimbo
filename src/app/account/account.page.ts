@@ -74,7 +74,7 @@ export class AccountPage implements OnInit, OnDestroy {
       .create({
         keyboardClose: true,
         showBackdrop: false,
-        message: 'Deleting...',
+        message: 'Please Wait...',
       })
       .then((loadingEl) => {
         loadingEl.present();

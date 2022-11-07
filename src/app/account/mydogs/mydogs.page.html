@@ -34,7 +34,9 @@
   </div>
   <ion-list *ngIf="!isLoading && loadedDogs.length>0">
     <ion-item-sliding *ngFor="let dog of loadedDogs">
-      <ion-item [routerLink]="'addit-dog/' + dog.id">{{dog.name}}</ion-item>
+      <ion-item detail [routerLink]="'addit-dog/' + dog.id"
+        >{{dog.name}}</ion-item
+      >
       <ion-item-options>
         <ion-item-option color="danger" (click)="deleteDog(dog.id)"
           ><ion-icon name="trash-outline" slot="start"></ion-icon

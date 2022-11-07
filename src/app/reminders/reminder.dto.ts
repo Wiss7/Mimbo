@@ -16,3 +16,13 @@ export interface AddReminderResponseDTO {
   isReminderAdded: boolean;
   notes: string;
 }
+
+export interface UpdateReminderDTO {
+  id: number;
+  dogId: number;
+  userId: number;
+  typeId: number;
+  reminderDate: Date;
+  remindBefore: number;
+  notes: string;
+}

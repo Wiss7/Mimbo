@@ -9,6 +9,13 @@ const routes: Routes = [
     component: RemindersPage,
   },
   {
+    path: 'addit-reminders/:id',
+    loadChildren: () =>
+      import('./addit-reminders/addit-reminders.module').then(
+        (m) => m.AdditRemindersPageModule
+      ),
+  },
+  {
     path: 'addit-reminders',
     loadChildren: () =>
       import('./addit-reminders/addit-reminders.module').then(

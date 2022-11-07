@@ -62,7 +62,7 @@ export class ProfilePage implements OnInit, OnDestroy {
       .create({
         keyboardClose: true,
         showBackdrop: false,
-        message: 'Updating Profile',
+        message: 'Please Wait...',
       })
       .then((loadingEl) => {
         loadingEl.present();

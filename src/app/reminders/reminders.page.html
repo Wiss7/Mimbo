@@ -13,31 +13,67 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment value="All" [(ngModel)]="filter">
-    <ion-segment-button value="All">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Upcoming">
-      <ion-label>Upcoming</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="Past">
-      <ion-label>Past</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  <div
-    class="ion-padding ion-text-center"
-    *ngIf="!isLoading && loadedReminders.length ===0"
-  >
-    <ion-text color="primary"
-      >You do not have any {{filter!=='All' ? filter.toLowerCase()+' ' :
-      ''}}events</ion-text
-    >
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
   </div>
-  <ion-fab-button
-    ><ion-icon
-      name="add-outline"
-      class="add-outline"
-      routerLink="addit-reminders"
-    ></ion-icon
-  ></ion-fab-button>
+  <div *ngIf="!isLoading">
+    <ion-segment
+      value="All"
+      [(ngModel)]="filter"
+      (ionChange)="filterReminders()"
+    >
+      <ion-segment-button value="All">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Upcoming">
+        <ion-label>Upcoming</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Past">
+        <ion-label>Past</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <div
+      class="ion-padding ion-text-center"
+      *ngIf="loadedReminders.length ===0"
+    >
+      <ion-text color="primary"
+        >You do not have any {{filter!=='All' ? filter.toLowerCase()+' ' :
+        ''}}events</ion-text
+      >
+    </div>
+    <div *ngIf="loadedReminders.length >0">
+      <ion-list>
+        <ion-item-sliding *ngFor="let reminder of loadedReminders">
+          <ion-item detail [routerLink]="'addit-reminders/' + reminder.id">
+            <ion-avatar class="avatar">
+              <img
+                alt="Reminder Type"
+                [src]="'../../../assets/images/remindertypes/' + reminder.typeImageName"
+              />
+            </ion-avatar>
+            <div>
+              <p class="info">{{formatDateTime(reminder.reminderDateTime)}}</p>
+              <p class="info">{{reminder.dogName}}</p>
+              <p class="info">{{getTypeName(reminder.typeId)}}</p>
+            </div>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option
+              color="danger"
+              (click)="deleteReminder(reminder.id)"
+              ><ion-icon name="trash-outline" slot="start"></ion-icon
+              >Delete</ion-item-option
+            >
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <ion-fab-button
+      ><ion-icon
+        name="add-outline"
+        class="add-outline"
+        routerLink="addit-reminders"
+      ></ion-icon
+    ></ion-fab-button>
+  </div>
 </ion-content>
