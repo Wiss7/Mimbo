@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Dog } from './dog.model';
@@ -21,7 +21,8 @@ export class MydogsPage implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private dogService: DogService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -55,6 +56,32 @@ export class MydogsPage implements OnInit, OnDestroy {
   }
 
   deleteDog(dogId: number) {
+    this.alertCtrl
+      .create({
+        header: 'Delete Dog?',
+        message:
+          'Are you sure you wish to delete this dog? This action will delete related reminders and cannot be undone!',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.alertCtrl.dismiss(dogId);
+            },
+          },
+          {
+            text: 'Delete',
+            cssClass: 'confirm-delete',
+            handler: () => {
+              this.performDelete(dogId);
+              this.alertCtrl.dismiss();
+            },
+          },
+        ],
+      })
+      .then((alertEl) => alertEl.present());
+  }
+
+  performDelete(dogId: number) {
     this.loadingCtrl
       .create({
         keyboardClose: true,

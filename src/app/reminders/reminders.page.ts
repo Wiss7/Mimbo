@@ -17,6 +17,8 @@ export class RemindersPage implements OnInit, OnDestroy {
   reminderSub: Subscription;
   isLoading = true;
   filter = 'All';
+  dogfilter = 'All';
+  dogFilterArray = [];
   loadedReminders: Reminder[];
   allReminders: Reminder[];
   userId = 0;
@@ -44,7 +46,18 @@ export class RemindersPage implements OnInit, OnDestroy {
     this.reminderSub = this.reminderService.reminders.subscribe((reminders) => {
       this.allReminders = reminders;
       this.filterReminders();
+      this.allReminders.filter((reminder) => {
+        const i = this.dogFilterArray.findIndex((x) => x === reminder.dogName);
+        if (i <= -1) {
+          this.dogFilterArray.push(reminder.dogName);
+        }
+        return null;
+      });
     });
+  }
+  setDogFilter(value: string) {
+    this.dogfilter = value;
+    this.filterReminders();
   }
   filterReminders() {
     if (this.filter === 'All') {
@@ -62,6 +75,11 @@ export class RemindersPage implements OnInit, OnDestroy {
         ),
       ];
       console.log(this.loadedReminders);
+    }
+    if (this.dogfilter !== 'All') {
+      this.loadedReminders = [
+        ...this.loadedReminders.filter((r) => r.dogName === this.dogfilter),
+      ];
     }
   }
   ionViewWillEnter() {

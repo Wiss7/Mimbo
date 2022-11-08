@@ -32,13 +32,28 @@
         <ion-label>Past</ion-label>
       </ion-segment-button>
     </ion-segment>
+    <ion-item>
+      <ion-chip
+        tappable
+        (click)="setDogFilter('All')"
+        [ngStyle]="{'background-color':dogfilter === 'All' ? '#16a5d4' : '' }"
+        >All Dogs</ion-chip
+      ><ion-chip
+        *ngFor="let i of dogFilterArray"
+        (click)="setDogFilter(i)"
+        tappable
+        [ngStyle]="{'background-color':dogfilter === i ? '#16a5d4' : '' }"
+        >{{i}}</ion-chip
+      >
+    </ion-item>
     <div
       class="ion-padding ion-text-center"
       *ngIf="loadedReminders.length ===0"
     >
       <ion-text color="primary"
-        >You do not have any {{filter!=='All' ? filter.toLowerCase()+' ' :
-        ''}}events</ion-text
+        >There are no {{filter!=='All' ? filter.toLowerCase()+' ' : ''}}events
+        {{dogfilter!=='All' ? 'for ' + dogfilter.toLowerCase()+' ' :
+        ''}}</ion-text
       >
     </div>
     <div *ngIf="loadedReminders.length >0">
