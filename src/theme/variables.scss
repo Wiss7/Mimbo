@@ -2,11 +2,27 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
+/** #f2eee6 AND 654930 **/
 :root {
+  --ion-color-darkmimbo: #654930;
+  --ion-color-darkmimbo-rgb: 101, 73, 48;
+  --ion-color-darkmimbo-contrast: #ffffff;
+  --ion-color-darkmimbo-contrast-rgb: 255, 255, 255;
+  --ion-color-darkmimbo-shade: #59402a;
+  --ion-color-darkmimbo-tint: #745b45;
+
+  --ion-color-lightmimbo: #ece6d8;
+  --ion-color-lightmimbo-rgb: 236, 230, 216;
+  --ion-color-lightmimbo-contrast: #000000;
+  --ion-color-lightmimbo-contrast-rgb: 0, 0, 0;
+  --ion-color-lightmimbo-shade: #d0cabe;
+  --ion-color-lightmimbo-tint: #eee9dc;
+
   --ion-color-primary: #16a5d4;
   --ion-color-primary-rgb: 22, 165, 212;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-contrast: #f4f5f8;
+  --ion-color-primary-contrast-rgb: 244, 245, 248;
   --ion-color-primary-shade: #1391bb;
   --ion-color-primary-tint: #2daed8;
 

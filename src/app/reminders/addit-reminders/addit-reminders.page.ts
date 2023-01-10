@@ -17,6 +17,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AddReminderDTO, UpdateReminderDTO } from '../reminder.dto';
 import { ReminderService } from '../reminder.service';
 import { Reminder } from '../reminder.model';
+import { LocalNotifications } from '@capacitor/local-notifications';
 @Component({
   selector: 'app-addit-reminders',
   templateUrl: './addit-reminders.page.html',
@@ -30,6 +31,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   userSub: Subscription;
   allDogsSub: Subscription;
   addReminderSub: Subscription;
+  setCompleteSub: Subscription;
   title = 'Add New Event';
   eventId = 0;
   typeId = 0;
@@ -45,6 +47,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   dogId = 0;
   reminderMins = '0';
   notes = '';
+  repeatEvery = '-1';
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -100,6 +103,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                   ).name;
                   this.datePopupVal = reminder.reminderDateTime;
                   this.reminderMins = reminder.remindMeBefore.toString();
+                  this.repeatEvery = reminder.repeatEvery.toString();
                   const format = 'dd-MMM-yyyy h:mm a';
                   const locale = 'en-US';
                   const formattedDate = formatDate(
@@ -200,6 +204,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
       reminderDate: this.datePopupVal,
       typeId: this.typeId,
       notes: this.notes,
+      repeatEvery: +this.repeatEvery,
     };
     this.loadingCtrl
       .create({
@@ -251,6 +256,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
       reminderDate: this.datePopupVal,
       typeId: this.typeId,
       notes: this.notes,
+      repeatEvery: +this.repeatEvery,
     };
     this.loadingCtrl
       .create({
@@ -262,6 +268,64 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
         loadingEl.present();
         this.addReminderSub = this.reminderService
           .updateReminder(updateReminderDTO)
+          .subscribe(
+            async (res) => {
+              if (!res) {
+                loadingEl.dismiss();
+                this.alertCtrl
+                  .create({
+                    header: 'An Error Occurred',
+                    message:
+                      'Could not perform this action at the moment. Please try again later.',
+                    buttons: [{ text: 'Dismiss' }],
+                  })
+                  .then((alerEl) => {
+                    loadingEl.dismiss();
+                    alerEl.present();
+                  });
+              } else {
+                const toast = await this.toastController.create({
+                  color: 'primary',
+                  duration: 2000,
+                  message: 'Updated successfully',
+                });
+                loadingEl.dismiss();
+                await toast.present();
+                this.router.navigate(['/reminders']);
+              }
+            },
+            () => loadingEl.dismiss()
+          );
+      });
+  }
+
+  scheduleNotification() {
+    //const notifcationDate = this.datePopupVal
+    LocalNotifications.schedule({
+      notifications: [
+        {
+          title: 'Test Title',
+          body: 'Test Body',
+          id: 1,
+          schedule: {
+            at: new Date(Date.now()), // in a minute
+          },
+        },
+      ],
+    });
+  }
+
+  setComplete() {
+    this.loadingCtrl
+      .create({
+        keyboardClose: true,
+        showBackdrop: false,
+        message: 'Please Wait...',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.setCompleteSub = this.reminderService
+          .setComplete(this.eventId)
           .subscribe(
             async (res) => {
               if (!res) {

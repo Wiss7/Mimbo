@@ -1,7 +1,7 @@
 <ion-header class="background-primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>Appointments & Reminders</ion-title>
     <ion-buttons slot="primary">
@@ -22,14 +22,11 @@
       [(ngModel)]="filter"
       (ionChange)="filterReminders()"
     >
-      <ion-segment-button value="All">
-        <ion-label>All</ion-label>
+      <ion-segment-button value="Active">
+        <ion-label>Active</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="Upcoming">
-        <ion-label>Upcoming</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Past">
-        <ion-label>Past</ion-label>
+      <ion-segment-button value="Complete">
+        <ion-label>Complete</ion-label>
       </ion-segment-button>
     </ion-segment>
     <ion-item>

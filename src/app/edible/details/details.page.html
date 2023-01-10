@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen color="lightmimbo">
   <div class="ion-text-center ion-padding" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
@@ -32,9 +32,11 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col sizeSm="8" offsetSm="2">
-          <h2><u>What You Should Know</u></h2>
-          <ion-text color="medium"><h4>{{selectedFood.notes}}</h4></ion-text>
+        <ion-col sizeSm="8" offsetSm="2" class="ion-text-center">
+          <h2>
+            <u><ion-text color="darkmimbo">What You Should Know </ion-text></u>
+          </h2>
+          <ion-text color="darkmimbo"><h4>{{selectedFood.notes}}</h4></ion-text>
         </ion-col>
       </ion-row>
     </ion-grid>

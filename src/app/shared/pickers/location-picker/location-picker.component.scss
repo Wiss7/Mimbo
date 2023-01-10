@@ -4,14 +4,16 @@
   object-fit: cover;
 }
 .picker {
-  width: 30rem;
-  max-width: 80%;
+  width: 100%;
   height: 20rem;
-  max-width: 30vh;
   border: 1px solid var(--icon-color-primary);
   display: flex;
   margin: auto;
   justify-content: center;
   align-items: center;
   padding-top: 16px;
+}
+
+.actionsheetclass .action-sheet-button {
+  color: var(--icon-color-primary) !important;
 }

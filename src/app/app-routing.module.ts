@@ -75,6 +75,10 @@ const routes: Routes = [
       import('./reminders/reminders.module').then((m) => m.RemindersPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'donate',
+    loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
+  },
 ];
 
 @NgModule({

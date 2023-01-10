@@ -44,14 +44,16 @@ export class LocationPickerComponent implements OnInit {
             handler: () => {
               this.locateUser();
             },
+            cssClass: 'actionsheetbutton',
           },
           {
             text: 'Pick on Map',
             handler: () => {
               this.openMap();
             },
+            cssClass: 'actionsheetbutton',
           },
-          { text: 'Cancel', handler: () => {} },
+          { text: 'Cancel', handler: () => {}, cssClass: 'actionsheetbutton' },
         ],
       })
       .then((actionSheetEl) => actionSheetEl.present());

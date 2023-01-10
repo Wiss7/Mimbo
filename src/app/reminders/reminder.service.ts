@@ -49,7 +49,9 @@ export class ReminderService {
               reminder.reminderDateTime,
               reminder.remindMeBefore,
               reminder.remindMe,
+              reminder.repeatEvery,
               reminder.typeId,
+              reminder.isComplete,
               reminder.notes,
               typeImageName
             )
@@ -78,7 +80,9 @@ export class ReminderService {
               reminder.reminderDateTime,
               reminder.remindMeBefore,
               reminder.remindMe,
+              reminder.repeatEvery,
               reminder.typeId,
+              reminder.isComplete,
               reminder.notes,
               typeImageName
             )
@@ -93,5 +97,10 @@ export class ReminderService {
   updateReminder(body: UpdateReminderDTO) {
     const url = environment.apiUrl + '/api/reminder/update';
     return this.http.post(url, body);
+  }
+
+  setComplete(reminderId: number) {
+    const url = environment.apiUrl + '/api/reminder/complete/' + reminderId;
+    return this.http.post(url, null);
   }
 }

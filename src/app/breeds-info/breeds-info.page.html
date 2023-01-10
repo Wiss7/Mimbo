@@ -1,7 +1,7 @@
 <ion-header class="background-primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>Dog Breeds</ion-title>
     <ion-buttons slot="primary">
@@ -28,7 +28,7 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col sizeSm="8" offsetSm="2">
-        <ion-card>
+        <ion-card color="lightmimbo">
           <img [src]="selectedBreed.imageUrl" width="100%" />
           <ion-card-header>
             <ion-card-subtitle>Breed Name</ion-card-subtitle>

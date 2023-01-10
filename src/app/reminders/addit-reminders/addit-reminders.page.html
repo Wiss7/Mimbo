@@ -74,6 +74,23 @@
                 >
               </ion-item>
               <ion-item>
+                <ion-label position="floating">Repeat</ion-label>
+                <ion-select name="repeat" required [(ngModel)]="repeatEvery">
+                  <ion-select-option value="-1">Never</ion-select-option>
+                  <ion-select-option value="1">Daily</ion-select-option>
+                  <ion-select-option value="2">Weekly</ion-select-option>
+                  <ion-select-option value="3">Monthly</ion-select-option>
+                  <ion-select-option value="1"
+                    >Every 3 Months</ion-select-option
+                  >
+                  <ion-select-option value="1"
+                    >Every 6 Months</ion-select-option
+                  >
+                  <ion-select-option value="1">Yearly</ion-select-option>
+                  >
+                </ion-select>
+              </ion-item>
+              <ion-item>
                 <ion-label position="floating">Notes</ion-label>
                 <ion-input name="Notes" [(ngModel)]="notes"></ion-input
               ></ion-item>
@@ -88,6 +105,19 @@
               type="submit"
               [disabled]="!f.valid"
               ><ion-icon name="save" slot="start"></ion-icon>Save</ion-button
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="eventId>0">
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-button
+              color="primary"
+              expand="block"
+              type="button"
+              fill="outline"
+              (click)="setComplete()"
+              ><ion-icon name="checkmark-done-outline" slot="start"></ion-icon
+              >Mark As Completed</ion-button
             >
           </ion-col>
         </ion-row>

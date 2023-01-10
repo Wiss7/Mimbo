@@ -1,0 +1,13 @@
+.logo {
+  width: 30%;
+}
+
+.background-color {
+  background-color: #ece6d8;
+}
+
+@media (min-width: 600px) {
+  .logo {
+    width: 20%;
+  }
+}

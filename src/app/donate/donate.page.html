@@ -1,0 +1,273 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Donate Now</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [routerLink]="['/account']"
+        ><ion-icon name="settings-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-padding background-color">
+  <ion-grid class="no-padding background-color">
+    <ion-row>
+      <ion-col sizeLg="6" offsetMd="3">
+        <ion-img
+          src="../../../assets/images/DonateSlogan.png"
+          class="slogan"
+        ></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">GIVE ME A PAW</ion-card-title>
+            <ion-card-subtitle color="primary">Lebanon</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary">
+              Give Me A Paw aim to show the world that animals are not
+              disposable, their lives matter and should be valued. Their mission
+              is to rescue, rehabilitate, and home in hopes that all animals
+              will receive the love and life they deserve. They want to home as
+              many dogs as possible as well as reduce the stray population on
+              the streets of Lebanon.</ion-text
+            >
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('gmap')">Donate</ion-button>
+          <ion-button fill="clear" (click)="visit('gmap')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">ANIMALS LEBANON</ion-card-title>
+            <ion-card-subtitle color="primary">Lebanon</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary"
+              >Animals Lebanon's main mission is to: <br />
+              - Enact and enforce comprehensive national animal protection and
+              welfare legislation<br />
+              - Increase Lebanon's compliance with the regulations of the World
+              Animal Health Organization (OIE) and the Convention on
+              International Trade in Endangered Species (CITES) <br />
+              - Encourage and enable civil society to make improvements for
+              animal welfare</ion-text
+            >
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('animalslebanon')"
+            >Donate</ion-button
+          >
+          <ion-button fill="clear" (click)="visit('animalslebanon')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">BETA</ion-card-title>
+            <ion-card-subtitle color="primary">Lebanon</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary">
+              BETA's mission is to strive towards ensuring that one day all
+              animals in Lebanon will get the chance to live safely and
+              securely. It’s their goal to educate individuals and take direct
+              action to help animals in Lebanon live the life they deserve, for
+              we all belong to this planet and it is home to all of us.
+            </ion-text>
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('beta')">Donate</ion-button>
+          <ion-button fill="clear" (click)="visit('beta')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary"
+              >BEKAA ANIMAL SHELTER</ion-card-title
+            >
+            <ion-card-subtitle color="primary">Lebanon</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary">
+              Bekaa shelter was started and is currently run by Rawaa Madi. She
+              began her mission in June 2020. Rawaa believes that people in
+              Bekaa have so many misconceptions about dogs. They think that dogs
+              are dangerous, so many get shot or poisoned. She's working hard on
+              spreading awareness, rescuing, spaying/neutering, and providing
+              shelter to sick and abused animals.
+            </ion-text>
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('bekaa')"
+            >Donate
+          </ion-button>
+          <ion-button fill="clear" (click)="visit('bekaa')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">FOUR PAWS</ion-card-title>
+            <ion-card-subtitle color="primary">Global</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary"
+              >Four Paws is the global animal welfare organisation for animals
+              under direct human influence, which reveals suffering, rescues
+              animals in need and protects them. Their vision is a world where
+              humans treat animals with respect, empathy and
+              understanding.</ion-text
+            >
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('4paws')">Donate</ion-button>
+          <ion-button fill="clear" (click)="visit('4paws')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">SUSIE'S SENIOR DOGS</ion-card-title>
+            <ion-card-subtitle color="primary">New York</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary"
+              >Susie's Senior Dogs is a nonprofit organization working to bring
+              awareness to the plight of homeless senior dogs. Because of their
+              age senior dogs are most often overlooked by adopters. People fear
+              adopting senior dogs for a number of reasons, but we're here to
+              tell a different story. They have so much love to give! Senior
+              dogs make wonderful companions and they simply need to be given
+              the chance.</ion-text
+            >
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('susie')">Donate</ion-button>
+          <ion-button fill="clear" (click)="visit('susie')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary"
+              >BO AI ANIMAL PROTECTION CENTRE</ion-card-title
+            >
+            <ion-card-subtitle color="primary">China</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary">
+              The Bo Ai Animal Protection Centre of Guangyuan is a small animal
+              rescue center in China that still manages to care for hundreds of
+              cats and dogs. Bo Ai dedicates their time to fighting the dog meat
+              industry and rescuing dogs from the dog meat trade. The founder of
+              Bo Ai, Du Yufeng, works to promote awareness of the dog meat trade
+              as she travels locally to rescue dogs and make government appeals
+              to close businesses that are involved with the dog meat trade.
+            </ion-text>
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('boai')">Donate</ion-button>
+          <ion-button fill="clear" (click)="visit('boai')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">KURTARAN EV</ion-card-title>
+            <ion-card-subtitle color="primary">Turkey</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary">
+              Kurtaran Ev (The Rescue House Organisation) is a non-profit rescue
+              and rehoming organization operating in Istanbul, Turkey. Their
+              mission is to rescue animals in need from the street, urban areas
+              and shelters, rehabilitate them and find them forever homes.
+            </ion-text>
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('kurtaran')"
+            >Donate</ion-button
+          >
+          <ion-button fill="clear" (click)="visit('kurtaran')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title color="primary">K9 FRIENDS</ion-card-title>
+            <ion-card-subtitle color="primary">UAE</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="primary">
+              K9 Friends has been in operation since 1989 and their main aim has
+              always been to rescue and rehome stray and abandoned dogs. As a
+              volunteer run organisation, they take in dogs and care for them
+              until new homes can be found; giving them shelter and high
+              standards of kennelling and veterinary care. they also help
+              reunite lost dogs with their owners, offer help and advice to new
+              pet owners and we endeavour to educate the public and encourage a
+              responsible dog-owning population in the UAE
+            </ion-text>
+          </ion-card-content>
+
+          <ion-button fill="clear" (click)="donate('k9')">Donate</ion-button>
+          <ion-button fill="clear" (click)="visit('k9')"
+            >View Website</ion-button
+          >
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

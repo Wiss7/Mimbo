@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { reminderTypes } from './reminder-types/reminderTypes';
 import { Reminder } from './reminder.model';
 import { ReminderService } from './reminder.service';
+
 @Component({
   selector: 'app-reminders',
   templateUrl: './reminders.page.html',
@@ -16,7 +17,7 @@ export class RemindersPage implements OnInit, OnDestroy {
   allRemindersSub: Subscription;
   reminderSub: Subscription;
   isLoading = true;
-  filter = 'All';
+  filter = 'Active';
   dogfilter = 'All';
   dogFilterArray = [];
   loadedReminders: Reminder[];
@@ -60,19 +61,13 @@ export class RemindersPage implements OnInit, OnDestroy {
     this.filterReminders();
   }
   filterReminders() {
-    if (this.filter === 'All') {
-      this.loadedReminders = [...this.allReminders];
-    } else if (this.filter === 'Upcoming') {
+    if (this.filter === 'Active') {
       this.loadedReminders = [
-        ...this.allReminders.filter(
-          (r) => new Date(r.reminderDateTime) >= new Date()
-        ),
+        ...this.allReminders.filter((r) => r.isComplete === false),
       ];
-    } else if (this.filter === 'Past') {
+    } else if (this.filter === 'Complete') {
       this.loadedReminders = [
-        ...this.allReminders.filter(
-          (r) => new Date(r.reminderDateTime) < new Date()
-        ),
+        ...this.allReminders.filter((r) => r.isComplete === true),
       ];
       console.log(this.loadedReminders);
     }

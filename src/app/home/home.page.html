@@ -1,9 +1,6 @@
 <ion-header class="background-primary">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Mimbo</ion-title>
+    <ion-title> Home </ion-title>
     <ion-buttons slot="primary">
       <ion-button [routerLink]="['/account']"
         ><ion-icon name="settings-outline" slot="icon-only"></ion-icon
@@ -14,7 +11,7 @@
 <ion-content>
   <ion-grid class="no-padding background-color">
     <ion-row>
-      <ion-col sizeLg="6" offsetMd="3">
+      <ion-col sizeLg="6" offsetLg="3">
         <ion-img
           src="../../../assets/images/HomeSlogan.png"
           class="slogan"
@@ -31,19 +28,10 @@
         <div class="square">
           <img src="../../../assets/images/menu/Appointment.jpg" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Appointments & Reminders</ion-text
         >
       </ion-col>
-      <ion-col sizeSm="4" sizeXs="6" class="ion-text-center"
-        ><div class="square">
-          <img src="../../../assets/images/menu/SaveLife.jpg" />
-        </div>
-        <ion-text color="primary" class="font-size"
-          >Save A Life</ion-text
-        ></ion-col
-      >
-
       <ion-col
         sizeSm="4"
         sizeXs="6"
@@ -52,7 +40,7 @@
         ><div class="square">
           <img src="../../../assets/images/menu/Food.png" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Can Pups Eat it?</ion-text
         ></ion-col
       >
@@ -65,7 +53,7 @@
         ><div class="square">
           <img src="../../../assets/images/menu/vets.png" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Vets Near Me</ion-text
         ></ion-col
       >
@@ -77,7 +65,7 @@
         ><div class="square">
           <img src="../../../assets/images/menu/doggogram.png" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Doggogram</ion-text
         ></ion-col
       >
@@ -89,7 +77,7 @@
         ><div class="square">
           <img src="../../../assets/images/menu/info.png" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Dog Breeds Info</ion-text
         ></ion-col
       >
@@ -101,7 +89,7 @@
         ><div class="square">
           <img src="../../../assets/images/menu/bodylanguage.jpg" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Dog Body Language</ion-text
         ></ion-col
       >
@@ -113,8 +101,20 @@
         ><div class="square">
           <img src="../../../assets/images/menu/training.jpg" />
         </div>
-        <ion-text color="primary" class="font-size"
+        <ion-text color="darkmimbo" class="font-size"
           >Training Tools</ion-text
+        ></ion-col
+      >
+      <ion-col
+        sizeSm="4"
+        sizeXs="6"
+        class="ion-text-center"
+        routerLink="/donate"
+        ><div class="square">
+          <img src="../../../assets/images/menu/donation.png" />
+        </div>
+        <ion-text color="darkmimbo" class="font-size"
+          >Donate Now</ion-text
         ></ion-col
       >
     </ion-row>

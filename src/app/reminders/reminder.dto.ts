@@ -4,6 +4,7 @@ export interface AddReminderDTO {
   typeId: number;
   reminderDate: Date;
   remindBefore: number;
+  repeatEvery: number;
   notes: string;
 }
 
@@ -13,6 +14,7 @@ export interface AddReminderResponseDTO {
   reminderDate: Date;
   typeId: number;
   remindBefore: number;
+  repeatEvery: number;
   isReminderAdded: boolean;
   notes: string;
 }
@@ -24,5 +26,6 @@ export interface UpdateReminderDTO {
   typeId: number;
   reminderDate: Date;
   remindBefore: number;
+  repeatEvery: number;
   notes: string;
 }

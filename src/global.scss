@@ -28,3 +28,25 @@
 button.alert-button.ion-focusable.ion-activatable.confirm-delete {
   color: var(--ion-color-danger);
 }
+
+.ion-color-darkmimbo {
+  --ion-color-base: var(--ion-color-darkmimbo) !important;
+  --ion-color-base-rgb: var(--ion-color-darkmimbo-rgb) !important;
+  --ion-color-contrast: var(--ion-color-darkmimbo-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-darkmimbo-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-darkmimbo-shade) !important;
+  --ion-color-tint: var(--ion-color-darkmimbo-tint) !important;
+}
+
+.ion-color-lightmimbo {
+  --ion-color-base: var(--ion-color-lightmimbo) !important;
+  --ion-color-base-rgb: var(--ion-color-lightmimbo-rgb) !important;
+  --ion-color-contrast: var(--ion-color-darkmimbo) !important;
+  --ion-color-contrast-rgb: var(--ion-color-darkmimbo-rgb) !important;
+  --ion-color-shade: var(--ion-color-lightmimbo-shade) !important;
+  --ion-color-tint: var(--ion-color-lightmimbo-tint) !important;
+}
+
+.actionsheetbutton {
+  color: var(--ion-color-primary) !important;
+}
