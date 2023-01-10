@@ -18,7 +18,6 @@ export class DonatePage implements OnInit {
   }
 
   async donate(name: string) {
-    console.log(ngos);
     const i = ngos.findIndex((x) => x.name === name);
     const url = ngos[i].donateLink;
     await Browser.open({ url });
