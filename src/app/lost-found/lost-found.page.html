@@ -1,0 +1,23 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Lost & Found</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [routerLink]="['/account']"
+        ><ion-icon name="settings-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab-button
+    ><ion-icon
+      name="add-outline"
+      class="add-outline"
+      routerLink="add-case"
+    ></ion-icon
+  ></ion-fab-button>
+</ion-content>

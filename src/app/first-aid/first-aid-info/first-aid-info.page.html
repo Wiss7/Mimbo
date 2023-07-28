@@ -1,0 +1,921 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>First Aid Basics</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [routerLink]="['/account']"
+        ><ion-icon name="settings-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen color="lightmimbo">
+  <h1 class="title"><div>{{type}}</div></h1>
+  <div class="ion-padding">
+    <div *ngIf="type === 'CPR'">
+      <ion-img src="../../../assets/images/firstaid/CPR.png"></ion-img>
+      <br /><br />
+      <ion-text>
+        <b>Step 1: Assess the Situation </b>
+        <p>
+          Ensure your safety and the safety of others around you. Approach the
+          dog carefully. If the dog is unresponsive, check for breathing and a
+          pulse.
+        </p>
+        <b>Step 2: Check for Breathing </b>
+        <p>
+          Place your ear close to the dog's nose and mouth, and watch for chest
+          movement. Feel for airflow on your cheek. If the dog is not breathing
+          or only gasping, it indicates a breathing emergency.
+        </p>
+        <b>Step 3: Check for Pulse </b>
+        <p>
+          Find the femoral pulse inside the dog's hind leg, close to the groin
+          area. If you cannot detect a pulse or it's weak and irregular, the dog
+          requires immediate CPR.
+        </p>
+
+        <h4>
+          <ion-text color="danger" style="text-transform: uppercase"
+            >Please remember to administer CPR to a dog only if it's not
+            breathing, unconscious, and shows no pulse; attempting CPR on a
+            responsive or healthy dog could be harmful.</ion-text
+          >
+        </h4>
+        <br />
+        <b>Step 4: Lay Your Dog on a Flat Surface</b>
+        <p>
+          Lay the dog on his/her side (either is fine) on a flat surface. You
+          will need to stand or kneel beside the dog. For barrel-chested dogs
+          like Bulldogs, it is also appropriate to place the dog on his/her
+          back.
+        </p>
+        <b>Step 5: Perform Chest Compressions</b>
+        <p>
+          - For small dogs: Use the heel of one hand to perform chest
+          compressions at the point where their elbow touches the chest.
+          Compress the chest about 1 to 1.5 inches (2.5 to 4 cm) deep.
+        </p>
+        <p>
+          - For medium to large dogs: Place both hands on the widest part of the
+          rib cage and compress the chest about 2 to 3 inches (5 to 7.5 cm)
+          deep.
+        </p>
+        <p>
+          Keep your elbows straight and use your body weight to administer
+          compressions. Aim for a rate of 100-120 compressions per minute, which
+          is roughly the beat of the song "Staying Alive."
+        </p>
+        <b>Step 6: Artificial Respiration </b>
+        <p>
+          Respiration After 30 compressions, provide artificial respiration to
+          the dog to supply oxygen to their lungs.
+        </p>
+        <p>
+          - For small dogs: Gently close their mouth and cover their nose with
+          your mouth, giving a breath that makes their chest rise.
+        </p>
+        <p>
+          - For medium to large dogs: Close their mouth, extend their neck to
+          straighten the airway, and breathe into their nose until the chest
+          rises.
+        </p>
+        <b>Step 7: Continue Cycles </b>
+        <p>
+          Alternate between 30 chest compressions and 2 breaths until the dog
+          starts breathing on its own or until you reach a veterinarian for
+          further medical attention.
+        </p>
+
+        <ion-text color="danger"
+          >Please remember that your pet's likelihood of surviving with
+          resuscitation is very low. However, in an emergency it may give your
+          pet its only chance.</ion-text
+        >
+      </ion-text>
+    </div>
+    <div *ngIf="type === 'Poisoning'">
+      <ion-text>
+        <ion-text color="danger"
+          >Remember, every poisoning case is different, and specific treatments
+          may vary depending on the type of poison involved. Always consult with
+          a veterinarian before attempting any first aid measures, as they can
+          provide accurate guidance based on the individual situation. If
+          possible, have the contact information of a nearby emergency
+          veterinary clinic available for quick reference in case of
+          emergencies.</ion-text
+        ><br /><br />
+        <b>Most Common Symptoms of Poisoning in Dogs:</b>
+        <p>
+          - Vomiting <br />
+          - Diarrhea <br />
+          - Excessive drooling <br />
+          - Tremors or shaking <br />
+          - Seizures <br />
+          - Weakness or lethargy <br />
+          - Difficulty breathing <br />
+          - Changes in behavior
+        </p>
+        <br />
+        <h4><b>First Aid for a Poisoned Dog</b></h4>
+        <br />
+        <b>Step 1: Assess the Situation</b>
+        <p>
+          Before approaching your dog, ensure your safety. If you suspect the
+          poison may be harmful to you, use protective gear such as gloves to
+          handle the dog.
+        </p>
+        <b>Step 2: Remove the Dog from the Source</b>
+        <p>
+          If the poison is still present and you can safely do so, move your dog
+          away from the area to prevent further exposure.
+        </p>
+        <b>Step 3: Check for Vital Signs </b>
+        <p>
+          Assess your dog's vital signs - check for breathing, pulse, and
+          responsiveness. If your dog is not breathing or unconscious, begin CPR
+          if you are trained to do so. If there's no pulse, initiate chest
+          compressions along with rescue breaths for dogs.
+        </p>
+        <b>Step 4: Contact a Veterinarian</b>
+        <p>
+          Call your regular veterinarian or the nearest emergency veterinary
+          clinic immediately. Describe the situation and let them know that you
+          suspect your dog has been poisoned. Follow their instructions closely.
+        </p>
+        <b>Step 5: Do Not Induce Vomiting </b>
+        <p>
+          <ion-text color="danger"><b> DO NOT</b></ion-text> induce vomiting in
+          your dog unless specifically instructed to do so by a veterinarian.
+          Some substances can cause more harm if vomited back up.
+        </p>
+        <b>Step 6: Observe Symptoms</b>
+        <p>
+          Keep a close eye on your dog's symptoms and behavior. Look for signs
+          such as vomiting, diarrhea, excessive drooling, tremors, seizures,
+          weakness, difficulty breathing, or changes in behavior.
+        </p>
+        <b>Step 7: Gather Information </b>
+        <p>
+          If possible, gather information about the suspected poison. Check for
+          any containers, labels, or remnants of the substance. Note any
+          exposure time and quantity ingested if known. This information can
+          assist the veterinarian in determining the appropriate treatment.
+        </p>
+        <b>Step 8: Prevent Further Exposure </b>
+        <p>
+          Keep other pets and animals away from the poisoned area to avoid
+          additional incidents.
+        </p>
+        <b>Step 9: Transport Safely </b>
+        <p>
+          If the veterinarian advises you to bring your dog in, transport them
+          safely. If the dog is unconscious, lay them on their right side during
+          transportation.
+        </p>
+        <b>Step 10: Do Not Delay</b>
+        <p>
+          Time is critical in poisoning cases. Act quickly and seek professional
+          veterinary help as soon as possible.
+        </p>
+        <br />
+        <ion-text color="danger"
+          >Remember, every poisoning case is different, and specific treatments
+          may vary depending on the type of poison involved. Always consult with
+          a veterinarian before attempting any first aid measures, as they can
+          provide accurate guidance based on the individual situation. If
+          possible, have the contact information of a nearby emergency
+          veterinary clinic available for quick reference in case of
+          emergencies.</ion-text
+        >
+      </ion-text>
+    </div>
+    <div *ngIf="type === 'Choking'">
+      <ion-text>
+        <b>Step 1: Assess the Situation</b>
+        <p>
+          Make sure the dog is indeed choking. Common signs of choking in dogs
+          include pawing at the mouth, difficulty breathing, gagging, wheezing,
+          and blue-tinged gums. Be cautious as an anxious or distressed dog may
+          bite, even unintentionally, when you try to help.
+        </p>
+        <b>Step 2: Remain Calm and Comfort the Dog</b>
+        <p>
+          Your calm demeanor will help keep the dog calmer too. Speak softly and
+          reassuringly to the dog to provide comfort and avoid escalating the
+          situation.
+        </p>
+        <b>Step 3: Open the Dog's Mouth</b>
+        <p>
+          If the dog is small and you can safely manage, open their mouth and
+          look for any visible foreign object blocking the airway. If you can
+          see and safely remove the object, do so carefully. However, never
+          attempt to retrieve an object if you can't see it or if it's lodged
+          deep in the throat, as this may push it further down and worsen the
+          situation.
+        </p>
+        <b>Step 4: Perform Dog Heimlich Maneuver</b>
+        <p>
+          If the object is not visible, you'll need to perform the dog version
+          of the Heimlich maneuver. Follow these steps:
+          <br /><br />
+          <b>1- For Small Dogs:</b>
+        </p>
+        <p>
+          - Place the dog on its back.<br />
+          - Place one hand on the dog's back for support. <br />- With the other
+          hand, apply quick and firm pressure just behind the dog's ribcage.<br />
+          - Perform abdominal thrusts (similar to compressions) upward and
+          inward to force the object out.<br />
+          - Check the dog's mouth to see if the object is dislodged. Be prepared
+          to perform several thrusts if necessary.
+        </p>
+        <b>2- For Large Dogs:</b>
+        <p>
+          - Stand behind the dog and wrap your arms around their abdomen.<br />
+          - Make a fist with one hand and place it just above the dog's navel
+          but below the ribcage. <br />- Place your other hand over the fist and
+          perform quick, upward thrusts to dislodge the object.<br />
+          - Check the dog's mouth to see if the object is dislodged. Repeat the
+          thrusts if necessary.
+        </p>
+        <b>Step 6: Seek Veterinary Help</b>
+        <p>
+          Even if you manage to dislodge the object and the dog seems fine
+          afterward, it is crucial to seek immediate veterinary attention. There
+          might still be internal injuries or irritation caused by the object,
+          and a professional evaluation is necessary to ensure the dog's
+          well-being.
+        </p>
+        <br />
+        <ion-text color="danger"
+          >Remember, if you are unsure about providing first aid or the dog's
+          condition does not improve, it's best to let a veterinarian handle the
+          situation. Always prioritize the dog's safety and seek professional
+          help when needed.</ion-text
+        >
+      </ion-text>
+    </div>
+    <div *ngIf="type === 'Dog Bites'">
+      <ion-text>
+        <b>Step 1: Assess the Situation</b>
+        <p>
+          Approach your dog calmly and carefully. Ensure your safety and be
+          cautious, as a dog in pain or distress may be anxious or defensive.
+        </p>
+        <b>Step 2: Control Your Dog</b>
+        <p>
+          If your dog is in a state of agitation, try to gently restrain them to
+          prevent further injuries. Use a leash if available, or if necessary,
+          use a cloth or a piece of clothing as a makeshift leash.
+        </p>
+        <b>Step 3: Examine the Bite Wound</b>
+        <p>
+          Assess the bite wound carefully to determine its severity and any
+          signs of excessive bleeding.
+        </p>
+        <b>Step 4: Control Bleeding (if applicable):</b>
+        <p>
+          If the bite wound is bleeding, apply gentle pressure with a clean
+          cloth or gauze to control the bleeding.
+        </p>
+        <b> Step 5: Clean the Wound </b>
+        <p>
+          If possible, rinse the bite wound gently with mild soap and water to
+          reduce the risk of infection. Avoid any harsh disinfectants or
+          solutions, as they may irritate the wound.
+        </p>
+        <b>Step 6: Apply Antibiotic Ointment and Dressing</b>
+        <p>
+          Apply a pet-safe antibiotic ointment to the wound, and cover it with a
+          clean bandage or gauze to protect it from further contamination.
+        </p>
+        <b>Step 7: Seek Veterinary Attention</b>
+        <p>
+          Regardless of the severity of the bite, it's essential to seek
+          veterinary attention for dog bites. Even seemingly minor bites can
+          lead to infections, and a veterinarian can assess the wound properly
+          and provide appropriate treatment.
+        </p>
+        <b>Step 8: Observe for Changes</b>
+        <p>
+          Keep a close eye on your dog for any signs of infection or worsening
+          of the wound. Watch for symptoms such as increased swelling, redness,
+          discharge, or behavioral changes.
+        </p>
+        <b>Step 9: Update Vaccinations (if applicable)</b>
+        <p>
+          If the bite is from an unknown animal or a potentially rabid animal,
+          ensure that your dog's rabies vaccinations are up to date. Contact
+          your veterinarian immediately if you have any concerns about rabies
+          exposure.
+        </p></ion-text
+      >
+      <br />
+      <ion-text color="danger"
+        >Remember, providing first aid is only the initial response. Always
+        consult with a veterinarian for proper evaluation, treatment, and
+        ongoing care to ensure your dog's health and well-being after a bite
+        incident</ion-text
+      >
+    </div>
+    <div *ngIf="type === 'Stings'">
+      <ion-text>
+        <b>Step 1: Assess the Situation</b>
+        <p>
+          Approach the dog calmly and carefully to avoid getting bitten.
+          Identify the source of the sting, which may be from bees, wasps,
+          hornets, or other insects.
+        </p>
+        <b>Step 2: Remove the Stinger (if applicable)</b>
+        <p>
+          If the sting is from a bee, wasp, or hornet, try to remove the stinger
+          as quickly as possible. Use a credit card or the edge of a blunt knife
+          to scrape it off the dog's skin. Avoid using tweezers, as they can
+          squeeze more venom into the wound.
+        </p>
+        <b>Step 3: Wash the Area</b>
+        <p>
+          Gently clean the sting site with mild soap and water to reduce the
+          risk of infection.
+        </p>
+        <b>Step 4: Apply a Cold Compress</b>
+        <p>
+          Place a cold pack or a clean cloth soaked in cold water over the
+          affected area for about 10 minutes to help reduce pain and swelling.
+        </p>
+        <b>Step 5: Monitor for Allergic Reactions</b>
+        <p>
+          Watch the dog closely for signs of an allergic reaction, such as
+          excessive swelling, difficulty breathing, hives, or extreme lethargy.
+          If any of these symptoms occur, seek immediate veterinary attention.
+        </p>
+        <b>Step 6: Keep the Dog Calm</b>
+        <p>
+          Try to keep the dog calm and restrict their movement to prevent the
+          venom from spreading quickly.
+        </p>
+        <b
+          >Step 7: <ion-text color="danger">DO NOT</ion-text> Give Human
+          Medications</b
+        >
+        <p>
+          Avoid giving over-the-counter pain relievers or any human medications
+          to dogs without specific instructions from a veterinarian.
+        </p>
+        <b>Step 8: Seek Veterinary Attention</b>
+        <p>
+          If the dog is stung multiple times, shows signs of a severe allergic
+          reaction, or the swelling and pain persist, it's essential to seek
+          immediate veterinary attention.
+        </p>
+      </ion-text>
+    </div>
+    <div *ngIf="type === 'Fractures & Broken Bones'">
+      <ion-text>
+        <b>Step 1: Minimize Movement</b>
+        <p>
+          If you suspect your dog has a fracture or broken bone, try to prevent
+          them from moving to avoid further injury. Gently restrain your dog or
+          use a makeshift stretcher (e.g., a board, a blanket) to transport them
+          carefully.
+        </p>
+        <b>Step 2: Apply a Temporary Splint</b>
+        <p>
+          If you have basic first aid supplies and feel comfortable doing so,
+          you can apply a temporary splint to immobilize the affected limb. Use
+          padded materials like rolled gauze or cloth to provide support, making
+          sure not to cut off blood circulation. The splint should be long
+          enough to cover the joint above and below the injury.
+        </p>
+        <b>Step 3: Control Bleeding</b>
+        <p>
+          If there is any bleeding associated with the injury, apply gentle
+          pressure with a clean cloth or sterile bandage to control the
+          bleeding. Be cautious not to put too much pressure on the fracture
+          site.
+        </p>
+        <b>Step 4: Cold Compress</b>
+        <p>
+          Applying a cold compress or ice pack (wrapped in a cloth) to the
+          injured area can help reduce swelling and provide some pain relief.
+          Apply the cold compress for 10-15 minutes at a time, allowing breaks
+          in between.
+        </p>
+        <b>Step 5: Transport to Veterinary Care</b>
+        <p>
+          Fractures and broken bones require immediate veterinary attention. Do
+          not delay seeking professional care. Call your veterinarian or an
+          emergency animal clinic to let them know you are on your way and
+          describe the situation.
+        </p>
+        <b>Step 6: Avoid Medication</b>
+        <p>
+          Do not administer pain medication or other drugs meant for humans
+          without veterinary guidance. Some medications can be toxic or harmful
+          to dogs.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger"
+        >Remember, while these steps can provide some temporary relief and
+        support, they are not a replacement for professional veterinary care.
+        Fractures and broken bones require X-rays and proper medical management,
+        including possible surgery or casting, which can only be provided by a
+        veterinarian. Always consult a professional for accurate diagnosis and
+        treatment.</ion-text
+      >
+    </div>
+    <div *ngIf="type === 'Food Poisoning'">
+      <ion-text>
+        <b>Most Common Symptoms of Poisoning in Dogs:</b>
+        <p>
+          - Vomiting <br />
+          - Diarrhea <br />
+          - Lethargy <br />
+          - Loss of Appetite <br />
+          - Abdominal Pain <br />
+          - Seizures or Tremors <br />
+          - Excessive Drooling <br />
+        </p>
+        <br />
+        <p>
+          If you suspect your dog has food poisoning, follow these first aid
+          steps:
+        </p>
+        <b>Step 1: Remove the Source</b>
+        <p>
+          : If you know what your dog ingested and it is still within reach,
+          remove it immediately to prevent further consumption.
+        </p>
+        <b
+          >Step 2:<ion-text color="danger"> DO NOT</ion-text> Induce Vomiting</b
+        >
+        <p>
+          Unlike with some types of poisoning, it is generally not recommended
+          to induce vomiting in cases of food poisoning. Inducing vomiting can
+          worsen the situation if your dog has ingested something caustic or
+          sharp.
+        </p>
+        <b>Step 3: Offer Fresh Water</b>
+        <p>
+          Provide your dog with access to fresh, clean water to help keep them
+          hydrated. However, do not force them to drink.
+        </p>
+        <b>Step 4: Contact a Veterinarian</b>
+        <p>
+          Food poisoning can be dangerous, and the severity of symptoms can
+          escalate rapidly. Contact your veterinarian or an emergency animal
+          clinic immediately for advice and instructions.
+        </p>
+        <b>Step 5: Observe Your Dog</b>
+        <p>
+          Keep a close eye on your dog's condition and note any changes in
+          symptoms or behavior. This information will be helpful for the
+          veterinarian in determining the appropriate course of action.
+        </p>
+        <b>Step 6: Avoid Home Remedies</b>
+        <p>
+          Do not attempt to treat food poisoning in dogs with home remedies or
+          human medications, as this can worsen the situation.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger"
+        >Remember that the best course of action is always to seek professional
+        veterinary care promptly. Even if your dog's symptoms seem mild at
+        first, some toxins can have delayed effects and lead to serious
+        complications if left untreated. Your veterinarian will be able to
+        properly diagnose the cause of the food poisoning and provide
+        appropriate treatment to help your dog recover.</ion-text
+      >
+    </div>
+    <div *ngIf="type === 'Heat Stroke'">
+      <ion-text>
+        <b>Step 1: Move to a Cool Area </b>
+        <p>
+          Immediately move your dog to a shady or air-conditioned location.
+          Avoid direct sunlight and hot surfaces.
+        </p>
+        <b>Step 2: Cool the Body </b>
+        <p>
+          Begin cooling your dog's body by wetting them with cool (not cold)
+          water. You can use a hose, wet towels, or immerse them in a shallow
+          tub of cool water. Focus on the armpits, groin area, and foot pads as
+          these areas have a higher concentration of blood vessels, which can
+          help cool the body more effectively.
+        </p>
+        <b>Step 3: Offer Water </b>
+        <p>
+          Allow your dog to drink small amounts of cool water, but do not force
+          them to drink.
+        </p>
+        <b>Step 4: Use Fans or Air Conditioning </b>
+        <p>
+          If available, use fans or air conditioning to aid in the cooling
+          process.
+        </p>
+        <b>Step 5: Avoid Ice-Cold Water or Ice Packs </b>
+        <p>
+          <ion-text color="danger"> DO NOT</ion-text> use ice-cold water or ice
+          packs, as this may constrict blood vessels and hinder the cooling
+          process.
+        </p>
+        <b>Step 6: Monitor Rectal Temperature and Prevent Overcooling </b>
+        <p>
+          If possible, monitor your dog's rectal temperature every few minutes.
+          Do not overcool them, as hypothermia can be just as dangerous. Stop
+          the cooling process once their temperature stabilizes around 39.4°C
+          (103°F).
+        </p>
+        <b>Step 7: Seek Veterinary Care </b>
+        <p>
+          Even if your dog's temperature improves, it is crucial to seek
+          immediate veterinary attention. Heatstroke can cause internal damage
+          that may not be immediately apparent.
+        </p>
+        <b>Step 8: Transport Safely </b>
+        <p>
+          During transport to the veterinary clinic, continue to keep your dog
+          in a cool environment and avoid letting them overheat again.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger">
+        <p>
+          Remember, heatstroke is preventable with proper precautions. To avoid
+          heatstroke in dogs:
+        </p>
+        <p>
+          - Never leave your dog in a parked car, even with the windows cracked
+          open. The temperature inside a car can rise rapidly, leading to
+          heatstroke. <br />
+          - Avoid exercising your dog during the hottest parts of the day. Opt
+          for early mornings or evenings when the weather is cooler. <br />
+          - Always provide access to fresh, cool water, and ensure your dog has
+          shade available during outdoor activities. <br />
+          - Be mindful of hot pavement or surfaces, as they can burn your dog's
+          paw pads.
+        </p>
+        <p>
+          Heatstroke is a medical emergency, and immediate first aid is crucial.
+          Contact your veterinarian immediately for further guidance and
+          treatment after providing first aid.
+        </p>
+      </ion-text>
+    </div>
+    <div *ngIf="type === 'Shock'">
+      <ion-text>
+        <p>
+          Shock is a lack of oxygen to the tissues of the body, usually caused
+          by a fall in blood volume or blood pressure.
+        </p>
+        <p>
+          Shock occurs as a result of the body’s circulatory system failing to
+          work properly, which means that the tissues and organs of the body,
+          including the heart and the brain, struggle to get sufficient oxygen.
+          The body’s response to this is to shut down the circulation to the
+          skin, the heart speeds up as it tries to get sufficient blood supply
+          and oxygen around the body and blood supply is drawn away from the gut
+          to prioritise vital organs; which causes the animal to feel sick and
+          thirsty and can lead to collapse.
+        </p>
+        <p>Shock results from major drop in blood pressure and is serious.</p>
+        <p>
+          If you suspect that your dog is in shock, it's essential to act
+          quickly and seek immediate veterinary attention. Shock is a
+          life-threatening condition that requires professional medical
+          treatment. While waiting for professional help, follow these first aid
+          steps to stabilize your dog:
+        </p>
+        <b>Step 1: Keep Calm and Handle Gently</b>
+        <p>
+          Approach your dog calmly and avoid sudden movements or loud noises.
+          Handle your dog gently to avoid causing further stress or injury.
+        </p>
+        <b>Step 2: Lay the Dog Down </b>
+        <p>
+          Lay your dog down on their right side, as this can help improve blood
+          flow to the heart.
+        </p>
+        <b>Step 3: Elevate the Hindquarters </b>
+        <p>
+          If your dog is having difficulty breathing or is unconscious, gently
+          elevate their hindquarters to help with blood circulation. Do not
+          force this if it causes discomfort.
+        </p>
+        <b>Step 4: Keep Warm </b>
+        <p>
+          Use a blanket or towel to keep your dog warm. Shock can cause a drop
+          in body temperature, so maintaining warmth is essential.
+        </p>
+        <b
+          >Step 5: <ion-text color="danger"> DO NOT</ion-text> Offer Food or
+          Water
+        </b>
+        <p>
+          While your first instinct may be to offer food or water, do not give
+          anything orally. Your dog may be unable to swallow properly or may
+          aspirate the fluids, which could worsen the situation.
+        </p>
+        <b>Step 6: Monitor Vital Signs </b>
+        <p>
+          Check your dog's pulse, breathing rate, and gum color (capillary
+          refill time). A normal gum color is pink, and the capillary refill
+          time should be around 1-2 seconds.
+        </p>
+        <b>Step 7: Keep the Dog Calm </b>
+        <p>
+          Minimize stress and keep the environment as quiet and calm as
+          possible. Excessive stimulation can worsen shock.
+        </p>
+        <b>Step 8: Transport to the Veterinarian </b>
+        <p>
+          Transport your dog to the nearest veterinary clinic or an emergency
+          animal hospital immediately. Call ahead to let them know you are
+          coming so they can be prepared for your arrival.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger"
+        >Remember, the information provided here is for first aid purposes only
+        and is not a substitute for professional veterinary care. Shock is a
+        serious condition that requires immediate medical attention and
+        diagnosis. Your veterinarian will be able to assess the situation,
+        identify the underlying cause of the shock, and provide the appropriate
+        treatment to stabilize and support your dog's recovery</ion-text
+      >
+    </div>
+    <div *ngIf="type === 'Bleeding'">
+      <ion-text>
+        <b>Step 1: Restrain and Examine </b>
+        <p>
+          Restrain your dog gently, especially if they are in pain or panicking.
+          Examine the wound carefully to determine the severity of the bleeding
+          and whether it requires immediate veterinary attention.
+        </p>
+        <b>Step 2: Apply Pressure </b>
+        <p>
+          Use a clean cloth, gauze, or a piece of clothing to apply firm, direct
+          pressure to the bleeding area. Maintain pressure for several minutes
+          (at least 3-5 minutes) to encourage clotting and stop the bleeding.
+        </p>
+        <b>Step 3: Elevate the Wound (if possible) </b>
+        <p>
+          If the wound is on a limb and not fractured, try to elevate the
+          injured area above the level of the heart. This can help reduce blood
+          flow to the wound and slow down bleeding.
+        </p>
+        <b>Step 4: Use a Tourniquet (if necessary) </b>
+        <p>
+          A tourniquet should only be used as a last resort if the bleeding is
+          severe and cannot be controlled with direct pressure. Place the
+          tourniquet proximal to the wound (closer to the body) and tighten it
+          enough to slow the bleeding, but not so tight that it cuts off blood
+          flow to the entire limb. Remember the exact time you applied the
+          tourniquet, as it should not be left on for an extended period.
+        </p>
+        <b>Step 5: Seek Veterinary Care </b>
+        <p>
+          Even if you manage to control the bleeding, it's crucial to seek
+          veterinary care for a proper evaluation and treatment of the wound.
+          Some injuries may be more severe than they appear, and infections can
+          occur without proper cleaning and care.
+        </p>
+        <b>Step 6: Keep Your Dog Calm </b>
+        <p>
+          Keep your dog calm and as immobile as possible during transport to
+          prevent further injury or re-opening of the wound.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger">
+        Remember, these first aid steps are meant to provide immediate care for
+        your dog until you can get them to a veterinarian. Always follow up with
+        professional veterinary care to ensure proper treatment and healing of
+        the wound. Additionally, never use human medications on your dog without
+        veterinary guidance, as some substances may be toxic to dogs.
+      </ion-text>
+    </div>
+    <div *ngIf="type === 'Having a Seizure'">
+      <ion-text>
+        <b>Step 1: Remain Calm </b>
+        <p>
+          Stay calm and try not to panic. Seizures can be frightening to
+          witness, but it's essential to stay composed to help your dog
+          effectively.
+        </p>
+        <b>Step 2: Keep Your Dog Safe </b>
+        <p>
+          Ensure that your dog is in a safe area during the seizure. Move away
+          any objects or obstacles that could pose a risk of injury. Do not
+          attempt to restrain your dog or put your hands near their mouth while
+          they are seizing, as they may unintentionally bite in confusion.
+        </p>
+        <b>Step 3: Note the Duration </b>
+        <p>
+          Observe the duration of the seizure. Seizures typically last for a few
+          seconds to a few minutes. It may be helpful to time the seizure with a
+          watch or phone.
+        </p>
+        <b>Step 4: Note the Details </b>
+        <p>
+          Pay attention to the details of the seizure, such as the type of
+          movements, body stiffness, and any vocalizations your dog may make.
+          This information will be valuable to share with your veterinarian.
+        </p>
+        <b>Step 5: Dim the Lights and Reduce Noise </b>
+        <p>
+          Dim the lights and reduce external noises to create a calm and quiet
+          environment. This can help minimize external stimuli that might
+          exacerbate the seizure.
+        </p>
+        <b>Step 6: Stay by Your Dog's Side </b>
+        <p>
+          Stay with your dog throughout the seizure, but maintain a safe
+          distance. Avoid touching them until the seizure has completely ended.
+        </p>
+        <b>Step 7: Comfort Your Dog After the Seizure </b>
+        <p>
+          Once the seizure is over, speak softly and offer gentle reassurance to
+          your dog. Be cautious as they may still be disoriented or confused
+          after the seizure.
+        </p>
+        <b>Step 8: Seek Veterinary Care </b>
+        <p>
+          Contact your veterinarian immediately after the seizure to discuss the
+          episode and follow their advice on the next steps.
+        </p>
+        <p>
+          Seizures can have various causes, and it's crucial to seek veterinary
+          attention to determine the underlying reason and discuss treatment
+          options. Your veterinarian will be able to perform a thorough
+          examination, run diagnostic tests, and provide appropriate guidance
+          based on your dog's individual situation.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger"
+        ><p>
+          If your dog experiences cluster seizures (multiple seizures in a short
+          period) or a seizure lasting more than five minutes, it is considered
+          an emergency. Seek immediate veterinary care in such cases.
+        </p></ion-text
+      >
+    </div>
+    <div *ngIf="type === 'Drowning'">
+      <ion-text>
+        <b>Step 1: Call for Help </b>
+        <p>
+          If possible, call for help or alert others nearby to assist in the
+          rescue.
+        </p>
+        <b>Step 2: Assess the Situation</b>
+        <p>
+          Evaluate the water's depth and current before attempting a rescue. If
+          the water conditions are hazardous or the current is strong, do not
+          enter the water. Instead, try to reach the dog with a long object
+          (such as a stick or rope) from the shoreline or a safe distance.p>
+        </p>
+        <b>Step 3: Reach or Throw, Don't Go </b>
+        <p>
+          If it is safe to do so, try to reach the dog with a long object, throw
+          a buoyant item (like a lifebuoy or floating device) towards the dog,
+          or extend a leash to pull them to safety. Avoid going into the water
+          yourself, especially if you are not a strong swimmer or if the water
+          is dangerous.
+        </p>
+        <b>Step 4: Get the Dog Out of the Water </b>
+        <p>
+          Once you have safely reached the dog or pulled them to a safe area,
+          gently lift them out of the water and onto dry land.
+        </p>
+        <b>Step 5: Check for Breathing and Pulse </b>
+        <p>
+          Assess the dog's breathing and pulse. If they are not breathing or do
+          not have a pulse, you may need to perform CPR (Cardiopulmonary
+          Resuscitation) if you are trained to do so. If you're unfamiliar with
+          CPR, continue to the next step and transport the dog to a veterinary
+          clinic immediately./p>
+        </p>
+        <b>Step 6: Transport to the Veterinarian </b>
+        <p>
+          Even if the dog appears fine after being rescued from the water, it's
+          crucial to seek immediate veterinary care. Secondary complications
+          from near-drowning incidents can occur hours or even days later.
+        </p>
+        <b>Step 7: Dry and Keep Warm </b>
+        <p>
+          Dry the dog off and keep them warm after the water rescue. Wrap them
+          in a towel or blanket to prevent hypothermia.
+        </p></ion-text
+      ><br />
+      <ion-text color="danger"
+        >Remember, rescuing a drowning dog can be risky, especially in
+        fast-moving water or deep bodies of water. Always prioritize your safety
+        and call for help if you need assistance. If possible, contact animal
+        control or the local authorities for assistance in rescuing the dog.
+        Seeking immediate veterinary care is essential after any water-related
+        incident to ensure the dog's well-being and to address any potential
+        complications.</ion-text
+      >
+    </div>
+
+    <div *ngIf="type === 'Eye Injuries'">
+      <ion-text>
+        <b>Step 1: Approach Calmly </b>
+        <p>
+          Approach your dog calmly and gently to avoid causing further stress or
+          agitation.
+        </p>
+        <b>Step 2: Restrain (if necessary) </b>
+        <p>
+          If your dog is in pain and becomes agitated, you may need to gently
+          restrain them to avoid accidental injury to yourself or your dog.
+        </p>
+        <b>Step 3: Do Not Touch the Eye </b>
+        <p>
+          Avoid touching your dog's injured eye, as this may worsen the injury
+          or introduce infection.
+        </p>
+        <b>Step 4: Protect the Eye </b>
+        <p>
+          If possible, place a clean, damp cloth or sterile gauze over the
+          injured eye without applying pressure. This can help protect the eye
+          from further damage and keep it moist.
+        </p>
+        <b>Step 5: Prevent Rubbing </b>
+        <p>
+          Prevent your dog from rubbing or scratching the injured eye, as this
+          can worsen the injury.
+        </p>
+        <b>Step 6: Avoid Medications </b>
+        <p>
+          Do not attempt to administer any medications or eye drops without
+          veterinary guidance, as some medications can be harmful to the eyes.
+        </p>
+        <b>Step 7: Seek Veterinary Care </b>
+        <p>
+          Contact your veterinarian immediately to describe the eye injury and
+          seek advice on how to proceed. Your veterinarian will be able to
+          assess the injury properly, provide appropriate treatment, and
+          recommend further steps for care and recovery.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger"
+        >Remember, eye injuries can be serious and may require specialized
+        treatment. Seeking prompt veterinary attention is crucial to prevent
+        complications and ensure the best possible outcome for your dog's eye
+        health.</ion-text
+      >
+    </div>
+    <div *ngIf="type === 'Ear Injuries'">
+      <ion-text>
+        <b>Step 1: Approach Calmly </b>
+        <p>
+          Approach your dog calmly and gently to avoid causing further stress or
+          agitation.
+        </p>
+        <b>Step 2: Restrain (if necessary) </b>
+        <p>
+          If your dog is in pain and becomes agitated, you may need to gently
+          restrain them to avoid accidental injury to yourself or your dog.
+        </p>
+        <b>Step 3: Assess the Injury </b>
+        <p>
+          If there is visible bleeding or foreign objects in the ear, do not
+          attempt to remove them. Cover the ear with a clean, damp cloth or
+          sterile gauze to protect it.
+        </p>
+        <b>Step 4: Do Not Probe or Insert </b>
+        <p>
+          Avoid inserting anything into your dog's ear canal, as this can push
+          debris or foreign objects further into the ear and cause more damage.
+        </p>
+        <b>Step 5: Avoid Medications </b>
+        <p>
+          Do not attempt to administer any medications or ear drops without
+          veterinary guidance, as some medications can be harmful to the ears.
+        </p>
+        <b>Step 7: Seek Veterinary Care </b>
+        <p>
+          Contact your veterinarian immediately to describe the ear injury and
+          seek advice on how to proceed. Your veterinarian will be able to
+          assess the injury properly, provide appropriate treatment, and
+          recommend further steps for care and recovery.
+        </p>
+      </ion-text>
+      <br />
+      <ion-text color="danger"
+        >Remember, ear injuries can be serious and may require specialized
+        treatment. Seeking prompt veterinary attention is crucial to prevent
+        complications and ensure the best possible outcome for your dog's ear
+        health.</ion-text
+      >
+    </div>
+  </div>
+</ion-content>

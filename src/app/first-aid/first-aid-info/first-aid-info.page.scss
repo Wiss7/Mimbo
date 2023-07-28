@@ -1,0 +1,12 @@
+.title {
+  color: var(--ion-color-primary);
+  text-align: center;
+  font-size: 30px;
+}
+.title div {
+  border-bottom: 2px solid;
+  margin: auto;
+  width: fit-content;
+  padding-left: 4px;
+  padding-right: 4px;
+}

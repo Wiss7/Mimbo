@@ -2,7 +2,7 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
-<ion-content>
+<ion-content color="lightmimbo">
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -22,18 +22,12 @@
           color="primary"
           (ionChange)="segmentChanged($event)"
         >
-          <ion-segment-button value="11200">
-            <small>11200Hz</small>
+          <ion-segment-button value="11200"> 11200Hz </ion-segment-button>
+          <ion-segment-button value="12200" color="darkmimbo">
+            12200Hz
           </ion-segment-button>
-          <ion-segment-button value="12200">
-            <small>12200Hz</small>
-          </ion-segment-button>
-          <ion-segment-button value="16000">
-            <small>16000Hz</small>
-          </ion-segment-button>
-          <ion-segment-button value="20000">
-            <small>20000Hz</small>
-          </ion-segment-button>
+          <ion-segment-button value="16000"> 16000Hz </ion-segment-button>
+          <ion-segment-button value="20000"> 20000Hz </ion-segment-button>
         </ion-segment>
       </ion-col>
     </ion-row>
