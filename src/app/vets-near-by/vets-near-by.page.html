@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="lightmimbo">
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -24,11 +24,7 @@
     <ion-row *ngIf="isLocationSelected && !isLoading" class="ion-text-center">
       <ion-col>
         <div *ngIf="vetsDetails.length>0">
-          <ion-card
-            *ngFor="let vet of vetsDetails"
-            class="vet-card"
-            color="lightmimbo"
-          >
+          <ion-card *ngFor="let vet of vetsDetails" class="vet-card">
             <ion-card-header>
               <ion-card-title color="primary">{{vet.name}}</ion-card-title>
               <ion-card-subtitle *ngIf="vet.rating" color="primary"
@@ -40,52 +36,32 @@
                 fill="clear"
                 size="small"
                 (click)="goToDirections(vet.location)"
-                ><ion-icon
-                  name="compass-outline"
-                  slot="start"
-                  color="darkmimbo"
-                ></ion-icon
-                ><ion-text color="darkmimbo">Directions</ion-text></ion-button
+                ><ion-icon name="compass-outline" slot="start"></ion-icon
+                ><ion-text>Directions</ion-text></ion-button
               >
               <ion-button
                 *ngIf="vet.website"
                 size="small"
                 fill="clear"
                 (click)="goToWebsite(vet.website)"
-                ><ion-icon
-                  name="compass-outline"
-                  slot="start"
-                  color="darkmimbo"
-                ></ion-icon
-                ><ion-text color="darkmimbo">Website</ion-text></ion-button
+                ><ion-icon name="compass-outline" slot="start"></ion-icon
+                ><ion-text>Website</ion-text></ion-button
               >
               <ion-button
                 *ngIf="vet.phoneNumber"
                 size="small"
                 fill="clear"
                 (click)="callVet(vet.phoneNumber)"
-                ><ion-icon
-                  name="call-outline"
-                  slot="start"
-                  color="darkmimbo"
-                ></ion-icon
-                ><ion-text color="darkmimbo"
-                  >{{vet.phoneNumber}}</ion-text
-                ></ion-button
+                ><ion-icon name="call-outline" slot="start"></ion-icon
+                ><ion-text>{{vet.phoneNumber}}</ion-text></ion-button
               >
               <ion-button
                 *ngIf="vet.openingHours"
                 size="small"
                 fill="clear"
                 (click)="viewOpeningHours(vet)"
-                ><ion-icon
-                  name="compass-outline"
-                  slot="start"
-                  color="darkmimbo"
-                ></ion-icon
-                ><ion-text color="darkmimbo"
-                  >View Opening Hours</ion-text
-                ></ion-button
+                ><ion-icon name="compass-outline" slot="start"></ion-icon
+                ><ion-text>View Opening Hours</ion-text></ion-button
               >
             </ion-card-content>
           </ion-card>
