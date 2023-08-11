@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'first-aid',
     loadChildren: () => import('./first-aid/first-aid.module').then( m => m.FirstAidPageModule)
   },
+  {
+    path: 'doggogram',
+    loadChildren: () => import('./doggogram/doggogram.module').then( m => m.DoggogramPageModule)
+  },
 ];
 
 @NgModule({
