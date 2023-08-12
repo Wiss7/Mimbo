@@ -17,7 +17,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AddReminderDTO, UpdateReminderDTO } from '../reminder.dto';
 import { ReminderService } from '../reminder.service';
 import { Reminder } from '../reminder.model';
-import { LocalNotifications } from '@capacitor/local-notifications';
 @Component({
   selector: 'app-addit-reminders',
   templateUrl: './addit-reminders.page.html',
@@ -301,18 +300,18 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
 
   scheduleNotification() {
     //const notifcationDate = this.datePopupVal
-    LocalNotifications.schedule({
-      notifications: [
-        {
-          title: 'Test Title',
-          body: 'Test Body',
-          id: 1,
-          schedule: {
-            at: new Date(Date.now()), // in a minute
-          },
-        },
-      ],
-    });
+    // LocalNotifications.schedule({
+    //   notifications: [
+    //     {
+    //       title: 'Test Title',
+    //       body: 'Test Body',
+    //       id: 1,
+    //       schedule: {
+    //         at: new Date(Date.now()), // in a minute
+    //       },
+    //     },
+    //   ],
+    // });
   }
 
   setComplete() {

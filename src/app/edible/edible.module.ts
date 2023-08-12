@@ -7,9 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { EdiblePageRoutingModule } from './edible-routing.module';
 
 import { EdiblePage } from './edible.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, EdiblePageRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    EdiblePageRoutingModule,
+    RouterModule,
+  ],
   declarations: [EdiblePage],
 })
 export class EdiblePageModule {}

@@ -6,7 +6,6 @@ import { LocationPickerComponent } from './pickers/location-picker/location-pick
 
 @NgModule({
   declarations: [LocationPickerComponent, MapModalComponent],
-  entryComponents: [MapModalComponent],
   exports: [LocationPickerComponent, MapModalComponent],
   imports: [CommonModule, IonicModule.forRoot()],
 })

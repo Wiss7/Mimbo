@@ -14,7 +14,6 @@ import { ErrorinterceptorInterceptor } from './interceptors/errorinterceptor.int
 import { CloudinaryModule } from '@cloudinary/ng';
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

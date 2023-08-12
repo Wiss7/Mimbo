@@ -29,17 +29,16 @@
   >
     <ion-text color="primary">No Results Found.</ion-text>
   </div>
-  <ion-virtual-scroll
-    [items]="filteredFoodList"
+  <ion-list
     approxItemHeight="48"
     *ngIf="!isLoading && filteredFoodList.length>0"
   >
     <ion-item
-      *virtualItem="let foodItem"
+      *ngFor="let foodItem of filteredFoodList"
       [routerLink]="['/edible/details/',foodItem.name]"
       detail
     >
       <ion-label>{{foodItem.name}}</ion-label>
     </ion-item>
-  </ion-virtual-scroll>
+  </ion-list>
 </ion-content>
