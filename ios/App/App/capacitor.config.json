@@ -1,6 +1,6 @@
 {
 	"appId": "com.mimbo.app",
-	"appName": "Mimbo",
+	"appName": "mimbo",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }

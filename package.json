@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "resources": "capacitor-resources -p android,ios"
+    "resources": "capacitor-resources -p android,ios",
+    "capacitor:sync:after": "node ./scripts/fix-audio-plugin.js"
   },
   "private": true,
   "dependencies": {
