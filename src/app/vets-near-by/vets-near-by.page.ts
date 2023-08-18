@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
 import { AlertController, ModalController } from '@ionic/angular';
 import { VetsInfo } from './vetsInfo.model';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';

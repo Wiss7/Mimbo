@@ -1,4 +1,4 @@
-<!-- <ion-header class="background-primary">
+<ion-header class="background-primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
@@ -18,12 +18,15 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button color="primary" (click)="onPickImageFromGallery()">
+      <ion-fab-button
+        color="primary"
+        (click)="onPickImageFromCamera('Gallery')"
+      >
         <ion-icon name="image-outline" style="font-size: 24px"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="primary" (click)="onPickImageFromCamera()">
+      <ion-fab-button color="primary" (click)="onPickImageFromCamera('Camera')">
         <ion-icon name="camera-outline" style="font-size: 24px"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-</ion-content> -->
+</ion-content>

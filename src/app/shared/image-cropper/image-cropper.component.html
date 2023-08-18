@@ -1,0 +1,70 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancel()"
+        ><ion-icon name="close-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSave()"
+        ><ion-icon name="checkmark-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="lightmimbo">
+  <div class="center-image">
+    <angular-cropper
+      #angularCropper
+      [cropperOptions]="cropperOptions"
+      [imageUrl]="uploadedImage"
+      *ngIf="show"
+    ></angular-cropper>
+  </div>
+</ion-content>
+
+<ion-footer class="background-primary">
+  <ion-toolbar color="primary">
+    <div class="center-buttons">
+      <ion-buttons slot="primary">
+        <ion-button (click)="zoom(true)" size="small">
+          <ion-icon
+            src="../../../assets/images/icons/zoomIn.svg"
+            slot="icon-only"
+          ></ion-icon>
+        </ion-button>
+        <ion-button (click)="zoom(false)" size="small">
+          <ion-icon
+            src="../../../assets/images/icons/zoomOut.svg"
+            slot="icon-only"
+          ></ion-icon>
+        </ion-button>
+        <ion-col>
+          <ion-button size="small" (click)="rotate()">
+            <ion-icon
+              src="../../../assets/images/icons/rotate.svg"
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button size="small" (click)="scaleX()">
+            <ion-icon
+              src="../../../assets/images/icons/flipX.svg"
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button size="small" (click)="scaleY()">
+            <ion-icon
+              src="../../../assets/images/icons/flipY.svg"
+              slot="icon-only"
+            ></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-buttons>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,17 @@
+.center-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-image {
+  position: fixed;
+  top: 50%;
+  height: auto;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-height: 100%;
+}

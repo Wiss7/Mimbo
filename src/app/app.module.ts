@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
@@ -11,7 +10,6 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { AuthinterceptorInterceptor } from './interceptors/authinterceptor.interceptor';
 import { ErrorinterceptorInterceptor } from './interceptors/errorinterceptor.interceptor';
-import { CloudinaryModule } from '@cloudinary/ng';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -19,7 +17,6 @@ import { CloudinaryModule } from '@cloudinary/ng';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    CloudinaryModule,
   ],
   providers: [
     NativeAudio,
