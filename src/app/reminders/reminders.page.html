@@ -56,7 +56,11 @@
     <div *ngIf="loadedReminders.length >0">
       <ion-list>
         <ion-item-sliding *ngFor="let reminder of loadedReminders">
-          <ion-item detail [routerLink]="'addit-reminders/' + reminder.id">
+          <ion-item
+            detail
+            [routerLink]="'addit-reminders/' + reminder.id"
+            color="lightmimbo"
+          >
             <ion-avatar class="avatar">
               <img
                 alt="Reminder Type"

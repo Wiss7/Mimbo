@@ -12,21 +12,43 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button
-        color="primary"
-        (click)="onPickImageFromCamera('Gallery')"
+<ion-content color="lightmimbo">
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="ion-padding ion-text-center" *ngIf="posts.length ===0">
+      <ion-text color="primary"
+        >There are no posts yet. You can start by adding your own.</ion-text
       >
-        <ion-icon name="image-outline" style="font-size: 24px"></ion-icon>
+    </div>
+
+    <div *ngIf="posts.length >0">
+      <ion-card *ngFor="let post of posts">
+        <ion-card-content class="ion-no-padding">
+          <img [src]="post.imageUrl" />
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="primary" (click)="onPickImageFromCamera('Camera')">
-        <ion-icon name="camera-outline" style="font-size: 24px"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+      <ion-fab-list side="top">
+        <ion-fab-button
+          color="primary"
+          (click)="onPickImageFromCamera('Gallery')"
+        >
+          <ion-icon name="image-outline" style="font-size: 24px"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button
+          color="primary"
+          (click)="onPickImageFromCamera('Camera')"
+        >
+          <ion-icon name="camera-outline" style="font-size: 24px"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </div>
 </ion-content>

@@ -19,11 +19,16 @@ export class ImageCropperComponent implements AfterViewInit {
   croppedImage = null;
   scaleValX = 1;
   scaleValY = 1;
+  IsCropped = false;
   show = false;
+  Caption = '';
   constructor(
     private modalCtrl: ModalController,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) {
+    this.IsCropped = false;
+    this.Caption = '';
+  }
   ngAfterViewInit() {
     this.cropperOptions = {
       dragMode: 'crop',
@@ -64,10 +69,22 @@ export class ImageCropperComponent implements AfterViewInit {
     this.angularCropper.cropper.scaleY(this.scaleValY);
   }
 
-  onSave() {
+  onSaveCrop() {
     let croppedImgB64String: string = this.angularCropper.cropper
       .getCroppedCanvas()
       .toDataURL('image/jpeg', 100 / 100);
     this.croppedImage = croppedImgB64String;
+    this.IsCropped = true;
+  }
+
+  BackToCrop() {
+    this.IsCropped = false;
+  }
+
+  UploadImage() {
+    this.modalCtrl.dismiss({
+      imageUrl: this.croppedImage,
+      caption: this.Caption,
+    });
   }
 }

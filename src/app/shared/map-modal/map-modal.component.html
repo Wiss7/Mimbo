@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Pick Location</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button (click)="onCancel()" color="light">Cancel</ion-button>
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancel()" color="light"
+        ><ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
+    <ion-title>Pick Location</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
