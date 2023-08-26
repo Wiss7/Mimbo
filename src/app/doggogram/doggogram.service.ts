@@ -74,7 +74,7 @@ export class DoggogramService {
   }
 
   toggleLike(body: ToggleLikeDTO) {
-    const url = environment.apiUrl + '/api/post/like';
-    return this.http.post<ToggleLikeResponseDTO>(url, body);
+    const url = environment.apiUrl + '/api/doggogram/post/like';
+    return this.http.post<number>(url, body);
   }
 }

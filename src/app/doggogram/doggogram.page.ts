@@ -21,7 +21,7 @@ import { Preferences } from '@capacitor/preferences';
 import { Post } from './post.model';
 import { DoggogramService } from './doggogram.service';
 import { formatDate } from '@angular/common';
-import { AddPostDTO } from './doggogram.dto';
+import { AddPostDTO, ToggleLikeDTO } from './doggogram.dto';
 
 @Component({
   selector: 'app-doggogram',
@@ -147,7 +147,6 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
           if (!modalData.data) {
             return;
           }
-          debugger;
           var caption = modalData.data['caption'];
           var imageUrl = modalData.data['imageUrl'];
           this.uploadPost(caption, imageUrl);
@@ -211,6 +210,27 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
           error: () => loadingEl.dismiss(),
         });
       });
+  }
+
+  ToggleLike(postid: number) {
+    const index = this.posts.findIndex((p) => p.id === postid);
+    this.posts[index].isLiked = !this.posts[index].isLiked;
+    if (this.posts[index].isLiked)
+      this.posts[index].likesCount = this.posts[index].likesCount + 1;
+    else this.posts[index].likesCount = this.posts[index].likesCount - 1;
+    const toggleLikeDTO: ToggleLikeDTO = { postid, userid: this.userId };
+    this.doggogramService.toggleLike(toggleLikeDTO).subscribe({
+      next: (res) => {
+        this.posts[index].likesCount = res;
+      },
+      error: async () => {
+        const toast = await this.toastController.create({
+          color: 'danger',
+          duration: 2000,
+          message: 'Could not perform action. Please try again later.',
+        });
+      },
+    });
   }
 
   ngOnDestroy() {

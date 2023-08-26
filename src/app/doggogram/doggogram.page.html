@@ -27,10 +27,31 @@
       <ion-card *ngFor="let post of posts">
         <ion-card-content class="ion-no-padding">
           <img [src]="post.imageUrl" />
+          <div class="interact">
+            <ion-icon
+              name="heart-outline"
+              *ngIf="!post.isLiked"
+              (click)="ToggleLike(post.id)"
+            ></ion-icon>
+            <ion-icon
+              name="heart"
+              color="danger"
+              *ngIf="post.isLiked"
+              (click)="ToggleLike(post.id)"
+            ></ion-icon>
+            <ion-text style="margin-right: 16px">{{post.likesCount}}</ion-text>
+            <ion-icon name="chatbubble-outline"></ion-icon>
+            <ion-text>{{post.comments.length}}</ion-text>
+          </div>
+          <ion-text
+            ><div class="footer">
+              <span class="username">@{{post.username}}</span>
+              <span class="caption">{{post.caption}}</span>
+            </div></ion-text
+          >
         </ion-card-content>
       </ion-card>
     </div>
-
     <ion-fab slot="fixed" horizontal="end" vertical="bottom">
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
