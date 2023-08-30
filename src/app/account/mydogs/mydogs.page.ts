@@ -89,14 +89,14 @@ export class MydogsPage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.dogService.deleteDog(dogId).subscribe(
-          () => {
+        this.dogService.deleteDog(dogId).subscribe({
+          next: () => {
             loadingEl.dismiss();
           },
-          () => {
+          error: () => {
             loadingEl.dismiss();
-          }
-        );
+          },
+        });
       });
   }
 }

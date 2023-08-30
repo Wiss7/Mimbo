@@ -77,8 +77,8 @@ export class ContactUsPage implements OnInit, OnDestroy {
         .then((loadingEl) => {
           loadingEl.present();
           const data: SendMessageDTO = { userId: this.userId, title, message };
-          this.sendSub = this.accountService.sendMessage(data).subscribe(
-            async (res) => {
+          this.sendSub = this.accountService.sendMessage(data).subscribe({
+            next: async (res) => {
               loadingEl.dismiss();
               this.messageInput.value = '';
               this.titleInput.value = '';
@@ -86,7 +86,7 @@ export class ContactUsPage implements OnInit, OnDestroy {
                 const toast = await this.toastCtrl.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Message Sent Successfully!',
+                  message: 'Message sent successfully.',
                 });
                 await toast.present();
               } else {
@@ -107,8 +107,8 @@ export class ContactUsPage implements OnInit, OnDestroy {
                   .then((alertEl) => alertEl.present());
               }
             },
-            (err) => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
         });
     }
   }

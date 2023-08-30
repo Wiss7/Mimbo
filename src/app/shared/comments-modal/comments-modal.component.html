@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancel()" color="light"
+        ><ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Comments</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="lightmimbo">
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="ion-padding ion-text-center" *ngIf="comments.length === 0">
+      <ion-text color="darkmimbo">
+        This post does not have any comments.</ion-text
+      >
+    </div>
+    <div *ngIf="comments.length > 0">
+      <ion-list>
+        <ion-item *ngFor="let comment of comments" color="lightmimbo">
+          <ion-text
+            ><b class="username"> @{{ comment.username }}: </b><br />{{
+              comment.comment
+            }}<br *ngIf="userId === comment.userid" />
+            <ion-button
+              *ngIf="userId === comment.userid"
+              class="delete ion-no-padding"
+              fill="clear"
+              size="small"
+              (click)="deleteComment(comment.id)"
+              >Delete</ion-button
+            ></ion-text
+          >
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-input
+      placeholder="Type your comment here..."
+      class="ion-padding"
+      color="primary"
+      [(ngModel)]="NewComment"
+      maxlength="250"
+    ></ion-input>
+    <ion-buttons slot="primary">
+      <ion-button
+        fill="clear"
+        class="ion-no-padding"
+        (click)="addComment()"
+        color="primary"
+        ><ion-icon name="send" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

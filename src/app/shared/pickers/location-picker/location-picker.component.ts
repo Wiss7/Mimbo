@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   ActionSheetController,
   AlertController,
@@ -12,16 +18,17 @@ import { environment } from '../../../../environments/environment';
 import { map, switchMap } from 'rxjs/operators';
 import { getMode } from '@ionic/core';
 import { PlaceLocation } from '../../../vets-near-by/location.model';
-import { of } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 
 @Component({
   selector: 'app-location-picker',
   templateUrl: './location-picker.component.html',
   styleUrls: ['./location-picker.component.scss'],
 })
-export class LocationPickerComponent implements OnInit {
+export class LocationPickerComponent implements OnInit, OnDestroy {
   @Output() locationSet = new EventEmitter<{ lat: number; lng: number }>();
   pickedLocation: PlaceLocation;
+  getAddressSub: Subscription;
   constructor(
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
@@ -33,6 +40,9 @@ export class LocationPickerComponent implements OnInit {
     if (!this.pickedLocation) {
       this.locateUser();
     }
+  }
+  ngOnDestroy(): void {
+    if (this.getAddressSub) this.getAddressSub.unsubscribe();
   }
   onPickLocation() {
     this.actionSheetCtrl
@@ -120,7 +130,10 @@ export class LocationPickerComponent implements OnInit {
   }
 
   private setImageAfterLocationChange() {
-    this.getAddress(this.pickedLocation.lat, this.pickedLocation.lng)
+    this.getAddressSub = this.getAddress(
+      this.pickedLocation.lat,
+      this.pickedLocation.lng
+    )
       .pipe(
         switchMap((address) => {
           this.pickedLocation.address = address;

@@ -16,6 +16,7 @@ export class RemindersPage implements OnInit, OnDestroy {
   userSub: Subscription;
   allRemindersSub: Subscription;
   reminderSub: Subscription;
+  deleteSub: Subscription;
   isLoading = true;
   filter = 'Active';
   dogfilter = 'All';
@@ -39,6 +40,10 @@ export class RemindersPage implements OnInit, OnDestroy {
     }
     if (this.reminderSub) {
       this.reminderSub.unsubscribe();
+    }
+
+    if (this.deleteSub) {
+      this.deleteSub.unsubscribe();
     }
   }
 
@@ -109,14 +114,16 @@ export class RemindersPage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.reminderService.deleteReminder(reminderId).subscribe(
-          () => {
-            loadingEl.dismiss();
-          },
-          () => {
-            loadingEl.dismiss();
-          }
-        );
+        this.deleteSub = this.reminderService
+          .deleteReminder(reminderId)
+          .subscribe({
+            next: () => {
+              loadingEl.dismiss();
+            },
+            error: () => {
+              loadingEl.dismiss();
+            },
+          });
       });
   }
 }

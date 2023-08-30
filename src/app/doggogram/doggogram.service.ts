@@ -29,21 +29,6 @@ export class DoggogramService {
       map((res) => {
         const posts = [];
         res.forEach((post) => {
-          const postComments = [];
-          post.comments
-            .filter((item) => item.postid === post.id)
-            .forEach((comment) => {
-              postComments.push(
-                new Comment(
-                  comment.id,
-                  comment.userid,
-                  comment.username,
-                  comment.postid,
-                  comment.createdDate,
-                  comment.comment
-                )
-              );
-            });
           posts.push(
             new Post(
               post.id,
@@ -54,7 +39,7 @@ export class DoggogramService {
               post.createdDate,
               post.likesCount,
               post.isLiked,
-              postComments
+              post.commentsCount
             )
           );
         });
@@ -69,12 +54,41 @@ export class DoggogramService {
     return this.http.post<AddPostResponseDTO>(url, body);
   }
   addComment(body: AddCommentDTO) {
-    const url = environment.apiUrl + '/api/post/comment/add';
+    const url = environment.apiUrl + '/api/doggogram/post/comment/add';
     return this.http.post<GetCommentResponseDTO>(url, body);
   }
 
   toggleLike(body: ToggleLikeDTO) {
     const url = environment.apiUrl + '/api/doggogram/post/like';
     return this.http.post<number>(url, body);
+  }
+
+  getComments(postId: number) {
+    const url =
+      environment.apiUrl + '/api/doggogram/post/comments/all/' + postId;
+    return this.http.get<GetCommentResponseDTO[]>(url).pipe(
+      map((res) => {
+        const postComments = [];
+        res.forEach((comment) => {
+          postComments.push(
+            new Comment(
+              comment.id,
+              comment.userId,
+              comment.username,
+              comment.postId,
+              comment.createdDate,
+              comment.comment
+            )
+          );
+        });
+        return postComments;
+      })
+    );
+  }
+
+  deleteComment(commentId) {
+    const url =
+      environment.apiUrl + '/api/doggogram/post/comments/delete/' + commentId;
+    return this.http.delete<number>(url);
   }
 }

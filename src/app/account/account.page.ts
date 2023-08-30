@@ -78,15 +78,15 @@ export class AccountPage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.deleteSub = this.authService.deleteProfile(this.userId).subscribe(
-          async (res) => {
+        this.deleteSub = this.authService.deleteProfile(this.userId).subscribe({
+          next: async (res) => {
             loadingEl.dismiss();
             if (res) {
               this.logout();
               const toast = await this.toastController.create({
                 color: 'primary',
                 duration: 2000,
-                message: 'Account Deleted Successfully!',
+                message: 'Account deleted successfully.',
               });
               await toast.present();
             } else {
@@ -107,8 +107,8 @@ export class AccountPage implements OnInit, OnDestroy {
                 .then((alertEl) => alertEl.present());
             }
           },
-          (err) => loadingEl.dismiss()
-        );
+          error: (err) => loadingEl.dismiss(),
+        });
       });
   }
 

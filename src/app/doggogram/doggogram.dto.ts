@@ -40,9 +40,9 @@ export interface AddCommentDTO {
 
 export interface GetCommentResponseDTO {
   id: number;
-  userid: number;
+  userId: number;
   username: string;
-  postid: number;
+  postId: number;
   comment: string;
   createdDate: Date;
   isCommentAdded: boolean;
@@ -56,6 +56,6 @@ export interface GetPostsResponseDTO {
   caption: string;
   createdDate: Date;
   likesCount: number;
+  commentsCount: number;
   isLiked: boolean;
-  comments: GetCommentResponseDTO[];
 }

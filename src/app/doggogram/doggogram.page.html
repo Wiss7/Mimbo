@@ -18,7 +18,7 @@
   </div>
   <div *ngIf="!isLoading">
     <div class="ion-padding ion-text-center" *ngIf="posts.length ===0">
-      <ion-text color="primary"
+      <ion-text color="darkmimbo"
         >There are no posts yet. You can start by adding your own.</ion-text
       >
     </div>
@@ -26,7 +26,7 @@
     <div *ngIf="posts.length >0">
       <ion-card *ngFor="let post of posts">
         <ion-card-content class="ion-no-padding">
-          <img [src]="post.imageUrl" />
+          <img [src]="post.imageUrl" style="width: 100%" />
           <div class="interact">
             <ion-icon
               name="heart-outline"
@@ -40,8 +40,11 @@
               (click)="ToggleLike(post.id)"
             ></ion-icon>
             <ion-text style="margin-right: 16px">{{post.likesCount}}</ion-text>
-            <ion-icon name="chatbubble-outline"></ion-icon>
-            <ion-text>{{post.comments.length}}</ion-text>
+            <ion-icon
+              name="chatbubble-outline"
+              (click)="ViewComments(post.id)"
+            ></ion-icon>
+            <ion-text>{{post.commentsCount}}</ion-text>
           </div>
           <ion-text
             ><div class="footer">

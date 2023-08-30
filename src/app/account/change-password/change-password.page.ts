@@ -53,34 +53,36 @@ export class ChangePasswordPage implements OnInit, OnDestroy {
           currentPassword: currentPass,
           newPassword: password,
         };
-        this.changePasswordSub = this.authService.changePassword(dto).subscribe(
-          (resp) => {
-            if (resp) {
+        this.changePasswordSub = this.authService
+          .changePassword(dto)
+          .subscribe({
+            next: (resp) => {
+              if (resp) {
+                loadingEl.dismiss();
+                form.reset();
+                this.alertCtrl
+                  .create({
+                    header: 'Success',
+                    message: 'Password updated successfully.',
+                    buttons: [{ text: 'Dismiss' }],
+                  })
+                  .then((alertEl) => alertEl.present());
+              } else {
+                loadingEl.dismiss();
+                this.alertCtrl
+                  .create({
+                    header: 'Incorrect Password',
+                    message:
+                      'If you forgot your password, sign out and reset your password from the login page',
+                    buttons: [{ text: 'Dismiss' }],
+                  })
+                  .then((alertEl) => alertEl.present());
+              }
+            },
+            error: () => {
               loadingEl.dismiss();
-              form.reset();
-              this.alertCtrl
-                .create({
-                  header: 'Success',
-                  message: 'Password Updated Successfully.',
-                  buttons: [{ text: 'Dismiss' }],
-                })
-                .then((alertEl) => alertEl.present());
-            } else {
-              loadingEl.dismiss();
-              this.alertCtrl
-                .create({
-                  header: 'Incorrect Password',
-                  message:
-                    'If you forgot your password, sign out and reset your password from the login page',
-                  buttons: [{ text: 'Dismiss' }],
-                })
-                .then((alertEl) => alertEl.present());
-            }
-          },
-          (err) => {
-            loadingEl.dismiss();
-          }
-        );
+            },
+          });
       });
   }
 }

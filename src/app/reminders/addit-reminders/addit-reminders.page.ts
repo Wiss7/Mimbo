@@ -31,6 +31,8 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   allDogsSub: Subscription;
   addReminderSub: Subscription;
   setCompleteSub: Subscription;
+  updateReminderSub: Subscription;
+  getReminderSub: Subscription;
   title = 'Add New Event';
   eventId = 0;
   typeId = 0;
@@ -77,6 +79,9 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     if (this.addReminderSub) {
       this.addReminderSub.unsubscribe();
     }
+    if (this.setCompleteSub) this.setCompleteSub.unsubscribe();
+    if (this.updateReminderSub) this.updateReminderSub.unsubscribe();
+    if (this.getReminderSub) this.getReminderSub.unsubscribe();
   }
   ionViewWillEnter() {
     this.dateToday = new Date().toISOString();
@@ -90,7 +95,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
             this.eventId = +this.activatedRoute.snapshot.params.id;
             if (this.eventId > 0) {
               this.title = 'Edit Event';
-              this.reminderService
+              this.getReminderSub = this.reminderService
                 .getReminderById(this.eventId)
                 .subscribe((reminder: Reminder) => {
                   this.dogName = reminder.dogName;
@@ -215,8 +220,8 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
         loadingEl.present();
         this.addReminderSub = this.reminderService
           .addReminder(addReminderDTO)
-          .subscribe(
-            async (res) => {
+          .subscribe({
+            next: async (res) => {
               if (!res.isReminderAdded) {
                 loadingEl.dismiss();
                 this.alertCtrl
@@ -234,15 +239,15 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                 const toast = await this.toastController.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Added successfully',
+                  message: 'Reminder added successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();
                 this.router.navigate(['/reminders']);
               }
             },
-            () => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
       });
   }
 
@@ -265,10 +270,10 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.addReminderSub = this.reminderService
+        this.updateReminderSub = this.reminderService
           .updateReminder(updateReminderDTO)
-          .subscribe(
-            async (res) => {
+          .subscribe({
+            next: async (res) => {
               if (!res) {
                 loadingEl.dismiss();
                 this.alertCtrl
@@ -286,15 +291,15 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                 const toast = await this.toastController.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Updated successfully',
+                  message: 'Reminder updated successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();
                 this.router.navigate(['/reminders']);
               }
             },
-            () => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
       });
   }
 
@@ -325,8 +330,8 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
         loadingEl.present();
         this.setCompleteSub = this.reminderService
           .setComplete(this.eventId)
-          .subscribe(
-            async (res) => {
+          .subscribe({
+            next: async (res) => {
               if (!res) {
                 loadingEl.dismiss();
                 this.alertCtrl
@@ -344,15 +349,15 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                 const toast = await this.toastController.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Updated successfully',
+                  message: 'Reminder updated successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();
                 this.router.navigate(['/reminders']);
               }
             },
-            () => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
       });
   }
 }

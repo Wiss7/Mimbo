@@ -6,11 +6,13 @@ import { LocationPickerComponent } from './pickers/location-picker/location-pick
 import { ImageCropperComponent } from './image-cropper/image-cropper.component';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { FormsModule } from '@angular/forms';
+import { CommentsModalComponent } from './comments-modal/comments-modal.component';
 @NgModule({
   declarations: [
     LocationPickerComponent,
     MapModalComponent,
     ImageCropperComponent,
+    CommentsModalComponent,
   ],
   exports: [LocationPickerComponent, MapModalComponent],
   imports: [

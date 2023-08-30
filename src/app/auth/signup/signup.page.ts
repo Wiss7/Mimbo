@@ -53,8 +53,8 @@ export class SignupPage implements OnInit, OnDestroy {
           firstName: form.value.firstName,
           lastName: form.value.lastName,
         };
-        this.registerSub = this.authService.register(registerDTO).subscribe(
-          (resp) => {
+        this.registerSub = this.authService.register(registerDTO).subscribe({
+          next: (resp) => {
             if (resp.isRegistrationSuccessful) {
               loadingEl.dismiss();
               const params = this.route.snapshot.queryParams;
@@ -80,10 +80,10 @@ export class SignupPage implements OnInit, OnDestroy {
                 .then((alertEl) => alertEl.present());
             }
           },
-          (err) => {
+          error: () => {
             loadingEl.dismiss();
-          }
-        );
+          },
+        });
       });
   }
 }

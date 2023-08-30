@@ -43,8 +43,8 @@ export class SigninPage implements OnInit, OnDestroy {
           username: form.value.email,
           password: form.value.password,
         };
-        this.loginSub = this.authService.login(loginDto).subscribe(
-          (resp) => {
+        this.loginSub = this.authService.login(loginDto).subscribe({
+          next: (resp) => {
             if (resp.isLoginSuccessful) {
               loadingEl.dismiss();
               const params = this.route.snapshot.queryParams;
@@ -72,10 +72,10 @@ export class SigninPage implements OnInit, OnDestroy {
                 });
             }
           },
-          (err) => {
+          error: () => {
             loadingEl.dismiss();
-          }
-        );
+          },
+        });
       });
   }
 

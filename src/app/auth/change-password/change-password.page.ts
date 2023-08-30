@@ -35,8 +35,8 @@ export class ChangePasswordPage implements OnInit, OnDestroy {
         })
         .then((loadingEl) => {
           loadingEl.present();
-          this.resetSub = this.authService.resetPassword(emailVal).subscribe(
-            (res) => {
+          this.resetSub = this.authService.resetPassword(emailVal).subscribe({
+            next: (res) => {
               loadingEl.dismiss();
               if (res) {
                 this.alertCtrl
@@ -71,8 +71,8 @@ export class ChangePasswordPage implements OnInit, OnDestroy {
                   .then((alertEl) => alertEl.present());
               }
             },
-            (err) => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
         });
     } else {
       this.alertCtrl

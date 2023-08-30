@@ -33,6 +33,8 @@ export class AdditDogPage implements OnInit, OnDestroy {
   dogId = 0;
   userId: number;
   addSub: Subscription;
+  updateSub: Subscription;
+  getSub: Subscription;
   userSub: Subscription;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,7 +56,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
     this.dogId = +this.activatedRoute.snapshot.params.id;
     if (this.dogId > 0) {
       this.title = 'Edit';
-      this.dogService.getDogById(this.dogId).subscribe((dog) => {
+      this.getSub = this.dogService.getDogById(this.dogId).subscribe((dog) => {
         this.name = dog.name;
         this.breed = dog.breed;
         this.gender = dog.gender;
@@ -78,6 +80,12 @@ export class AdditDogPage implements OnInit, OnDestroy {
     }
     if (this.userSub) {
       this.userSub.unsubscribe();
+    }
+    if (this.updateSub) {
+      this.updateSub.unsubscribe();
+    }
+    if (this.getSub) {
+      this.getSub.unsubscribe();
     }
   }
 
@@ -133,8 +141,8 @@ export class AdditDogPage implements OnInit, OnDestroy {
             gender: this.gender,
             id: this.dogId,
           };
-          this.addSub = this.dogService.updateDog(updateDogDTO).subscribe(
-            async (res) => {
+          this.updateSub = this.dogService.updateDog(updateDogDTO).subscribe({
+            next: async (res) => {
               if (!res) {
                 loadingEl.dismiss();
                 this.alertCtrl
@@ -151,15 +159,15 @@ export class AdditDogPage implements OnInit, OnDestroy {
                 const toast = await this.toastController.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Updated successfully',
+                  message: 'Dog updated successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();
                 this.router.navigate(['account', 'mydogs']);
               }
             },
-            () => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
         } else {
           const addDogDTO: AddDogDTO = {
             name: this.name,
@@ -168,8 +176,8 @@ export class AdditDogPage implements OnInit, OnDestroy {
             gender: this.gender,
             userId: this.userId,
           };
-          this.addSub = this.dogService.addDog(addDogDTO).subscribe(
-            async (res) => {
+          this.addSub = this.dogService.addDog(addDogDTO).subscribe({
+            next: async (res) => {
               if (!res.isDogAdded) {
                 loadingEl.dismiss();
                 this.alertCtrl
@@ -186,7 +194,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
                 const toast = await this.toastController.create({
                   color: 'primary',
                   duration: 2000,
-                  message: 'Added successfully',
+                  message: 'Dog added successfully',
                 });
                 loadingEl.dismiss();
                 await toast.present();
@@ -201,8 +209,8 @@ export class AdditDogPage implements OnInit, OnDestroy {
                 }
               }
             },
-            () => loadingEl.dismiss()
-          );
+            error: () => loadingEl.dismiss(),
+          });
         }
       });
   }

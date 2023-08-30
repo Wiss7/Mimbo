@@ -29,12 +29,12 @@ export class BreedsInfoPage implements OnInit, OnDestroy {
       .get('https://api.thedogapi.com/v1/breeds?page=0&limit=1000', {
         headers: { 'x-api-key': 'e2c31cf2-a9e7-45f9-95b9-13818f0a9959' },
       })
-      .subscribe(
-        (res: any) => {
+      .subscribe({
+        next: (res: any) => {
           this.breedsList = res;
           this.randomizeBreed();
         },
-        (err) => {
+        error: () => {
           this.alerCtrl.create({
             header: 'Woof! Woof!',
             message: 'An error occured!! Please try again later.',
@@ -48,8 +48,8 @@ export class BreedsInfoPage implements OnInit, OnDestroy {
               },
             ],
           });
-        }
-      );
+        },
+      });
   }
 
   randomizeBreed() {

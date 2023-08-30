@@ -8,6 +8,6 @@ export class Post {
     public createdDate: Date,
     public likesCount: number,
     public isLiked: boolean,
-    public comments: Comment[]
+    public commentsCount: number
   ) {}
 }

@@ -6,15 +6,14 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { from, Observable, Subscription } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { environment } from 'src/environments/environment';
 import { Preferences } from '@capacitor/preferences';
 import { User } from '../auth/user.model';
 import { map, switchMap } from 'rxjs/operators';
 @Injectable()
-export class AuthinterceptorInterceptor implements HttpInterceptor, OnDestroy {
-  tokenSubscription: Subscription;
+export class AuthinterceptorInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(
@@ -50,10 +49,5 @@ export class AuthinterceptorInterceptor implements HttpInterceptor, OnDestroy {
         }
       })
     );
-  }
-  ngOnDestroy() {
-    if (this.tokenSubscription) {
-      this.tokenSubscription.unsubscribe();
-    }
   }
 }

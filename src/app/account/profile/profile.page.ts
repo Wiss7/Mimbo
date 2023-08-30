@@ -66,20 +66,20 @@ export class ProfilePage implements OnInit, OnDestroy {
       })
       .then((loadingEl) => {
         loadingEl.present();
-        this.updateSub = this.authService.updateProfile(dto).subscribe(
-          async (res) => {
+        this.updateSub = this.authService.updateProfile(dto).subscribe({
+          next: async (res) => {
             const toast = await this.toastController.create({
               color: 'primary',
               duration: 2000,
-              message: 'Updated successfully',
+              message: 'Profile updated successfully',
             });
             loadingEl.dismiss();
             await toast.present();
           },
-          (err) => {
+          error: () => {
             loadingEl.dismiss();
-          }
-        );
+          },
+        });
       });
   }
 }
