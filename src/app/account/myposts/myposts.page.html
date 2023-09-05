@@ -1,0 +1,27 @@
+<ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment
+    value="doggogram"
+    [(ngModel)]="filter"
+    (ionChange)="filterPosts()"
+  >
+    <ion-segment-button value="doggogram">
+      <ion-label>Doggogram</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lostFound">
+      <ion-label>Lost/Found</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div *ngIf="!isLoading"></div>
+</ion-content>

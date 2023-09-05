@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { DoggogramPageRoutingModule } from './doggogram-routing.module';
 
 import { DoggogramPage } from './doggogram.page';
+import { PostCardComponent } from '../shared/post-card/post-card.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DoggogramPageRoutingModule
+    DoggogramPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [DoggogramPage]
+  declarations: [DoggogramPage],
 })
 export class DoggogramPageModule {}

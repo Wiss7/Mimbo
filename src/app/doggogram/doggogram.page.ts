@@ -19,9 +19,7 @@ import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
 import { Post } from './post.model';
 import { DoggogramService } from './doggogram.service';
-import { formatDate } from '@angular/common';
-import { AddCommentDTO, AddPostDTO, ToggleLikeDTO } from './doggogram.dto';
-import { CommentsModalComponent } from '../shared/comments-modal/comments-modal.component';
+import { AddPostDTO } from './doggogram.dto';
 
 @Component({
   selector: 'app-doggogram',
@@ -34,7 +32,6 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
   postsHTTPSub: Subscription;
   addPostSub: Subscription;
   userSub: Subscription;
-  likeSub: Subscription;
   isLoading = true;
   posts: Post[];
   userId = 0;
@@ -60,15 +57,6 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
       .subscribe(() => {
         this.isLoading = false;
       });
-  }
-
-  formatDateTime(myDate: Date) {
-    const format = 'dd-MMM-yyyy h:mm a';
-    const locale = 'en-US';
-    const formattedDate = formatDate(myDate, format, locale).split(' ');
-    return (
-      formattedDate[0] + ' At ' + formattedDate[1] + ' ' + formattedDate[2]
-    );
   }
 
   ShowLoginAlert() {
@@ -212,51 +200,6 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
       });
   }
 
-  ToggleLike(postid: number) {
-    const index = this.posts.findIndex((p) => p.id === postid);
-    this.posts[index].isLiked = !this.posts[index].isLiked;
-    if (this.posts[index].isLiked)
-      this.posts[index].likesCount = this.posts[index].likesCount + 1;
-    else this.posts[index].likesCount = this.posts[index].likesCount - 1;
-    const toggleLikeDTO: ToggleLikeDTO = { postid, userid: this.userId };
-    this.likeSub = this.doggogramService.toggleLike(toggleLikeDTO).subscribe({
-      next: (res) => {
-        this.posts[index].likesCount = res;
-      },
-      error: async () => {
-        const toast = await this.toastController.create({
-          color: 'danger',
-          duration: 2000,
-          message: 'Could not perform action. Please try again later.',
-        });
-        await toast.present();
-      },
-    });
-  }
-
-  ViewComments(postid: number) {
-    const index = this.posts.findIndex((p) => p.id === postid);
-    this.modalCtrl
-      .create({
-        component: CommentsModalComponent,
-        componentProps: {
-          postid,
-          userId: this.userId,
-          source: 'doggogram',
-        },
-      })
-      .then((modalEl) => {
-        modalEl.onDidDismiss().then((modalData) => {
-          if (!modalData.data) {
-            return;
-          }
-          const index = this.posts.findIndex((p) => p.id === postid);
-          this.posts[index].commentsCount = modalData.data['commentsCount'];
-        });
-        modalEl.present();
-      });
-  }
-
   ngOnDestroy() {
     if (this.postsSub) {
       this.postsSub.unsubscribe();
@@ -269,9 +212,6 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
     }
     if (this.addPostSub) {
       this.addPostSub.unsubscribe();
-    }
-    if (this.likeSub) {
-      this.likeSub.unsubscribe();
     }
   }
 }
