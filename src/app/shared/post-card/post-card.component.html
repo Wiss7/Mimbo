@@ -27,5 +27,25 @@
         <span class="caption">{{ post.caption }}</span>
       </div></ion-text
     >
+    <ion-button
+      (click)="editCaption(post.id)"
+      color="primary"
+      class="ion-text-center"
+      expand="full"
+      fill="clear"
+      *ngIf="!hideDelete"
+      ><ion-icon name="pencil-outline" slot="start"></ion-icon>Edit
+      Caption</ion-button
+    >
+    <ion-button
+      (click)="deletePost(post.id)"
+      color="danger"
+      class="ion-text-center"
+      expand="full"
+      fill="clear"
+      *ngIf="!hideDelete"
+      ><ion-icon name="close-circle-outline" slot="start"></ion-icon>Delete
+      Post</ion-button
+    >
   </ion-card-content>
 </ion-card>

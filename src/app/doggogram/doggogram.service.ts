@@ -11,7 +11,6 @@ import {
   GetCommentResponseDTO,
   GetPostsResponseDTO,
   ToggleLikeDTO,
-  ToggleLikeResponseDTO,
 } from './doggogram.dto';
 
 @Injectable({ providedIn: 'root' })
@@ -25,6 +24,32 @@ export class DoggogramService {
 
   getPosts(userId: number) {
     const url = environment.apiUrl + '/api/doggogram/post/all/' + userId;
+    return this.http.get<GetPostsResponseDTO[]>(url).pipe(
+      map((res) => {
+        const posts = [];
+        res.forEach((post) => {
+          posts.push(
+            new Post(
+              post.id,
+              post.userId,
+              post.username,
+              post.caption,
+              post.imageURL,
+              post.createdDate,
+              post.likesCount,
+              post.isLiked,
+              post.commentsCount
+            )
+          );
+        });
+        return posts;
+      }),
+      tap((posts) => this._posts.next(posts))
+    );
+  }
+
+  getPostsByUser(userId: number) {
+    const url = environment.apiUrl + '/api/doggogram/post/all/user/' + userId;
     return this.http.get<GetPostsResponseDTO[]>(url).pipe(
       map((res) => {
         const posts = [];
@@ -90,5 +115,20 @@ export class DoggogramService {
     const url =
       environment.apiUrl + '/api/doggogram/post/comments/delete/' + commentId;
     return this.http.delete<number>(url);
+  }
+
+  deletePost(postId: number) {
+    const url = environment.apiUrl + '/api/doggogram/post/delete/' + postId;
+    return this.http.delete<Boolean>(url);
+  }
+
+  updateComment(postId: number, caption: string) {
+    const url =
+      environment.apiUrl +
+      '/api/doggogram/post/caption/edit?postId=' +
+      postId +
+      '&caption=' +
+      caption;
+    return this.http.post<Boolean>(url, {});
   }
 }

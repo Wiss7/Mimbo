@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="onCancel()" color="light"
+        ><ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edit Caption</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" color="lightmimbo">
+  <img [src]="imageUrl" style="width: 100%" />
+  <ion-textarea
+    class="italic textarea-padding"
+    rows="2"
+    autoGrow="true"
+    maxlength="250"
+    color="lightmimbo"
+    placeholder="Write a caption..."
+    [(ngModel)]="caption"
+  ></ion-textarea>
+  <div style="width: 100%; margin-top: 16px">
+    <ion-button expand="full" (click)="updateCaption()"
+      ><ion-icon name="save" slot="start" size="large"></ion-icon>Update
+      Caption</ion-button
+    >
+  </div>
+</ion-content>

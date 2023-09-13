@@ -50,6 +50,15 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
     });
   }
 
+  async handleRefresh(event: any) {
+    this.userId = await this.isLoggedIn();
+    this.postsHTTPSub = this.doggogramService
+      .getPosts(this.userId)
+      .subscribe(() => {
+        event.target.complete();
+      });
+  }
+
   async ionViewWillEnter() {
     this.userId = await this.isLoggedIn();
     this.postsHTTPSub = this.doggogramService

@@ -8,6 +8,7 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 import { FormsModule } from '@angular/forms';
 import { CommentsModalComponent } from './comments-modal/comments-modal.component';
 import { PostCardComponent } from './post-card/post-card.component';
+import { EditCommentModalComponent } from './post-card/edit-comment-modal/edit-comment-modal.component';
 @NgModule({
   declarations: [
     LocationPickerComponent,
@@ -15,8 +16,14 @@ import { PostCardComponent } from './post-card/post-card.component';
     ImageCropperComponent,
     CommentsModalComponent,
     PostCardComponent,
+    EditCommentModalComponent,
   ],
-  exports: [LocationPickerComponent, MapModalComponent, PostCardComponent],
+  exports: [
+    LocationPickerComponent,
+    MapModalComponent,
+    PostCardComponent,
+    EditCommentModalComponent,
+  ],
   imports: [
     CommonModule,
     IonicModule.forRoot(),

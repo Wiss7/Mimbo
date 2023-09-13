@@ -8,6 +8,18 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)"
+    color="primary"
+  >
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingSpinner="circular"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-segment
     value="doggogram"
     [(ngModel)]="filter"
@@ -20,8 +32,26 @@
       <ion-label>Lost/Found</ion-label>
     </ion-segment-button>
   </ion-segment>
+
   <div class="ion-padding ion-text-center" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
-  <div *ngIf="!isLoading"></div>
+  <div *ngIf="!isLoading">
+    <div *ngIf="filter === 'doggogram'">
+      <div class="ion-padding ion-text-center" *ngIf="posts.length ===0">
+        <ion-text color="darkmimbo"
+          >You haven't uploaded any posts. You can start uploading in the
+          Doggogram section.</ion-text
+        >
+      </div>
+      <div *ngIf="posts.length >0">
+        <app-post-card
+          *ngFor="let post of posts"
+          [post]="post"
+          [userId]="userId"
+          [posts]="posts"
+        ></app-post-card>
+      </div>
+    </div>
+  </div>
 </ion-content>
