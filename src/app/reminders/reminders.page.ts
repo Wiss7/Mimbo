@@ -82,6 +82,20 @@ export class RemindersPage implements OnInit, OnDestroy {
       ];
     }
   }
+
+  async handleRefresh(event: any) {
+    this.userSub = this.authService.user.subscribe((user) => {
+      if (user) {
+        this.userId = user.id;
+        this.allRemindersSub = this.reminderService
+          .getAllReminders(this.userId)
+          .subscribe(() => {
+            event.target.complete();
+          });
+      }
+    });
+  }
+
   ionViewWillEnter() {
     this.userSub = this.authService.user.subscribe((user) => {
       if (user) {
