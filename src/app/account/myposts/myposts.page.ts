@@ -16,6 +16,7 @@ export class MypostsPage implements OnInit, OnDestroy {
   userId = 0;
   postsSub: Subscription;
   postsHTTPSub: Subscription;
+  HasMoreData = true;
   constructor(private doggogramService: DoggogramService) {}
 
   async isLoggedIn() {
@@ -33,7 +34,7 @@ export class MypostsPage implements OnInit, OnDestroy {
   async handleRefresh(event: any) {
     this.userId = await this.isLoggedIn();
     this.postsHTTPSub = this.doggogramService
-      .getPostsByUser(this.userId)
+      .getPostsByUser(this.userId, 0)
       .subscribe(() => {
         event.target.complete();
       });
@@ -42,7 +43,7 @@ export class MypostsPage implements OnInit, OnDestroy {
   async ionViewWillEnter() {
     this.userId = await this.isLoggedIn();
     this.postsHTTPSub = this.doggogramService
-      .getPostsByUser(this.userId)
+      .getPostsByUser(this.userId, 0)
       .subscribe(() => {
         this.isLoading = false;
       });
@@ -51,6 +52,8 @@ export class MypostsPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.postsSub = this.doggogramService.posts.subscribe((posts) => {
       this.posts = posts;
+      if (this.posts.length === 0) this.HasMoreData = false;
+      else this.HasMoreData = true;
     });
   }
 
@@ -61,6 +64,17 @@ export class MypostsPage implements OnInit, OnDestroy {
     if (this.postsHTTPSub) {
       this.postsHTTPSub.unsubscribe();
     }
+  }
+
+  onIonInfinite(event: any) {
+    this.postsHTTPSub = this.doggogramService
+      .getPostsByUser(this.userId, this.posts[this.posts.length - 1].id)
+      .subscribe((res) => {
+        const hasLastPost = this.posts.find((p) => p.isLastPost === true);
+        debugger;
+        if (hasLastPost === undefined) event.target.complete();
+        else this.HasMoreData = false;
+      });
   }
 
   filterPosts() {}

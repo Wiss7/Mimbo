@@ -58,4 +58,5 @@ export interface GetPostsResponseDTO {
   likesCount: number;
   commentsCount: number;
   isLiked: boolean;
+  isLastPost: boolean;
 }

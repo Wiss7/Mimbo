@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="lightmimbo">
   <ion-refresher
     slot="fixed"
     (ionRefresh)="handleRefresh($event)"
@@ -54,4 +54,10 @@
       </div>
     </div>
   </div>
+  <ion-infinite-scroll
+    (ionInfinite)="onIonInfinite($event)"
+    *ngIf="!isLoading && HasMoreData"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

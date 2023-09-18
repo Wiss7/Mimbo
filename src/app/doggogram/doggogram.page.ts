@@ -35,6 +35,7 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
   isLoading = true;
   posts: Post[];
   userId = 0;
+  HasMoreData = true;
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
@@ -47,13 +48,16 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
   ngOnInit() {
     this.postsSub = this.doggogramService.posts.subscribe((posts) => {
       this.posts = posts;
+      if (this.posts.length === 0) this.HasMoreData = false;
+      else this.HasMoreData = true;
     });
   }
 
   async handleRefresh(event: any) {
     this.userId = await this.isLoggedIn();
+    this.HasMoreData = true;
     this.postsHTTPSub = this.doggogramService
-      .getPosts(this.userId)
+      .getPosts(this.userId, 0)
       .subscribe(() => {
         event.target.complete();
       });
@@ -62,7 +66,7 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
   async ionViewWillEnter() {
     this.userId = await this.isLoggedIn();
     this.postsHTTPSub = this.doggogramService
-      .getPosts(this.userId)
+      .getPosts(this.userId, 0)
       .subscribe(() => {
         this.isLoading = false;
       });
@@ -197,7 +201,8 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
                   res.createdDate,
                   0,
                   false,
-                  0
+                  0,
+                  false
                 )
               );
               loadingEl.dismiss();
@@ -222,5 +227,15 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
     if (this.addPostSub) {
       this.addPostSub.unsubscribe();
     }
+  }
+
+  onIonInfinite(event: any) {
+    this.postsHTTPSub = this.doggogramService
+      .getPosts(this.userId, this.posts[this.posts.length - 1].id)
+      .subscribe((res) => {
+        const hasLastPost = this.posts.find((p) => p.isLastPost === true);
+        if (hasLastPost === undefined) event.target.complete();
+        else this.HasMoreData = false;
+      });
   }
 }

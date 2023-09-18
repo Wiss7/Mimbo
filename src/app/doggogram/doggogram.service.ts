@@ -16,19 +16,26 @@ import {
 @Injectable({ providedIn: 'root' })
 export class DoggogramService {
   private _posts = new BehaviorSubject<Post[]>([]);
+  postsArray = [];
+  PostsByUserArray = [];
   get posts() {
     return this._posts.asObservable();
   }
 
   constructor(private http: HttpClient) {}
 
-  getPosts(userId: number) {
-    const url = environment.apiUrl + '/api/doggogram/post/all/' + userId;
+  getPosts(userId: number, lastItemId: number) {
+    if (lastItemId === 0) this.postsArray = [];
+    const url =
+      environment.apiUrl +
+      '/api/doggogram/post/all/' +
+      userId +
+      '/' +
+      lastItemId;
     return this.http.get<GetPostsResponseDTO[]>(url).pipe(
       map((res) => {
-        const posts = [];
         res.forEach((post) => {
-          posts.push(
+          this.postsArray.push(
             new Post(
               post.id,
               post.userId,
@@ -38,23 +45,29 @@ export class DoggogramService {
               post.createdDate,
               post.likesCount,
               post.isLiked,
-              post.commentsCount
+              post.commentsCount,
+              post.isLastPost
             )
           );
         });
-        return posts;
+        return this.postsArray;
       }),
       tap((posts) => this._posts.next(posts))
     );
   }
 
-  getPostsByUser(userId: number) {
-    const url = environment.apiUrl + '/api/doggogram/post/all/user/' + userId;
+  getPostsByUser(userId: number, lastItemId: number) {
+    if (lastItemId === 0) this.PostsByUserArray = [];
+    const url =
+      environment.apiUrl +
+      '/api/doggogram/post/all/user/' +
+      userId +
+      '/' +
+      lastItemId;
     return this.http.get<GetPostsResponseDTO[]>(url).pipe(
       map((res) => {
-        const posts = [];
         res.forEach((post) => {
-          posts.push(
+          this.PostsByUserArray.push(
             new Post(
               post.id,
               post.userId,
@@ -64,11 +77,12 @@ export class DoggogramService {
               post.createdDate,
               post.likesCount,
               post.isLiked,
-              post.commentsCount
+              post.commentsCount,
+              post.isLastPost
             )
           );
         });
-        return posts;
+        return this.PostsByUserArray;
       }),
       tap((posts) => this._posts.next(posts))
     );

@@ -8,6 +8,7 @@ export class Post {
     public createdDate: Date,
     public likesCount: number,
     public isLiked: boolean,
-    public commentsCount: number
+    public commentsCount: number,
+    public isLastPost: boolean
   ) {}
 }
