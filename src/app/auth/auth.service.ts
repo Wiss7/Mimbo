@@ -68,6 +68,9 @@ export class AuthService {
           const user = new User(
             resp.userId,
             resp.email,
+            resp.phoneCode,
+            resp.phoneRegion,
+            resp.phoneNumber,
             resp.username,
             resp.firstName,
             resp.lastName,
@@ -89,6 +92,9 @@ export class AuthService {
           const user = new User(
             resp.userId,
             resp.email,
+            resp.phoneCode,
+            resp.phoneRegion,
+            resp.phoneNumber,
             resp.username,
             resp.firstName,
             resp.lastName,
@@ -141,6 +147,9 @@ export class AuthService {
             const user = new User(
               resp.userId,
               resp.email,
+              resp.phoneCode,
+              resp.phoneRegion,
+              resp.phoneNumber,
               resp.username,
               resp.firstName,
               resp.lastName,

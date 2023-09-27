@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="lightmimbo">
   <div class="ion-padding ion-text-center" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
@@ -17,7 +17,7 @@
         <ion-row>
           <ion-col sizeSm="8" offsetSm="2">
             <ion-list>
-              <ion-item>
+              <ion-item color="lightmimbo">
                 <ion-label position="floating">Type</ion-label>
                 <ion-input
                   name="reminderType"
@@ -27,7 +27,7 @@
                   [(ngModel)]="reminderType"
                 ></ion-input>
               </ion-item>
-              <ion-item>
+              <ion-item color="lightmimbo">
                 <ion-label position="floating">Dog</ion-label>
                 <ion-input
                   name="dog"
@@ -36,7 +36,7 @@
                   required
                 ></ion-input>
               </ion-item>
-              <ion-item>
+              <ion-item color="lightmimbo">
                 <ion-label position="floating">Date & Time</ion-label>
                 <ion-input
                   name="reminderDate"
@@ -47,7 +47,7 @@
                   #dateCtrl="ngModel"
                 ></ion-input>
               </ion-item>
-              <ion-item>
+              <ion-item color="lightmimbo">
                 <ion-label position="floating">Remind Me</ion-label>
                 <ion-select
                   name="remindBefore"
@@ -73,24 +73,24 @@
                   ></ion-select
                 >
               </ion-item>
-              <ion-item>
+              <ion-item color="lightmimbo">
                 <ion-label position="floating">Repeat</ion-label>
                 <ion-select name="repeat" required [(ngModel)]="repeatEvery">
                   <ion-select-option value="-1">Never</ion-select-option>
                   <ion-select-option value="1">Daily</ion-select-option>
                   <ion-select-option value="2">Weekly</ion-select-option>
                   <ion-select-option value="3">Monthly</ion-select-option>
-                  <ion-select-option value="1"
+                  <ion-select-option value="4"
                     >Every 3 Months</ion-select-option
                   >
-                  <ion-select-option value="1"
+                  <ion-select-option value="5"
                     >Every 6 Months</ion-select-option
                   >
-                  <ion-select-option value="1">Yearly</ion-select-option>
+                  <ion-select-option value="6">Yearly</ion-select-option>
                   >
                 </ion-select>
               </ion-item>
-              <ion-item>
+              <ion-item color="lightmimbo">
                 <ion-label position="floating">Notes</ion-label>
                 <ion-input name="Notes" [(ngModel)]="notes"></ion-input
               ></ion-item>
@@ -181,9 +181,10 @@
             <ion-title>Set Event Date</ion-title>
           </ion-toolbar>
         </ion-header>
-        <ion-content class="ion-padding">
+        <ion-content class="ion-padding" color="lightmimbo">
           <div class="calendar">
             <ion-datetime
+              color="primary"
               [min]="dateToday"
               [(ngModel)]="datePopupVal"
             ></ion-datetime>
@@ -212,15 +213,18 @@
             <ion-title>Choose a Dog</ion-title>
           </ion-toolbar>
         </ion-header>
-        <ion-content>
+        <ion-content color="lightmimbo">
           <ion-list>
-            <ion-item *ngFor="let dog of loadedDogs" (click)="setDog(dog.id)"
+            <ion-item
+              color="lightmimbo"
+              *ngFor="let dog of loadedDogs"
+              (click)="setDog(dog.id)"
               >{{dog.name}}</ion-item
             >
 
-            <ion-item (click)="addNewDog()"
-              ><ion-icon name="add" style="margin-right: 8px"></ion-icon>Add a
-              new dog</ion-item
+            <ion-item (click)="addNewDog()" color="lightmimbo"
+              ><ion-icon name="add" style="margin-right: 8px"></ion-icon>Add New
+              Dog</ion-item
             >
           </ion-list>
         </ion-content>

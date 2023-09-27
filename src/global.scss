@@ -50,3 +50,11 @@ button.alert-button.ion-focusable.ion-activatable.confirm-delete {
 .actionsheetbutton {
   color: var(--ion-color-primary) !important;
 }
+
+.calendar-day.calendar-day-today {
+  color: var(--ion-color-darkmimbo) !important;
+}
+
+ion-datetime {
+  background-color: var(--ion-color-lightmimbo);
+}

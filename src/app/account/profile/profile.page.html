@@ -6,13 +6,13 @@
     <ion-title>My Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content color="lightmimbo">
   <form #f="ngForm" class="ion-padding">
     <ion-grid>
       <ion-row>
         <ion-col sizeSm="8" offsetSm="2">
           <ion-list>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">E-Mail</ion-label>
               <ion-input
                 name="email"
@@ -21,7 +21,7 @@
                 [value]="email"
               ></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Username</ion-label>
               <ion-input
                 type="text"
@@ -31,7 +31,29 @@
                 #usernameCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
+              <div class="countrycode">
+                <ion-img
+                  (click)="changeCountryCode()"
+                  [src]="codeImage"
+                ></ion-img>
+                <ion-icon name="caret-down-outline"></ion-icon>
+                <input type="hidden" [value]="selectedCode" />
+              </div>
+              <ion-input
+                class="phonenumber"
+                type="phone"
+                name="phone"
+                ngModel
+                #PhoneNumberCtrl="ngModel"
+                [(ngModel)]="phoneNumber"
+                required
+                type="tel"
+                placeholder="Phone Number"
+              >
+              </ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">First Name</ion-label>
               <ion-input
                 type="text"
@@ -40,7 +62,7 @@
                 required
               ></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Last Name</ion-label>
               <ion-input
                 type="text"

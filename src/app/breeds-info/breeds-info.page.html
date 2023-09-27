@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content color="lightmimbo">
   <div class="ion-padding ion-text-center" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
@@ -28,11 +28,13 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col sizeSm="8" offsetSm="2">
-        <ion-card color="lightmimbo">
+        <ion-card>
           <img [src]="selectedBreed.imageUrl" width="100%" />
           <ion-card-header>
-            <ion-card-subtitle>Breed Name</ion-card-subtitle>
-            <ion-card-title>{{selectedBreed.name}}</ion-card-title>
+            <ion-card-subtitle color="darkmimbo">Breed Name</ion-card-subtitle>
+            <ion-card-title color="darkmimbo"
+              >{{selectedBreed.name}}</ion-card-title
+            >
           </ion-card-header>
           <ion-card-content>
             <div class="ion-padding-bottom" *ngIf="selectedBreed.breedGroup">

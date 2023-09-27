@@ -11,10 +11,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-list>
+<ion-content color="lightmimbo">
+  <ion-list class="firstaid-list">
     <ion-item
       *ngFor="let firstaid of firstAidNames"
+      color="lightmimbo"
       detail
       [routerLink]="['first-aid-info']"
       [queryParams]="{'type':firstaid}"

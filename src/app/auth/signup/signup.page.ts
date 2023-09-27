@@ -1,11 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, UrlTree } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ModalController,
+} from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { RegistrationDto } from '../auth.dto';
 import { AuthService } from '../auth.service';
-
+import { countrycodes } from '../../shared/phone-codes/countrycodes';
+import { PhoneCodesComponent } from 'src/app/shared/phone-codes/phone-codes.component';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -13,15 +18,23 @@ import { AuthService } from '../auth.service';
 })
 export class SignupPage implements OnInit, OnDestroy {
   passwordsMatch = true;
+  countrycodes = [];
   redirectURL: UrlTree;
   registerSub: Subscription;
+  codeImage =
+    'https://upload.wikimedia.org/wikipedia/commons/5/59/Flag_of_Lebanon.svg';
+  selectedCode = '+961';
+  selectedRegion = 'Lebanon';
   constructor(
     private router: Router,
     private authService: AuthService,
     private alertCtrl: AlertController,
     private route: ActivatedRoute,
-    private loadingCtrl: LoadingController
-  ) {}
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController
+  ) {
+    this.countrycodes = countrycodes;
+  }
 
   ngOnInit() {}
   ngOnDestroy() {
@@ -52,6 +65,9 @@ export class SignupPage implements OnInit, OnDestroy {
           confirmPassword: form.value.confirmPassword,
           firstName: form.value.firstName,
           lastName: form.value.lastName,
+          phoneCode: this.selectedCode,
+          phoneRegion: this.selectedRegion,
+          phoneNumber: form.value.phone,
         };
         this.registerSub = this.authService.register(registerDTO).subscribe({
           next: (resp) => {
@@ -84,6 +100,24 @@ export class SignupPage implements OnInit, OnDestroy {
             loadingEl.dismiss();
           },
         });
+      });
+  }
+  changeCountryCode() {
+    this.modalCtrl
+      .create({
+        component: PhoneCodesComponent,
+      })
+      .then((modalEl) => {
+        modalEl.present();
+        return modalEl.onDidDismiss();
+      })
+      .then((resData) => {
+        if (resData.role === 'select') {
+          const country = resData.data.country;
+          this.selectedCode = country.number;
+          this.selectedRegion = country.name;
+          this.codeImage = country.flag;
+        }
       });
   }
 }

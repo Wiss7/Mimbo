@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="lightmimbo">
   <div class="ion-text-center ion-padding" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
@@ -26,7 +26,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-text color="primary"
+    <ion-text color="darkmimbo"
       >You have not added any dogs yet. <br />
       <br />Press the add button in the bottom right corner to get
       started.</ion-text
@@ -34,7 +34,7 @@
   </div>
   <ion-list *ngIf="!isLoading && loadedDogs.length>0">
     <ion-item-sliding *ngFor="let dog of loadedDogs">
-      <ion-item detail [routerLink]="'addit-dog/' + dog.id"
+      <ion-item detail [routerLink]="'addit-dog/' + dog.id" color="lightmimbo"
         >{{dog.name}}</ion-item
       >
       <ion-item-options>

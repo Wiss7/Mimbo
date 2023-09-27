@@ -8,17 +8,19 @@
     <ion-title>Select Breed</ion-title>
   </ion-toolbar>
   <ion-searchbar
-    (ionChange)="onFilterChanged(searchBar)"
+    class="searchbar"
+    (ionInput)="onFilterChanged(searchBar)"
     #searchBar
     *ngIf="!isLoading"
   ></ion-searchbar>
 </ion-header>
-<ion-content>
+<ion-content color="lightmimbo">
   <div class="ion-text-center ion-padding" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
-  <ion-list *ngIf="!isLoading">
+  <ion-list *ngIf="!isLoading" class="breedlist">
     <ion-item
+      color="lightmimbo"
       *ngFor="let breed of filteredBreedsList"
       (click)="onSelect(breed)"
     >

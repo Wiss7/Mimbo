@@ -1,9 +1,126 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add-case</ion-title>
+<!-- <ion-header class="background-primary">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add New Case</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-</ion-content>
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <form #f="ngForm" class="ion-padding" (ngSubmit)="save(f)">
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Case Type</ion-label>
+              <ion-select placeholder="--Select--" [(ngModel)]="caseType">
+                <ion-select-option value="adoption"
+                  >For Adoption</ion-select-option
+                >
+                <ion-select-option value="lost">Lost Dog</ion-select-option>
+                <ion-select-option value="found">Found Dog</ion-select-option>
+                <ion-select-option value="foster"
+                  >Foster Needed</ion-select-option
+                >
+                <ion-select-option value="donation"
+                  >Donation Needed</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Phone Number*</ion-label>
+              <ion-input
+                name="phone"
+                id="phone-modal"
+                [(ngModel)]="phoneNumber"
+                type="n"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Date & Time</ion-label>
+              <ion-input
+                name="reminderDate"
+                required
+                id="date-modal"
+                readonly="true"
+                [(ngModel)]="reminderDate"
+                #dateCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Remind Me</ion-label>
+              <ion-select
+                name="remindBefore"
+                required
+                [(ngModel)]="reminderMins"
+              >
+                <ion-select-option value="0">As scheduled</ion-select-option>
+                <ion-select-option value="-1">Never</ion-select-option>
+                <ion-select-option value="15"
+                  >15 minutes before</ion-select-option
+                >
+                <ion-select-option value="60">1 hour before</ion-select-option>
+                <ion-select-option value="180"
+                  >3 hours before</ion-select-option
+                >
+                <ion-select-option value="360"
+                  >6 hours before</ion-select-option
+                >
+                <ion-select-option value="1440"
+                  >1 day before</ion-select-option
+                ></ion-select
+              >
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Repeat</ion-label>
+              <ion-select name="repeat" required [(ngModel)]="repeatEvery">
+                <ion-select-option value="-1">Never</ion-select-option>
+                <ion-select-option value="1">Daily</ion-select-option>
+                <ion-select-option value="2">Weekly</ion-select-option>
+                <ion-select-option value="3">Monthly</ion-select-option>
+                <ion-select-option value="1">Every 3 Months</ion-select-option>
+                <ion-select-option value="1">Every 6 Months</ion-select-option>
+                <ion-select-option value="1">Yearly</ion-select-option>
+                >
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Notes</ion-label>
+              <ion-input name="Notes" [(ngModel)]="notes"></ion-input
+            ></ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-button
+            color="primary"
+            expand="block"
+            type="submit"
+            [disabled]="!f.valid"
+            ><ion-icon name="save" slot="start"></ion-icon>Save</ion-button
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="eventId>0">
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-button
+            color="primary"
+            expand="block"
+            type="button"
+            fill="outline"
+            (click)="setComplete()"
+            ><ion-icon name="checkmark-done-outline" slot="start"></ion-icon
+            >Mark As Completed</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content> -->

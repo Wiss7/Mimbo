@@ -5,6 +5,9 @@ export interface RegistrationDto {
   username: string;
   password: string;
   confirmPassword: string;
+  phoneCode: string;
+  phoneRegion: string;
+  phoneNumber: string;
 }
 
 export interface RegistrationResponseDto {
@@ -17,6 +20,9 @@ export interface RegistrationResponseDto {
   firstName: string;
   lastName: string;
   email: string;
+  phoneCode: string;
+  phoneRegion: string;
+  phoneNumber: string;
   username: string;
   tokenExpirationDate: Date;
 }
@@ -33,6 +39,9 @@ export interface LoginResponseDTO {
   firstName: string;
   lastName: string;
   email: string;
+  phoneCode: string;
+  phoneRegion: string;
+  phoneNumber: string;
   username: string;
   tokenExpirationDate: Date;
 }
@@ -42,6 +51,9 @@ export interface UpdateProfileDTO {
   firstName: string;
   lastName: string;
   username: string;
+  phoneCode: string;
+  phoneRegion: string;
+  phoneNumber: string;
 }
 
 export interface UpdateProfileResponseDTO {
@@ -52,6 +64,9 @@ export interface UpdateProfileResponseDTO {
   firstName: string;
   lastName: string;
   email: string;
+  phoneCode: string;
+  phoneRegion: string;
+  phoneNumber: string;
   username: string;
   tokenExpirationDate: Date;
 }

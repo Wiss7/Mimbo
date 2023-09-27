@@ -6,6 +6,9 @@
   background-color: #ece6d8;
 }
 
+ion-text {
+  color: var(--ion-color-darkmimbo);
+}
 @media (min-width: 600px) {
   .logo {
     width: 20%;

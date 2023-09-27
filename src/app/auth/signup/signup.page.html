@@ -43,6 +43,27 @@
               ></ion-input>
             </ion-item>
             <ion-item>
+              <div class="countrycode">
+                <ion-img
+                  (click)="changeCountryCode()"
+                  [src]="codeImage"
+                ></ion-img>
+                <ion-icon name="caret-down-outline"></ion-icon>
+                <input type="hidden" [value]="selectedCode" />
+              </div>
+              <ion-input
+                class="phonenumber"
+                type="phone"
+                name="phone"
+                ngModel
+                #PhoneNumberCtrl="ngModel"
+                required
+                type="tel"
+                placeholder="Phone Number"
+              >
+              </ion-input>
+            </ion-item>
+            <ion-item>
               <ion-label position="floating">First Name</ion-label>
               <ion-input
                 type="text"

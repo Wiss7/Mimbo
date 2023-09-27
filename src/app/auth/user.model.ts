@@ -3,6 +3,9 @@ export class User {
   constructor(
     public id: number,
     public email: string,
+    public phoneCode: string,
+    public phoneRegion: string,
+    public phoneNumber: string,
     public username: string,
     public firstName: string,
     public lastName: string,

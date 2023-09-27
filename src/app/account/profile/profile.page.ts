@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../auth/user.model';
-import { catchError, take, tap } from 'rxjs/operators';
-import { Subscription, pipe } from 'rxjs';
+import { Subscription } from 'rxjs';
 import {
-  AlertController,
   LoadingController,
+  ModalController,
   ToastController,
 } from '@ionic/angular';
 import { UpdateProfileDTO } from '../../auth/auth.dto';
+import { countrycodes } from 'src/app/shared/phone-codes/countrycodes';
+import { PhoneCodesComponent } from 'src/app/shared/phone-codes/phone-codes.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -24,10 +25,15 @@ export class ProfilePage implements OnInit, OnDestroy {
   userSub: Subscription;
   updateSub: Subscription;
   isUpdating = false;
+  codeImage: string;
+  selectedCode: string;
+  selectedRegion: string;
+  phoneNumber: string;
   constructor(
     private authService: AuthService,
     private loadingCtrl: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -39,6 +45,15 @@ export class ProfilePage implements OnInit, OnDestroy {
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.userId = user.id;
+        this.selectedCode = user.phoneCode;
+        this.selectedRegion = user.phoneRegion;
+        this.phoneNumber = user.phoneNumber;
+
+        this.codeImage = countrycodes.filter((c) => {
+          return (
+            c.number === this.selectedCode && c.name === this.selectedRegion
+          );
+        })[0].flag;
       }
     });
   }
@@ -57,6 +72,9 @@ export class ProfilePage implements OnInit, OnDestroy {
       firstName: this.firstName,
       lastName: this.lastName,
       username: this.username,
+      phoneCode: this.selectedCode,
+      phoneRegion: this.selectedRegion,
+      phoneNumber: this.phoneNumber,
     };
     this.loadingCtrl
       .create({
@@ -80,6 +98,25 @@ export class ProfilePage implements OnInit, OnDestroy {
             loadingEl.dismiss();
           },
         });
+      });
+  }
+
+  changeCountryCode() {
+    this.modalCtrl
+      .create({
+        component: PhoneCodesComponent,
+      })
+      .then((modalEl) => {
+        modalEl.present();
+        return modalEl.onDidDismiss();
+      })
+      .then((resData) => {
+        if (resData.role === 'select') {
+          const country = resData.data.country;
+          this.selectedCode = country.number;
+          this.selectedRegion = country.name;
+          this.codeImage = country.flag;
+        }
       });
   }
 }
