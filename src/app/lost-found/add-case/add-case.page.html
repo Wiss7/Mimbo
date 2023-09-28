@@ -1,4 +1,4 @@
-<!-- <ion-header class="background-primary">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
@@ -7,18 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding ion-text-center" *ngIf="isLoading">
-    <ion-spinner color="primary"></ion-spinner>
-  </div>
-  <form #f="ngForm" class="ion-padding" (ngSubmit)="save(f)">
+<ion-content color="lightmimbo">
+  <form #f="ngForm" class="ion-padding" (ngSubmit)="save()">
     <ion-grid>
       <ion-row>
         <ion-col sizeSm="8" offsetSm="2">
           <ion-list>
-            <ion-item>
-              <ion-label position="floating">Case Type</ion-label>
-              <ion-select placeholder="--Select--" [(ngModel)]="caseType">
+            <ion-item color="lightmimbo">
+              <ion-label position="floating"></ion-label>
+              <ion-select
+                required
+                name="caseType"
+                placeholder="--Case Type--"
+                [(ngModel)]="caseType"
+              >
                 <ion-select-option value="adoption"
                   >For Adoption</ion-select-option
                 >
@@ -27,74 +29,63 @@
                 <ion-select-option value="foster"
                   >Foster Needed</ion-select-option
                 >
-                <ion-select-option value="donation"
-                  >Donation Needed</ion-select-option
+                <ion-select-option value="cashdonation"
+                  >Cash Donation Needed</ion-select-option
+                >
+                <ion-select-option value="supplies">
+                  Pet Supplies Donation Needed</ion-select-option
+                >
+                <ion-select-option value="report"
+                  >Cruelty Report</ion-select-option
                 >
               </ion-select>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Phone Number*</ion-label>
+            <ion-item color="lightmimbo">
+              <div class="countrycode">
+                <ion-img
+                  (click)="changeCountryCode()"
+                  [src]="codeImage"
+                ></ion-img>
+                <ion-icon name="caret-down-outline"></ion-icon>
+                <input type="hidden" [value]="selectedCode" />
+              </div>
               <ion-input
+                class="phonenumber"
+                type="phone"
                 name="phone"
-                id="phone-modal"
                 [(ngModel)]="phoneNumber"
-                type="n"
                 required
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Date & Time</ion-label>
-              <ion-input
-                name="reminderDate"
-                required
-                id="date-modal"
-                readonly="true"
-                [(ngModel)]="reminderDate"
-                #dateCtrl="ngModel"
-              ></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Remind Me</ion-label>
-              <ion-select
-                name="remindBefore"
-                required
-                [(ngModel)]="reminderMins"
+                type="tel"
+                placeholder="Phone Number"
               >
-                <ion-select-option value="0">As scheduled</ion-select-option>
-                <ion-select-option value="-1">Never</ion-select-option>
-                <ion-select-option value="15"
-                  >15 minutes before</ion-select-option
-                >
-                <ion-select-option value="60">1 hour before</ion-select-option>
-                <ion-select-option value="180"
-                  >3 hours before</ion-select-option
-                >
-                <ion-select-option value="360"
-                  >6 hours before</ion-select-option
-                >
-                <ion-select-option value="1440"
-                  >1 day before</ion-select-option
-                ></ion-select
-              >
+              </ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Repeat</ion-label>
-              <ion-select name="repeat" required [(ngModel)]="repeatEvery">
-                <ion-select-option value="-1">Never</ion-select-option>
-                <ion-select-option value="1">Daily</ion-select-option>
-                <ion-select-option value="2">Weekly</ion-select-option>
-                <ion-select-option value="3">Monthly</ion-select-option>
-                <ion-select-option value="1">Every 3 Months</ion-select-option>
-                <ion-select-option value="1">Every 6 Months</ion-select-option>
-                <ion-select-option value="1">Yearly</ion-select-option>
-                >
-              </ion-select>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Region</ion-label>
+              <ion-input name="region" [(ngModel)]="region" required>
+              </ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Notes</ion-label>
-              <ion-input name="Notes" [(ngModel)]="notes"></ion-input
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Case Details</ion-label>
+              <ion-textarea
+                [(ngModel)]="details"
+                name="details"
+                rows="10"
+                placeholder="Share with us the information you have about this case"
+                required
+              ></ion-textarea
             ></ion-item>
           </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row
+        ><ion-col sizeSm="8" offsetSm="2">
+          <ion-list *ngIf="images.length >0">
+            <ion-item *ngFor="let image of images"></ion-item>
+          </ion-list>
+          <div *ngIf="images.length ===0">
+            <ion-text>Upload at least one picture to save.</ion-text>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -108,19 +99,6 @@
           >
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="eventId>0">
-        <ion-col sizeSm="8" offsetSm="2">
-          <ion-button
-            color="primary"
-            expand="block"
-            type="button"
-            fill="outline"
-            (click)="setComplete()"
-            ><ion-icon name="checkmark-done-outline" slot="start"></ion-icon
-            >Mark As Completed</ion-button
-          >
-        </ion-col>
-      </ion-row>
     </ion-grid>
   </form>
-</ion-content> -->
+</ion-content>

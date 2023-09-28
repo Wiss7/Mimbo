@@ -10,6 +10,7 @@ import {
 import { UpdateProfileDTO } from '../../auth/auth.dto';
 import { countrycodes } from 'src/app/shared/phone-codes/countrycodes';
 import { PhoneCodesComponent } from 'src/app/shared/phone-codes/phone-codes.component';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',

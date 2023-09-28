@@ -1,4 +1,4 @@
-<ion-header class="background-primary">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/account"></ion-back-button>
@@ -28,7 +28,6 @@
                 name="username"
                 [(ngModel)]="username"
                 required
-                #usernameCtrl="ngModel"
               ></ion-input>
             </ion-item>
             <ion-item color="lightmimbo">
@@ -44,8 +43,6 @@
                 class="phonenumber"
                 type="phone"
                 name="phone"
-                ngModel
-                #PhoneNumberCtrl="ngModel"
                 [(ngModel)]="phoneNumber"
                 required
                 type="tel"
@@ -69,7 +66,6 @@
                 name="lastName"
                 [(ngModel)]="lastName"
                 required
-                #lastNameCtrl="ngModel"
               ></ion-input>
             </ion-item>
           </ion-list>

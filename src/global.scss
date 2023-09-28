@@ -58,3 +58,8 @@ button.alert-button.ion-focusable.ion-activatable.confirm-delete {
 ion-datetime {
   background-color: var(--ion-color-lightmimbo);
 }
+
+.alert-radio-label {
+  text-overflow: unset !important;
+  white-space: unset !important;
+}
