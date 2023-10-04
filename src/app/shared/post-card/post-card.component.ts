@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { EditCommentModalComponent } from './edit-comment-modal/edit-comment-modal.component';
+import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 
 @Component({
   selector: 'app-post-card',
@@ -34,7 +35,7 @@ export class PostCardComponent implements OnInit, OnDestroy {
     private loadingCtrl: LoadingController
   ) {}
   ngOnInit() {
-    this.hideDelete = this.router.url.includes('doggogram');
+    this.hideDelete = this.router.url.toLowerCase().includes('doggogram');
   }
   formatDate(myDate: Date) {
     const format = 'dd-MMM-yyyy';
@@ -48,7 +49,10 @@ export class PostCardComponent implements OnInit, OnDestroy {
     }
   }
   ViewComments(postid: number) {
-    const index = this.posts.findIndex((p) => p.id === postid);
+    if (this.userId <= 0) {
+      this.openSignInPopup();
+      return;
+    }
     this.modalCtrl
       .create({
         component: CommentsModalComponent,
@@ -70,7 +74,29 @@ export class PostCardComponent implements OnInit, OnDestroy {
       });
   }
 
+  openSignInPopup() {
+    this.modalCtrl
+      .create({
+        component: AuthPopupComponent,
+        showBackdrop: true,
+        cssClass: 'small-modal',
+      })
+      .then((modalEl) => {
+        modalEl.onDidDismiss().then((modalData) => {
+          if (!modalData.data) {
+            return;
+          }
+          this.userId = modalData.data['userId'];
+        });
+        modalEl.present();
+      });
+  }
+
   ToggleLike(postid: number) {
+    if (this.userId <= 0) {
+      this.openSignInPopup();
+      return;
+    }
     const index = this.posts.findIndex((p) => p.id === postid);
     this.posts[index].isLiked = !this.posts[index].isLiked;
     if (this.posts[index].isLiked)

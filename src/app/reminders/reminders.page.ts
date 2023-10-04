@@ -91,6 +91,7 @@ export class RemindersPage implements OnInit, OnDestroy {
           .getAllReminders(this.userId)
           .subscribe(() => {
             event.target.complete();
+            this.isLoading = false;
           });
       }
     });

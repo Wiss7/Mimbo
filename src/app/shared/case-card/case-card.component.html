@@ -1,0 +1,26 @@
+<ion-card>
+  <swiper-container pagination="true" [zoom]="true">
+    <swiper-slide *ngFor="let image of casee.images"
+      ><img [src]="image.url" style="width: 100%"
+    /></swiper-slide>
+  </swiper-container>
+  <ion-text
+    ><div class="footer">
+      <span class="username">@{{ casee.username }}</span>
+    </div></ion-text
+  >
+  <ion-card-title class="type">{{ caseType }}</ion-card-title>
+  <ion-card-subtitle class="location">{{ casee.location }}</ion-card-subtitle>
+  <div class="interact">
+    <ion-icon name="share-social-outline" class="share"></ion-icon>
+    <ion-button fill="clear" color="darkmimbo" (click)="ViewComments(casee.id)">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+      <ion-text>{{ casee.commentsCount }} </ion-text>
+    </ion-button>
+    <ion-text class="date">{{ formatDate(casee.createdDate) }}</ion-text>
+  </div>
+
+  <ion-button expand="full" fill="clear" color="primary"
+    >View Case Details</ion-button
+  >
+</ion-card>

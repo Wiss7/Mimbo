@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { Post } from './post.model';
-import { Comment } from './comment.model';
+import { Comment } from '../shared/comments-modal/comment.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {
-  AddCommentDTO,
   AddPostDTO,
   AddPostResponseDTO,
-  GetCommentResponseDTO,
   GetPostsResponseDTO,
   ToggleLikeDTO,
 } from './doggogram.dto';
+import {
+  AddCommentDTO,
+  GetCommentResponseDTO,
+} from '../shared/comments-modal/comments.dto';
 
 @Injectable({ providedIn: 'root' })
 export class DoggogramService {

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from '../environments/environment';
 import { AuthService } from './auth/auth.service';
+import { register } from 'swiper/element/bundle';
+register();
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

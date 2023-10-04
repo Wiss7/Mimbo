@@ -44,6 +44,7 @@
       <ion-card-content class="ion-no-padding">
         <img [src]="croppedImage" style="width: 100%" />
         <ion-textarea
+          *ngIf="!hideCaption"
           class="italic textarea-padding"
           rows="2"
           autoGrow="true"

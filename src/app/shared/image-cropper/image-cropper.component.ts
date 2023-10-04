@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CropperComponent } from 'angular-cropperjs';
 @Component({
@@ -22,12 +23,15 @@ export class ImageCropperComponent implements AfterViewInit {
   IsCropped = false;
   show = false;
   Caption = '';
+  hideCaption = false;
   constructor(
     private modalCtrl: ModalController,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private router: Router
   ) {
     this.IsCropped = false;
     this.Caption = '';
+    this.hideCaption = this.router.url.indexOf('lost-found') >= 0;
   }
   ngAfterViewInit() {
     this.cropperOptions = {

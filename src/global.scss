@@ -63,3 +63,16 @@ ion-datetime {
   text-overflow: unset !important;
   white-space: unset !important;
 }
+
+.block {
+  width: 100%;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ion-color-lightmimbo);
+}
+
+.small-modal {
+  --height: auto;
+}

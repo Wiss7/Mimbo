@@ -71,7 +71,6 @@ export class MypostsPage implements OnInit, OnDestroy {
       .getPostsByUser(this.userId, this.posts[this.posts.length - 1].id)
       .subscribe((res) => {
         const hasLastPost = this.posts.find((p) => p.isLastPost === true);
-        debugger;
         if (hasLastPost === undefined) event.target.complete();
         else this.HasMoreData = false;
       });

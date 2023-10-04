@@ -11,7 +11,6 @@ import {
   LoadingController,
   ModalController,
   ToastController,
-  ViewWillEnter,
 } from '@ionic/angular';
 import { ImageCropperComponent } from '../shared/image-cropper/image-cropper.component';
 import { Subscription } from 'rxjs';
@@ -26,7 +25,7 @@ import { AddPostDTO } from './doggogram.dto';
   templateUrl: './doggogram.page.html',
   styleUrls: ['./doggogram.page.scss'],
 })
-export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
+export class DoggogramPage implements OnInit, OnDestroy {
   uploadedImage: string;
   postsSub: Subscription;
   postsHTTPSub: Subscription;
@@ -60,6 +59,7 @@ export class DoggogramPage implements OnInit, OnDestroy, ViewWillEnter {
       .getPosts(this.userId, 0)
       .subscribe(() => {
         event.target.complete();
+        this.isLoading = false;
       });
   }
 

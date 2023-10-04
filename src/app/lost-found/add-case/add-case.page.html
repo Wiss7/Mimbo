@@ -24,8 +24,8 @@
                 <ion-select-option value="adoption"
                   >For Adoption</ion-select-option
                 >
-                <ion-select-option value="lost">Lost Dog</ion-select-option>
-                <ion-select-option value="found">Found Dog</ion-select-option>
+                <ion-select-option value="lost">Lost Pet</ion-select-option>
+                <ion-select-option value="found">Found Pet</ion-select-option>
                 <ion-select-option value="foster"
                   >Foster Needed</ion-select-option
                 >
@@ -38,6 +38,7 @@
                 <ion-select-option value="report"
                   >Cruelty Report</ion-select-option
                 >
+                <ion-select-option value="other">Other</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item color="lightmimbo">
@@ -78,23 +79,44 @@
           </ion-list>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-button
+            expand="full"
+            (click)="addImage()"
+            [disabled]="images.length>4"
+            ><ion-icon name="camera-outline" slot="start"></ion-icon> Add Image
+            <br
+          /></ion-button>
+        </ion-col>
+      </ion-row>
       <ion-row
         ><ion-col sizeSm="8" offsetSm="2">
-          <ion-list *ngIf="images.length >0">
-            <ion-item *ngFor="let image of images"></ion-item>
-          </ion-list>
+          <div *ngIf="images.length >0">
+            <div *ngFor="let image of images;index as i" class="image-wrap">
+              <ion-icon
+                name="close-circle-outline"
+                class="close"
+                (click)="removePhoto(i)"
+              ></ion-icon>
+              <ion-img ion-item [src]="image" class="uploaded-images"></ion-img>
+            </div>
+          </div>
           <div *ngIf="images.length ===0">
-            <ion-text>Upload at least one picture to save.</ion-text>
+            <ion-text color="danger"
+              >Upload at least one picture to save. (Up to 5 images)</ion-text
+            >
           </div>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col sizeSm="8" offsetSm="2">
           <ion-button
             color="primary"
             expand="block"
             type="submit"
-            [disabled]="!f.valid"
+            [disabled]="!f.valid || images.length===0"
             ><ion-icon name="save" slot="start"></ion-icon>Save</ion-button
           >
         </ion-col>

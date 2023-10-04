@@ -14,12 +14,6 @@ export interface AddPostResponseDTO {
   isPostAdded: boolean;
 }
 
-export interface AddCommentDTO {
-  userid: number;
-  postid: number;
-  comment: string;
-}
-
 export interface ToggleLikeDTO {
   userid: number;
   postid: number;
@@ -30,22 +24,6 @@ export interface ToggleLikeResponseDTO {
   postId: number;
   likeCount: number;
   isLiked: boolean;
-}
-
-export interface AddCommentDTO {
-  userid: number;
-  postid: number;
-  comment: string;
-}
-
-export interface GetCommentResponseDTO {
-  id: number;
-  userId: number;
-  username: string;
-  postId: number;
-  comment: string;
-  createdDate: Date;
-  isCommentAdded: boolean;
 }
 
 export interface GetPostsResponseDTO {

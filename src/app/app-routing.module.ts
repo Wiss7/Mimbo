@@ -77,19 +77,25 @@ const routes: Routes = [
   },
   {
     path: 'donate',
-    loadChildren: () => import('./donate/donate.module').then( m => m.DonatePageModule)
+    loadChildren: () =>
+      import('./donate/donate.module').then((m) => m.DonatePageModule),
   },
   {
     path: 'lost-found',
-    loadChildren: () => import('./lost-found/lost-found.module').then( m => m.LostFoundPageModule)
+    loadChildren: () =>
+      import('./lost-found/lost-found.module').then(
+        (m) => m.LostFoundPageModule
+      ),
   },
   {
     path: 'first-aid',
-    loadChildren: () => import('./first-aid/first-aid.module').then( m => m.FirstAidPageModule)
+    loadChildren: () =>
+      import('./first-aid/first-aid.module').then((m) => m.FirstAidPageModule),
   },
   {
     path: 'doggogram',
-    loadChildren: () => import('./doggogram/doggogram.module').then( m => m.DoggogramPageModule)
+    loadChildren: () =>
+      import('./doggogram/doggogram.module').then((m) => m.DoggogramPageModule),
   },
 ];
 

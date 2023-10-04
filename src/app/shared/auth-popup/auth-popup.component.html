@@ -1,0 +1,83 @@
+<div class="block">
+  <ion-button class="close" (click)="close()" fill="clear">
+    <ion-icon name="close-outline" slot="icon-only"></ion-icon
+  ></ion-button>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img
+            class="logo"
+            src="../../../assets/images/HomeSlogan.png"
+          ></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-list>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">E-Mail/Username</ion-label>
+              <ion-input
+                type="text"
+                name="email"
+                ngModel
+                required
+                #emailCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item
+              *ngIf="!emailCtrl.valid && emailCtrl.touched"
+              lines="none"
+              color="lightmimbo"
+            >
+              <ion-text color="danger"
+                ><small>Enter your email/username.</small></ion-text
+              >
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input
+                type="password"
+                name="password"
+                ngModel
+                required
+                minlength="6"
+                #passwordCtrl="ngModel"
+              ></ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo" *ngIf="loginFail" lines="none">
+              <ion-text color="danger"
+                ><small>Incorrect Password.</small></ion-text
+              >
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-button
+            color="primary"
+            expand="block"
+            type="submit"
+            [disabled]="!f.valid"
+            >Sign In</ion-button
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-text color="primary" (click)="goToChangePassword()"
+            >Forgot Password?</ion-text
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-padding-vertical">
+        <ion-col sizeSm="8" offsetSm="2">
+          <ion-text color="primary" (click)="goToSignup()"
+            >Dont have an account? Click here to sign up!</ion-text
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</div>

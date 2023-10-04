@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { LostFoundPageRoutingModule } from './lost-found-routing.module';
 
 import { LostFoundPage } from './lost-found.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LostFoundPageRoutingModule
+    LostFoundPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [LostFoundPage]
+  declarations: [LostFoundPage],
 })
 export class LostFoundPageModule {}
