@@ -20,7 +20,12 @@
     <ion-text class="date">{{ formatDate(casee.createdDate) }}</ion-text>
   </div>
 
-  <ion-button expand="full" fill="clear" color="primary"
-    >View Case Details</ion-button
+  <ion-button
+    expand="full"
+    fill="clear"
+    color="primary"
+    (click)="viewDetails(casee.id)"
+    >View Case</ion-button
   >
 </ion-card>
+<div class="line-break"></div>

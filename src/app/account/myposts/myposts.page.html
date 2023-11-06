@@ -20,24 +20,11 @@
     >
     </ion-refresher-content>
   </ion-refresher>
-  <ion-segment
-    value="doggogram"
-    [(ngModel)]="filter"
-    (ionChange)="filterPosts()"
-  >
-    <ion-segment-button value="doggogram">
-      <ion-label>Doggogram</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="lostFound">
-      <ion-label>Lost/Found</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-
   <div class="ion-padding ion-text-center" *ngIf="isLoading">
     <ion-spinner color="primary"></ion-spinner>
   </div>
   <div *ngIf="!isLoading">
-    <div *ngIf="filter === 'doggogram'">
+    <div>
       <div class="ion-padding ion-text-center" *ngIf="posts.length ===0">
         <ion-text color="darkmimbo"
           >You haven't uploaded any posts. You can start uploading in the

@@ -2,6 +2,10 @@
   margin: auto;
   width: 30%;
 }
+
+ion-list {
+  background-color: var(--ion-color-lightmimbo);
+}
 @media (min-width: 600px) {
   .logo {
     margin: auto;

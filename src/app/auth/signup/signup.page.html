@@ -7,13 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="lightmimbo">
   <form #f="ngForm" class="ion-padding" (ngSubmit)="onRegister(f)">
     <ion-grid>
       <ion-row>
         <ion-col sizeSm="8" offsetSm="2">
           <ion-list>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">E-Mail</ion-label>
               <ion-input
                 type="email"
@@ -27,12 +27,13 @@
             <ion-item
               *ngIf="!emailCtrl.valid && emailCtrl.touched"
               lines="none"
+              color="lightmimbo"
             >
               <ion-text color="danger"
                 ><small>Enter a valid email.</small></ion-text
               >
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Username</ion-label>
               <ion-input
                 type="username"
@@ -42,7 +43,7 @@
                 #usernameCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <div class="countrycode">
                 <ion-img
                   (click)="changeCountryCode()"
@@ -63,7 +64,7 @@
               >
               </ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">First Name</ion-label>
               <ion-input
                 type="text"
@@ -73,7 +74,7 @@
                 #firstNameCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Last Name</ion-label>
               <ion-input
                 type="text"
@@ -83,7 +84,7 @@
                 #lastNameCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Password</ion-label>
               <ion-input
                 type="password"
@@ -94,14 +95,18 @@
                 #passwordCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched">
+            <ion-item
+              color="lightmimbo"
+              *ngIf="!passwordCtrl.valid && passwordCtrl.touched"
+              lines="none"
+            >
               <ion-text color="danger">
                 <small
                   >Password should be at least 6 characters long.</small
                 ></ion-text
               >
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Confirm Password</ion-label>
               <ion-input
                 type="password"
@@ -111,7 +116,7 @@
                 #confirmPasswordCtrl="ngModel"
               ></ion-input>
             </ion-item>
-            <ion-item *ngIf="!passwordsMatch" lines="none">
+            <ion-item *ngIf="!passwordsMatch" lines="none" color="lightmimbo">
               <ion-text color="danger"
                 ><small>Passwords do not match.</small></ion-text
               >

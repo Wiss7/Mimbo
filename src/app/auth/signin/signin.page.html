@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="lightmimbo">
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="ion-padding">
     <ion-grid>
       <ion-row>
@@ -21,7 +21,7 @@
       <ion-row>
         <ion-col sizeSm="8" offsetSm="2">
           <ion-list>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">E-Mail/Username</ion-label>
               <ion-input
                 type="text"
@@ -34,12 +34,13 @@
             <ion-item
               *ngIf="!emailCtrl.valid && emailCtrl.touched"
               lines="none"
+              color="lightmimbo"
             >
               <ion-text color="danger"
                 ><small>Enter your email/username.</small></ion-text
               >
             </ion-item>
-            <ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating">Password</ion-label>
               <ion-input
                 type="password"
@@ -53,6 +54,7 @@
             <ion-item
               *ngIf="!passwordCtrl.valid && passwordCtrl.touched"
               lines="none"
+              color="lightmimbo"
             >
               <ion-text color="danger"
                 ><small

@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
 import {
   ActionSheetController,
   AlertController,
+  IonModal,
   LoadingController,
   ModalController,
   ToastController,
@@ -28,12 +29,23 @@ export class AddCasePage implements OnInit, OnDestroy {
     'https://upload.wikimedia.org/wikipedia/commons/5/59/Flag_of_Lebanon.svg';
   selectedCode = '+961';
   selectedRegion = 'Lebanon';
-
+  fullName: string;
   phoneNumber: string;
   region: string;
   details: string;
+  userId: number;
+  dogName: string;
+  breed: string;
+  age: number;
+  medical: string;
+  size: string = 'unknown';
+  gender: string = 'unknown';
   images = [];
   selectedImage: string;
+  termsAccepted = false;
+  hideTermsMessage = true;
+  email: string;
+  @ViewChild('termsModal') termsModal: IonModal;
   constructor(
     private modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
@@ -44,7 +56,13 @@ export class AddCasePage implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  toggleMessage() {
+    if (this.termsAccepted) this.hideTermsMessage = true;
+    else this.hideTermsMessage = false;
+  }
+  async ngOnInit() {
+    this.userId = await this.isLoggedIn();
+  }
   ngOnDestroy(): void {
     if (this.addCaseSub) this.addCaseSub.unsubscribe();
   }
@@ -67,7 +85,16 @@ export class AddCasePage implements OnInit, OnDestroy {
       });
   }
 
+  cancel() {
+    this.termsModal.dismiss();
+  }
+
   save() {
+    if (!this.termsAccepted) {
+      this.hideTermsMessage = false;
+      return;
+    }
+
     this.loadingCtrl
       .create({
         keyboardClose: true,
@@ -76,16 +103,22 @@ export class AddCasePage implements OnInit, OnDestroy {
       })
       .then(async (loadingEl) => {
         loadingEl.present();
-        const userId = await this.isLoggedIn();
         const addCaseDTO: AddCaseDTO = {
           details: this.details,
+          email: this.email,
           location: this.region,
           phoneCode: this.selectedCode,
           phoneNumber: this.phoneNumber,
           phoneRegion: this.selectedRegion,
           type: this.caseType,
           images: [...this.images],
-          userId,
+          userId: this.userId,
+          age: this.age,
+          breed: this.breed,
+          dogName: this.dogName,
+          gender: this.gender,
+          medical: this.medical,
+          size: this.size,
         };
 
         this.addCaseSub = this.caseService.addCase(addCaseDTO).subscribe({
@@ -127,6 +160,8 @@ export class AddCasePage implements OnInit, OnDestroy {
     if (authData.tokenExpirationDate <= new Date()) {
       return -1;
     }
+    this.fullName = authData.firstName + ' ' + authData.lastName;
+    this.email = authData.email;
     return authData.id;
   }
   addImage() {
@@ -207,5 +242,24 @@ export class AddCasePage implements OnInit, OnDestroy {
 
   removePhoto(index: number) {
     this.images.splice(index, 1);
+  }
+
+  openTermsConditions() {
+    this.modalCtrl
+      .create({
+        component: PhoneCodesComponent,
+      })
+      .then((modalEl) => {
+        modalEl.present();
+        return modalEl.onDidDismiss();
+      })
+      .then((resData) => {
+        if (resData.role === 'select') {
+          const country = resData.data.country;
+          this.selectedCode = country.number;
+          this.selectedRegion = country.name;
+          this.codeImage = country.flag;
+        }
+      });
   }
 }

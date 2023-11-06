@@ -14,6 +14,40 @@
         <ion-col sizeSm="8" offsetSm="2">
           <ion-list>
             <ion-item color="lightmimbo">
+              <div>
+                <ion-text><b> {{fullName}}</b></ion-text>
+              </div>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Email</ion-label>
+              <ion-input
+                name="email"
+                [(ngModel)]="email"
+                required
+                type="email"
+              ></ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <div class="countrycode">
+                <ion-img
+                  (click)="changeCountryCode()"
+                  [src]="codeImage"
+                ></ion-img>
+                <ion-icon name="caret-down-outline"></ion-icon>
+                <input type="hidden" [value]="selectedCode" />
+              </div>
+              <ion-input
+                class="phonenumber"
+                type="phone"
+                name="phone"
+                [(ngModel)]="phoneNumber"
+                required
+                type="tel"
+                placeholder="Phone Number"
+              >
+              </ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
               <ion-label position="floating"></ion-label>
               <ion-select
                 required
@@ -42,29 +76,55 @@
               </ion-select>
             </ion-item>
             <ion-item color="lightmimbo">
-              <div class="countrycode">
-                <ion-img
-                  (click)="changeCountryCode()"
-                  [src]="codeImage"
-                ></ion-img>
-                <ion-icon name="caret-down-outline"></ion-icon>
-                <input type="hidden" [value]="selectedCode" />
-              </div>
-              <ion-input
-                class="phonenumber"
-                type="phone"
-                name="phone"
-                [(ngModel)]="phoneNumber"
-                required
-                type="tel"
-                placeholder="Phone Number"
-              >
-              </ion-input>
-            </ion-item>
-            <ion-item color="lightmimbo">
               <ion-label position="floating">Region</ion-label>
               <ion-input name="region" [(ngModel)]="region" required>
               </ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Dog's Name (If Known)</ion-label>
+              <ion-input name="dogName" [(ngModel)]="dogName"> </ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Breed (If Known)</ion-label>
+              <ion-input name="breed" [(ngModel)]="breed"> </ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Age (Years)</ion-label>
+              <ion-input name="age" [(ngModel)]="age" type="number">
+              </ion-input>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Size</ion-label>
+              <ion-select
+                required
+                name="size"
+                [(ngModel)]="size"
+                value="unknown"
+              >
+                <ion-select-option value="unknown">Unknown</ion-select-option>
+                <ion-select-option value="small">Small</ion-select-option>
+                <ion-select-option value="medium">Medium</ion-select-option>
+                <ion-select-option value="large">Large</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating">Gender</ion-label>
+              <ion-select
+                required
+                name="gender"
+                [(ngModel)]="gender"
+                value="unknown"
+              >
+                <ion-select-option value="unknown">Unknown</ion-select-option>
+                <ion-select-option value="male">Male</ion-select-option>
+                <ion-select-option value="female">Female</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item color="lightmimbo">
+              <ion-label position="floating"
+                >Medical Issues (If Known)</ion-label
+              >
+              <ion-input name="medical" [(ngModel)]="medical"> </ion-input>
             </ion-item>
             <ion-item color="lightmimbo">
               <ion-label position="floating">Case Details</ion-label>
@@ -109,7 +169,32 @@
           </div>
         </ion-col>
       </ion-row>
-
+      <ion-row>
+        <ion-col size="11">
+          <ion-text
+            >I've read and accept the
+            <ion-label id="terms-modal" color="primary"
+              ><b>Terms of Service</b></ion-label
+            ></ion-text
+          >
+        </ion-col>
+        <ion-col size="1" style="align-self: center"
+          ><ion-checkbox
+            (ionChange)="toggleMessage()"
+            name="termsAccepted"
+            [(ngModel)]="termsAccepted"
+          ></ion-checkbox
+        ></ion-col>
+      </ion-row>
+      <ion-row
+        ><ion-col
+          ><ion-text color="danger" *ngIf="!hideTermsMessage"
+            ><small
+              ><i>You must accept terms and conditions to continue</i></small
+            ></ion-text
+          ></ion-col
+        ></ion-row
+      >
       <ion-row>
         <ion-col sizeSm="8" offsetSm="2">
           <ion-button
@@ -124,3 +209,83 @@
     </ion-grid>
   </form>
 </ion-content>
+
+<ion-modal trigger="terms-modal" #termsModal>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()"
+            ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+          ></ion-button>
+        </ion-buttons>
+        <ion-title>Terms & Conditions</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content color="lightmimbo">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h1>Terms and Conditions</h1>
+            <h2>1. Submission of Form</h2>
+            <p>
+              By submitting this form, you agree to comply with the terms and
+              conditions outlined herein. If you do not agree with these terms,
+              please do not submit the form.
+            </p>
+
+            <h2>2. Data Privacy</h2>
+            <h3>2.1 Data Collection</h3>
+            <p>
+              We collect and store the information provided in this form,
+              including your name and phone number, for the purpose of
+              facilitating communication between users.
+            </p>
+
+            <h3>2.2 Data Usage</h3>
+            <p>
+              Your information will be used solely for the purpose of allowing
+              other users to contact you as specified in this form.
+            </p>
+
+            <h3>2.3 Data Security</h3>
+            <p>
+              We take data security seriously and employ industry-standard
+              measures to protect your information. However, please be aware
+              that no online data transmission or storage is entirely secure,
+              and we cannot guarantee the absolute security of your information.
+            </p>
+
+            <h3>2.4 Data Retention</h3>
+            <p>
+              Your information will be retained for as long as necessary to
+              fulfill the intended purpose or as required by applicable laws and
+              regulations.
+            </p>
+
+            <h2>3. Consent to Share Information</h2>
+            <p>
+              By submitting this form, you consent to the sharing of your name
+              and phone number with other users of our platform for the purpose
+              of communication.
+            </p>
+
+            <h2>4. Changes to Terms and Conditions</h2>
+            <p>
+              We reserve the right to update or modify these terms and
+              conditions at any time. You are responsible for reviewing this
+              page periodically to ensure you are aware of any changes.
+            </p>
+
+            <h2>5. Contact Information</h2>
+            <p>
+              If you have any questions or concerns about these terms and
+              conditions, please contact us at
+              <a href="mailto:your@email.com">mimboapp@gmail.com</a>.
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>

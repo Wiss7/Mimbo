@@ -6,6 +6,7 @@ import { Case } from 'src/app/lost-found/case.model';
 import { CommentsModalComponent } from '../comments-modal/comments-modal.component';
 import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 import { Preferences } from '@capacitor/preferences';
+import { CaseDetailsComponent } from 'src/app/lost-found/case-details/case-details.component';
 
 @Component({
   selector: 'app-case-card',
@@ -118,6 +119,19 @@ export class CaseCardComponent implements OnInit {
           }
           this.userId = modalData.data['userId'];
         });
+        modalEl.present();
+      });
+  }
+  viewDetails(id: number) {
+    const selectedCase = this.cases.find((c) => c.id === id);
+    this.modalCtrl
+      .create({
+        component: CaseDetailsComponent,
+        componentProps: {
+          selectedCase,
+        },
+      })
+      .then((modalEl) => {
         modalEl.present();
       });
   }

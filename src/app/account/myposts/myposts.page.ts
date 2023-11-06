@@ -11,7 +11,6 @@ import { Post } from 'src/app/doggogram/post.model';
 })
 export class MypostsPage implements OnInit, OnDestroy {
   isLoading = true;
-  filter = 'doggogram';
   posts: Post[];
   userId = 0;
   postsSub: Subscription;
