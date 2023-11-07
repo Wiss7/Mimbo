@@ -9,10 +9,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorinterceptorInterceptor implements HttpInterceptor {
-  constructor(private alertCtrl: AlertController) {}
+  constructor(private alertCtrl: AlertController, private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -22,8 +24,11 @@ export class ErrorinterceptorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         let message = error.message;
+        let logout = false;
         if (error.status === 401) {
-          message = 'Unathorized request! Log in to perform this action.';
+          message = 'Login Expired! Log in again to perform this action.';
+          Preferences.remove({ key: 'authData' });
+          logout = true;
         } else if (error.status === 404) {
           message = 'Error 404! URL not found';
         } else if (error.status === 0) {
@@ -34,7 +39,14 @@ export class ErrorinterceptorInterceptor implements HttpInterceptor {
           .create({
             header: 'Oops!!',
             message,
-            buttons: [{ text: 'Dismiss' }],
+            buttons: [
+              {
+                text: 'Dismiss',
+                handler: () => {
+                  if (logout) this.router.navigateByUrl('home');
+                },
+              },
+            ],
           })
           .then((alerEl) => {
             alerEl.present();

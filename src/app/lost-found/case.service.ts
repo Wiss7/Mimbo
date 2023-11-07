@@ -72,6 +72,51 @@ export class CaseService {
     );
   }
 
+  getCasesByUser(userId: number, lastItemId: number) {
+    if (lastItemId === 0) this.casesArray = [];
+    const url =
+      environment.apiUrl + '/api/case/all/user/' + userId + '/' + lastItemId;
+    return this.http.get<GetCaseResponseDTO[]>(url).pipe(
+      map((res) => {
+        res.forEach((casee) => {
+          const images: CaseImage[] = [];
+          casee.images.forEach((image) => {
+            images.push(
+              new CaseImage(image.id, image['imageURL'], image['case'].id)
+            );
+          });
+          this.casesArray.push(
+            new Case(
+              casee.id,
+              casee.userId,
+              casee.username,
+              casee.fullName,
+              casee.email,
+              casee.type,
+              casee.phoneNumber,
+              casee.phoneCode,
+              casee.phoneRegion,
+              casee.location,
+              casee.details,
+              casee.dogName,
+              casee.breed,
+              casee.age,
+              casee.medical,
+              casee.size,
+              casee.gender,
+              [...images],
+              casee.commentsCount,
+              casee.createdDate,
+              casee.isLastPost
+            )
+          );
+        });
+        return this.casesArray;
+      }),
+      tap((cases) => this._cases.next(cases))
+    );
+  }
+
   getComments(caseId: number) {
     const url = environment.apiUrl + '/api/case/comments/all/' + caseId;
     return this.http.get<GetCommentResponseDTO[]>(url).pipe(
@@ -102,5 +147,10 @@ export class CaseService {
   addComment(body: AddCommentDTO) {
     const url = environment.apiUrl + '/api/case/comment/add';
     return this.http.post<GetCommentResponseDTO>(url, body);
+  }
+
+  deleteCase(caseId: number) {
+    const url = environment.apiUrl + '/api/case/delete/' + caseId;
+    return this.http.delete<Boolean>(url);
   }
 }

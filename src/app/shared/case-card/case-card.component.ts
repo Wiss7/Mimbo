@@ -1,12 +1,18 @@
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ModalController,
+  ToastController,
+} from '@ionic/angular';
 import { Case } from 'src/app/lost-found/case.model';
 import { CommentsModalComponent } from '../comments-modal/comments-modal.component';
 import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 import { Preferences } from '@capacitor/preferences';
 import { CaseDetailsComponent } from 'src/app/lost-found/case-details/case-details.component';
+import { CaseService } from 'src/app/lost-found/case.service';
 
 @Component({
   selector: 'app-case-card',
@@ -19,7 +25,15 @@ export class CaseCardComponent implements OnInit {
   hideDelete = true;
   caseType = '';
   userId = 0;
-  constructor(private router: Router, private modalCtrl: ModalController) {}
+
+  constructor(
+    private router: Router,
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private toastController: ToastController,
+    private caseService: CaseService
+  ) {}
 
   async ngOnInit() {
     this.userId = await this.isLoggedIn();
@@ -133,6 +147,75 @@ export class CaseCardComponent implements OnInit {
       })
       .then((modalEl) => {
         modalEl.present();
+      });
+  }
+
+  deleteCase(caseId: number) {
+    this.alertCtrl
+      .create({
+        header: 'Delete Case?',
+        message:
+          'Are you sure you wish to delete this case? This action cannot be undone!',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.alertCtrl.dismiss();
+            },
+          },
+          {
+            text: 'Delete',
+            cssClass: 'confirm-delete',
+            handler: () => {
+              this.performDelete(caseId);
+              this.alertCtrl.dismiss();
+            },
+          },
+        ],
+      })
+      .then((alertEl) => alertEl.present());
+  }
+
+  performDelete(caseId: number) {
+    this.loadingCtrl
+      .create({
+        keyboardClose: true,
+        message: 'Please wait...',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.caseService.deleteCase(caseId).subscribe({
+          next: async (res) => {
+            if (res) {
+              const index = this.cases.findIndex((p) => p.id === caseId);
+              this.cases.splice(index, 1);
+              loadingEl.dismiss();
+              const toast = await this.toastController.create({
+                color: 'primary',
+                duration: 2000,
+                message: 'Case deleted successfully.',
+              });
+              await toast.present();
+            } else {
+              loadingEl.dismiss();
+              const toast = await this.toastController.create({
+                color: 'danger',
+                duration: 2000,
+                message: 'Could not perform action. Please try again later.',
+              });
+              await toast.present();
+            }
+          },
+          error: async () => {
+            loadingEl.dismiss();
+            const toast = await this.toastController.create({
+              color: 'danger',
+              duration: 2000,
+              message: 'Could not perform action. Please try again later.',
+            });
+            await toast.present();
+          },
+        });
       });
   }
 }

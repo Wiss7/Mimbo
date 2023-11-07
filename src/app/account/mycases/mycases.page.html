@@ -1,13 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>mycases</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Cases</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mycases</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="lightmimbo">
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)"
+    color="primary"
+  >
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingSpinner="circular"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div>
+      <div class="ion-padding ion-text-center" *ngIf="cases.length ===0">
+        <ion-text color="darkmimbo"
+          >You haven't uploaded any cases. You can start uploading in the
+          Doggogram section.</ion-text
+        >
+      </div>
+      <div *ngIf="cases.length >0">
+        <app-case-card
+          *ngFor="let casee of cases"
+          [cases]="cases"
+          [casee]="casee"
+        ></app-case-card>
+      </div>
+    </div>
+  </div>
+  <ion-infinite-scroll
+    (ionInfinite)="onIonInfinite($event)"
+    *ngIf="!isLoading && HasMoreData"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
