@@ -7,13 +7,14 @@ import {
   ModalController,
   ToastController,
 } from '@ionic/angular';
-import { Case } from 'src/app/lost-found/case.model';
+import { Case, CaseImage } from 'src/app/lost-found/case.model';
 import { CommentsModalComponent } from '../comments-modal/comments-modal.component';
 import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 import { Preferences } from '@capacitor/preferences';
 import { CaseDetailsComponent } from 'src/app/lost-found/case-details/case-details.component';
 import { CaseService } from 'src/app/lost-found/case.service';
-
+import { EditCaseComponent } from 'src/app/lost-found/edit-case/edit-case.component';
+import { App } from '@capacitor/app';
 @Component({
   selector: 'app-case-card',
   templateUrl: './case-card.component.html',
@@ -25,7 +26,6 @@ export class CaseCardComponent implements OnInit {
   hideDelete = true;
   caseType = '';
   userId = 0;
-
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
@@ -150,6 +150,49 @@ export class CaseCardComponent implements OnInit {
       });
   }
 
+  editCase(id: number) {
+    const selectedCase = this.cases.find((c) => c.id === id);
+    this.modalCtrl
+      .create({
+        component: EditCaseComponent,
+        componentProps: {
+          selectedCase,
+        },
+      })
+      .then((modalEl) => {
+        modalEl.onDidDismiss().then((modalData) => {
+          if (!modalData.data) {
+            return;
+          }
+          const index = this.cases.findIndex(
+            (p) => p.id === modalData.data.updatedCase.id
+          );
+          this.cases[index].age = modalData.data.updatedCase.age;
+          this.cases[index].breed = modalData.data.updatedCase.breed;
+          this.cases[index].details = modalData.data.updatedCase.details;
+          this.cases[index].dogName = modalData.data.updatedCase.dogName;
+          this.cases[index].email = modalData.data.updatedCase.email;
+          this.cases[index].gender = modalData.data.updatedCase.gender;
+          this.cases[index].location = modalData.data.updatedCase.location;
+          this.cases[index].medical = modalData.data.updatedCase.medical;
+          this.cases[index].phoneCode = modalData.data.updatedCase.phoneCode;
+          this.cases[index].phoneNumber =
+            modalData.data.updatedCase.phoneNumber;
+          this.cases[index].phoneRegion =
+            modalData.data.updatedCase.phoneRegion;
+          this.cases[index].size = modalData.data.updatedCase.size;
+          this.cases[index].type = modalData.data.updatedCase.type;
+          this.cases[index].images = [];
+          modalData.data.updatedCase.images.forEach((image) => {
+            this.cases[index].images.push(
+              new CaseImage(image.id, image['imageURL'], image['case'].id)
+            );
+          });
+        });
+        modalEl.present();
+      });
+  }
+
   deleteCase(caseId: number) {
     this.alertCtrl
       .create({
@@ -217,5 +260,10 @@ export class CaseCardComponent implements OnInit {
           },
         });
       });
+  }
+
+  async shareCase(id: number) {
+    const { url } = await App.getLaunchUrl();
+    console.log(url);
   }
 }

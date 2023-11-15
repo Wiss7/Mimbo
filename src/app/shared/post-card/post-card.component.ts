@@ -12,7 +12,7 @@ import { DoggogramService } from 'src/app/doggogram/doggogram.service';
 import { Subscription } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
-import { EditCommentModalComponent } from './edit-comment-modal/edit-comment-modal.component';
+import { EditCaptionModalComponent } from './edit-caption-modal/edit-caption-modal.component';
 import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 
 @Component({
@@ -193,7 +193,7 @@ export class PostCardComponent implements OnInit, OnDestroy {
     const imageUrl = this.posts[index].imageUrl;
     this.modalCtrl
       .create({
-        component: EditCommentModalComponent,
+        component: EditCaptionModalComponent,
         componentProps: {
           caption,
           imageUrl,

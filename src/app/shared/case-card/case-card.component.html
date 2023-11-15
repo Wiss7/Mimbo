@@ -11,8 +11,16 @@
   >
   <ion-card-title class="type">{{ caseType }}</ion-card-title>
   <ion-card-subtitle class="location">{{ casee.location }}</ion-card-subtitle>
+  <ion-card-content class="info">{{ casee.details }}</ion-card-content>
   <div class="interact">
-    <ion-icon name="share-social-outline" class="share"></ion-icon>
+    <ion-button fill="clear" color="darkmimbo" (click)="shareCase(casee.id)">
+      <ion-icon
+        name="share-social-outline"
+        class="share"
+        slot="icon-only"
+      ></ion-icon>
+    </ion-button>
+
     <ion-button fill="clear" color="darkmimbo" (click)="ViewComments(casee.id)">
       <ion-icon name="chatbubble-outline"></ion-icon>
       <ion-text>{{ casee.commentsCount }} </ion-text>
@@ -25,7 +33,8 @@
     fill="clear"
     color="primary"
     (click)="viewDetails(casee.id)"
-    >View Case</ion-button
+    ><ion-icon name="eye-outline" slot="start"></ion-icon>View Case
+    Details</ion-button
   >
   <ion-button
     color="primary"
@@ -33,8 +42,9 @@
     expand="full"
     fill="clear"
     *ngIf="!hideDelete"
+    (click)="editCase(casee.id)"
     ><ion-icon name="pencil-outline" slot="start"></ion-icon>Edit
-    Caption</ion-button
+    Case</ion-button
   >
   <ion-button
     (click)="deleteCase(casee.id)"
@@ -44,7 +54,7 @@
     fill="clear"
     *ngIf="!hideDelete"
     ><ion-icon name="close-circle-outline" slot="start"></ion-icon>Delete
-    Post</ion-button
+    Case</ion-button
   >
 </ion-card>
 <div class="line-break"></div>

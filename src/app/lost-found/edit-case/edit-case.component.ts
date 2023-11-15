@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
 import {
@@ -13,21 +13,23 @@ import { Subscription } from 'rxjs';
 import { ImageCropperComponent } from 'src/app/shared/image-cropper/image-cropper.component';
 import { PhoneCodesComponent } from 'src/app/shared/phone-codes/phone-codes.component';
 import { CaseService } from '../case.service';
-import { AddCaseDTO } from '../case.dto';
+import { UpdateCaseDTO } from '../case.dto';
 import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
+import { Case } from '../case.model';
+import { countrycodes } from 'src/app/shared/phone-codes/countrycodes';
 
 @Component({
-  selector: 'app-add-case',
-  templateUrl: './add-case.page.html',
-  styleUrls: ['./add-case.page.scss'],
+  selector: 'app-edit-case',
+  templateUrl: './edit-case.component.html',
+  styleUrls: ['./edit-case.component.scss'],
 })
-export class AddCasePage implements OnInit, OnDestroy {
+export class EditCaseComponent implements OnInit, OnDestroy {
+  @Input() selectedCase: Case;
   caseType: string;
-  addCaseSub: Subscription;
-  codeImage =
-    'https://upload.wikimedia.org/wikipedia/commons/5/59/Flag_of_Lebanon.svg';
-  selectedCode = '+961';
+  updateCaseSub: Subscription;
+  codeImage: string;
+  selectedCode: string;
   selectedRegion = 'Lebanon';
   fullName: string;
   phoneNumber: string;
@@ -45,6 +47,7 @@ export class AddCasePage implements OnInit, OnDestroy {
   termsAccepted = false;
   hideTermsMessage = true;
   email: string;
+  imagesCount: number;
   @ViewChild('termsModal') termsModal: IonModal;
   constructor(
     private modalCtrl: ModalController,
@@ -62,9 +65,34 @@ export class AddCasePage implements OnInit, OnDestroy {
   }
   async ngOnInit() {
     this.userId = await this.isLoggedIn();
+    this.caseType = this.selectedCase.type;
+    this.fullName = this.selectedCase.fullName;
+    this.email = this.selectedCase.email;
+    this.phoneNumber = this.selectedCase.phoneNumber;
+    this.selectedCode = this.selectedCase.phoneCode;
+    this.selectedRegion = this.selectedCase.phoneRegion;
+    this.codeImage = countrycodes.filter(
+      (b) =>
+        b.name.toLowerCase() === this.selectedRegion.toLowerCase() &&
+        b.number === this.selectedCode
+    )[0].flag;
+    this.region = this.selectedCase.location;
+    this.details = this.selectedCase.details;
+    this.dogName = this.selectedCase.dogName;
+    this.breed = this.selectedCase.breed;
+    this.age = this.selectedCase.age;
+    this.medical = this.selectedCase.medical;
+    this.size = this.selectedCase.size;
+    this.gender = this.selectedCase.gender;
+    this.images = [...this.selectedCase.images];
+    this.images.forEach((image) => {
+      image.isAdded = 0;
+      image.isDeleted = 0;
+    });
+    this.imagesCount = this.images.length;
   }
   ngOnDestroy(): void {
-    if (this.addCaseSub) this.addCaseSub.unsubscribe();
+    if (this.updateCaseSub) this.updateCaseSub.unsubscribe();
   }
   changeCountryCode() {
     this.modalCtrl
@@ -103,7 +131,8 @@ export class AddCasePage implements OnInit, OnDestroy {
       })
       .then(async (loadingEl) => {
         loadingEl.present();
-        const addCaseDTO: AddCaseDTO = {
+        const updateCaseDTO: UpdateCaseDTO = {
+          id: this.selectedCase.id,
           details: this.details,
           email: this.email,
           location: this.region,
@@ -121,9 +150,20 @@ export class AddCasePage implements OnInit, OnDestroy {
           size: this.size,
         };
 
-        this.addCaseSub = this.caseService.addCase(addCaseDTO).subscribe({
-          next: async (isAdded) => {
-            if (!isAdded) {
+        this.updateCaseSub = this.caseService
+          .updateCase(updateCaseDTO)
+          .subscribe({
+            next: async (updatedCase) => {
+              const toast = await this.toastController.create({
+                color: 'primary',
+                duration: 2000,
+                message: 'Post added successfully',
+              });
+              loadingEl.dismiss();
+              await toast.present();
+              this.modalCtrl.dismiss({ updatedCase });
+            },
+            error: () => {
               loadingEl.dismiss();
               this.alertCtrl
                 .create({
@@ -136,19 +176,8 @@ export class AddCasePage implements OnInit, OnDestroy {
                   loadingEl.dismiss();
                   alerEl.present();
                 });
-            } else {
-              const toast = await this.toastController.create({
-                color: 'primary',
-                duration: 2000,
-                message: 'Case added successfully',
-              });
-              loadingEl.dismiss();
-              await toast.present();
-              this.router.navigate(['lost-found']);
-            }
-          },
-          error: () => loadingEl.dismiss(),
-        });
+            },
+          });
       });
   }
   async isLoggedIn() {
@@ -160,8 +189,6 @@ export class AddCasePage implements OnInit, OnDestroy {
     if (authData.tokenExpirationDate <= new Date()) {
       return -1;
     }
-    this.fullName = authData.firstName + ' ' + authData.lastName;
-    this.email = authData.email;
     return authData.id;
   }
   addImage() {
@@ -234,14 +261,21 @@ export class AddCasePage implements OnInit, OnDestroy {
             return;
           }
           var imageUrl = modalData.data['imageUrl'];
-          this.images.push(imageUrl);
+          const newImage = { id: -1, url: imageUrl, isDeleted: 0, isAdded: 1 };
+          this.images.push(newImage);
+          this.imagesCount++;
         });
         modalEl.present();
       });
   }
 
   removePhoto(index: number) {
-    this.images.splice(index, 1);
+    if (this.images[index].isAdded === 1) {
+      this.images.splice(index, 1);
+    } else {
+      this.images[index].isDeleted = 1;
+    }
+    this.imagesCount--;
   }
 
   openTermsConditions() {
@@ -261,5 +295,9 @@ export class AddCasePage implements OnInit, OnDestroy {
           this.codeImage = country.flag;
         }
       });
+  }
+
+  onCancel() {
+    this.modalCtrl.dismiss();
   }
 }

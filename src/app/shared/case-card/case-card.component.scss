@@ -13,13 +13,13 @@ swiper-slide {
 .type {
   padding-top: 10px;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   color: var(--ion-color-darkmimbo);
 }
 
 .location {
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--ion-color-darkmimbo);
 }
 
@@ -62,4 +62,12 @@ swiper-slide {
   font-weight: 700;
   color: var(--ion-color-darkmimbo);
   margin-right: 12px;
+  padding-top: 8px;
+  display: block;
+}
+
+.info {
+  color: var(--ion-color-darkmimbo);
+  text-align: center;
+  font-size: 18px;
 }

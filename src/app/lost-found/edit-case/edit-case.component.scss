@@ -1,0 +1,41 @@
+.countrycode {
+  width: 60px;
+}
+
+.countrycode ion-img {
+  width: 28px;
+  display: inline-block;
+}
+
+.phonenumber {
+  padding-left: 12px !important;
+  max-width: calc(100% - 44px) !important;
+}
+
+ion-list {
+  background-color: var(--ion-color-lightmimbo);
+}
+
+.uploaded-images {
+  width: 85px;
+  height: 85px;
+  display: inline-block;
+}
+.image-wrap {
+  display: inline-block;
+  position: relative;
+  font-size: 0;
+  border: 1px solid var(--ion-color-darkmimbo);
+}
+
+.image-wrap .close {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 100;
+  background-color: #fff;
+  color: #000;
+  opacity: 0.7;
+  font-size: 22px;
+  border-radius: 50%;
+}

@@ -5,7 +5,7 @@
         ><ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon
       ></ion-button>
     </ion-buttons>
-    <ion-title>New Post</ion-title>
+    <ion-title>Edit Image</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onSaveCrop()"
         ><ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon
@@ -21,7 +21,7 @@
         ><ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon
       ></ion-button>
     </ion-buttons>
-    <ion-title>New Post</ion-title>
+    <ion-title>Upload Image</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="UploadImage()"
         ><ion-icon name="checkmark-outline" slot="icon-only"></ion-icon
@@ -41,7 +41,10 @@
   </div>
   <div class="center-image" *ngIf="croppedImage && IsCropped">
     <ion-card>
-      <ion-card-content class="ion-no-padding">
+      <ion-card-content
+        class="ion-no-padding"
+        [ngClass]="{ 'no-line-height': hideCaption }"
+      >
         <img [src]="croppedImage" style="width: 100%" />
         <ion-textarea
           *ngIf="!hideCaption"

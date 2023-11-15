@@ -22,3 +22,7 @@
   padding-left: 16px;
   padding-top: 8px;
 }
+
+.no-line-height {
+  line-height: 0 !important;
+}

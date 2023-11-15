@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AddCaseDTO, GetCaseResponseDTO } from './case.dto';
+import { AddCaseDTO, GetCaseResponseDTO, UpdateCaseDTO } from './case.dto';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, tap } from 'rxjs';
@@ -26,6 +26,11 @@ export class CaseService {
   addCase(body: AddCaseDTO) {
     const url = environment.apiUrl + '/api/case/add';
     return this.http.post<boolean>(url, body);
+  }
+
+  updateCase(body: UpdateCaseDTO) {
+    const url = environment.apiUrl + '/api/case/update';
+    return this.http.post<GetCaseResponseDTO>(url, body);
   }
 
   getCases(lastItemId: number) {

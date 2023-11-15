@@ -41,3 +41,22 @@ export interface GetCaseResponseDTO {
   size: string;
   gender: string;
 }
+
+export interface UpdateCaseDTO {
+  id: number;
+  type: string;
+  userId: number;
+  email: string;
+  phoneNumber: string;
+  phoneCode: string;
+  phoneRegion: string;
+  location: string;
+  details: string;
+  images: { id: number; url: string; isAdded: number; isDeleted: number }[];
+  dogName: string;
+  breed: string;
+  age: number;
+  medical: string;
+  size: string;
+  gender: string;
+}

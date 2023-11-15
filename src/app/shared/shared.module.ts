@@ -8,7 +8,7 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 import { FormsModule } from '@angular/forms';
 import { CommentsModalComponent } from './comments-modal/comments-modal.component';
 import { PostCardComponent } from './post-card/post-card.component';
-import { EditCommentModalComponent } from './post-card/edit-comment-modal/edit-comment-modal.component';
+import { EditCaptionModalComponent } from './post-card/edit-caption-modal/edit-caption-modal.component';
 import { PhoneCodesComponent } from './phone-codes/phone-codes.component';
 import { CaseCardComponent } from './case-card/case-card.component';
 import { AuthPopupComponent } from './auth-popup/auth-popup.component';
@@ -19,7 +19,7 @@ import { AuthPopupComponent } from './auth-popup/auth-popup.component';
     ImageCropperComponent,
     CommentsModalComponent,
     PostCardComponent,
-    EditCommentModalComponent,
+    EditCaptionModalComponent,
     PhoneCodesComponent,
     CaseCardComponent,
     AuthPopupComponent,
@@ -29,7 +29,7 @@ import { AuthPopupComponent } from './auth-popup/auth-popup.component';
     MapModalComponent,
     PostCardComponent,
     CaseCardComponent,
-    EditCommentModalComponent,
+    EditCaptionModalComponent,
     AuthPopupComponent,
   ],
   imports: [
