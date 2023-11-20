@@ -1,5 +1,12 @@
 import { formatDate } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import {
   AlertController,
@@ -11,10 +18,10 @@ import { Case, CaseImage } from 'src/app/lost-found/case.model';
 import { CommentsModalComponent } from '../comments-modal/comments-modal.component';
 import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 import { Preferences } from '@capacitor/preferences';
-import { CaseDetailsComponent } from 'src/app/lost-found/case-details/case-details.component';
 import { CaseService } from 'src/app/lost-found/case.service';
 import { EditCaseComponent } from 'src/app/lost-found/edit-case/edit-case.component';
 import { App } from '@capacitor/app';
+import { Swiper } from 'swiper/types';
 @Component({
   selector: 'app-case-card',
   templateUrl: './case-card.component.html',
@@ -23,6 +30,8 @@ import { App } from '@capacitor/app';
 export class CaseCardComponent implements OnInit {
   @Input('casee') casee: Case;
   @Input('cases') cases: Case[];
+  @ViewChild('swiper') swiperRef: ElementRef | undefined;
+  swiper!: Swiper;
   hideDelete = true;
   caseType = '';
   userId = 0;
@@ -32,7 +41,8 @@ export class CaseCardComponent implements OnInit {
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastController: ToastController,
-    private caseService: CaseService
+    private caseService: CaseService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   async ngOnInit() {
@@ -137,17 +147,7 @@ export class CaseCardComponent implements OnInit {
       });
   }
   viewDetails(id: number) {
-    const selectedCase = this.cases.find((c) => c.id === id);
-    this.modalCtrl
-      .create({
-        component: CaseDetailsComponent,
-        componentProps: {
-          selectedCase,
-        },
-      })
-      .then((modalEl) => {
-        modalEl.present();
-      });
+    this.router.navigateByUrl('cases/' + id);
   }
 
   editCase(id: number) {
@@ -183,11 +183,17 @@ export class CaseCardComponent implements OnInit {
           this.cases[index].size = modalData.data.updatedCase.size;
           this.cases[index].type = modalData.data.updatedCase.type;
           this.cases[index].images = [];
+
           modalData.data.updatedCase.images.forEach((image) => {
             this.cases[index].images.push(
               new CaseImage(image.id, image['imageURL'], image['case'].id)
             );
           });
+          setTimeout(() => {
+            this.swiper = this.swiperRef?.nativeElement.swiper;
+            this.swiper.updateSlides();
+            this.cdRef.detectChanges();
+          }, 500);
         });
         modalEl.present();
       });

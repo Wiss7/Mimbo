@@ -15,6 +15,13 @@ const routes: Routes = [
       import('./add-case/add-case.module').then((m) => m.AddCasePageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: ':id',
+    loadChildren: () =>
+      import('./case-details/case-details.module').then(
+        (m) => m.CaseDetailsPageModule
+      ),
+  },
 ];
 
 @NgModule({

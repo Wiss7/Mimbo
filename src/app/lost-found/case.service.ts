@@ -77,6 +77,44 @@ export class CaseService {
     );
   }
 
+  getCaseById(id: number) {
+    const url = environment.apiUrl + '/api/case/get/' + id;
+    return this.http.get<GetCaseResponseDTO>(url).pipe(
+      map((casee) => {
+        const images: CaseImage[] = [];
+        casee.images.forEach((image) => {
+          images.push(
+            new CaseImage(image.id, image['imageURL'], image['case'].id)
+          );
+        });
+        const selectedCase = new Case(
+          casee.id,
+          casee.userId,
+          casee.username,
+          casee.fullName,
+          casee.email,
+          casee.type,
+          casee.phoneNumber,
+          casee.phoneCode,
+          casee.phoneRegion,
+          casee.location,
+          casee.details,
+          casee.dogName,
+          casee.breed,
+          casee.age,
+          casee.medical,
+          casee.size,
+          casee.gender,
+          [...images],
+          casee.commentsCount,
+          casee.createdDate,
+          casee.isLastPost
+        );
+        return selectedCase;
+      })
+    );
+  }
+
   getCasesByUser(userId: number, lastItemId: number) {
     if (lastItemId === 0) this.casesArray = [];
     const url =

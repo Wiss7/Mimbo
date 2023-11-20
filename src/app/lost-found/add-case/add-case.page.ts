@@ -144,7 +144,7 @@ export class AddCasePage implements OnInit, OnDestroy {
               });
               loadingEl.dismiss();
               await toast.present();
-              this.router.navigate(['lost-found']);
+              this.router.navigate(['cases']);
             }
           },
           error: () => loadingEl.dismiss(),

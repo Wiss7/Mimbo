@@ -81,7 +81,7 @@ const routes: Routes = [
       import('./donate/donate.module').then((m) => m.DonatePageModule),
   },
   {
-    path: 'lost-found',
+    path: 'cases',
     loadChildren: () =>
       import('./lost-found/lost-found.module').then(
         (m) => m.LostFoundPageModule

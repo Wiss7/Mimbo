@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.mimbo.app',
-  appName: 'mimbo',
+  appName: 'Mimbo',
   webDir: 'www',
   bundledWebRuntime: false,
 };
