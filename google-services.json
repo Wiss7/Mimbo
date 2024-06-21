@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "849807425408",
+    "project_id": "mimboapp-a5417",
+    "storage_bucket": "mimboapp-a5417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849807425408:android:05c84606891a6545be8b65",
+        "android_client_info": {
+          "package_name": "com.mimbo.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO44hr6KI79v3hBGybMZrzHQnbROH21Yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

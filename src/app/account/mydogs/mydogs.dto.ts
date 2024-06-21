@@ -4,6 +4,7 @@ export interface AddDogDTO {
   dateOfBirth: string;
   gender: string;
   userId: number;
+  imageUrl: string;
 }
 
 export interface AddDogResponseDTO {
@@ -13,6 +14,7 @@ export interface AddDogResponseDTO {
   breed: string;
   dateOfBirth: Date;
   gender: string;
+  imageUrl: string;
   isDogAdded: boolean;
 }
 
@@ -22,6 +24,7 @@ export interface UpdateDogDTO {
   breed: string;
   dateOfBirth: string;
   gender: string;
+  imageUrl: string;
 }
 
 export interface GetDogResponseDTO {

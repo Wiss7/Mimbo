@@ -48,7 +48,7 @@ export class PostCardComponent implements OnInit, OnDestroy {
       this.likeSub.unsubscribe();
     }
   }
-  ViewComments(postid: number) {
+  ViewComments(postid: number, postUserId: number) {
     if (this.userId <= 0) {
       this.openSignInPopup();
       return;
@@ -58,6 +58,7 @@ export class PostCardComponent implements OnInit, OnDestroy {
         component: CommentsModalComponent,
         componentProps: {
           postid,
+          postUserId,
           userId: this.userId,
           source: 'doggogram',
         },

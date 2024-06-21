@@ -24,9 +24,9 @@
           <ion-text
             ><b class="username"> @{{ comment.username }}: </b><br />{{
               comment.comment
-            }}<br *ngIf="userId === comment.userid" />
+            }}<br *ngIf="userId === comment.userid || userId === postUserId" />
             <ion-button
-              *ngIf="userId === comment.userid"
+              *ngIf="userId === comment.userid || userId === postUserId"
               class="delete ion-no-padding"
               fill="clear"
               size="small"

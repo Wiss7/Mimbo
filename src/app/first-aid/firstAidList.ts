@@ -3,6 +3,7 @@ export const firstAidList = [
   'Poisoning',
   'Choking',
   'Stings',
+  'Burns',
   'Dog Bites',
   'Fractures & Broken Bones',
   'Food Poisoning',
@@ -11,6 +12,7 @@ export const firstAidList = [
   'Bleeding',
   'Having a Seizure',
   'Drowning',
+  'Hypothermia',
   'Ear Injuries',
   'Eye Injuries',
 ];

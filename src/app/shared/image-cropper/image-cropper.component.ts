@@ -33,7 +33,8 @@ export class ImageCropperComponent implements AfterViewInit {
     this.Caption = '';
     this.hideCaption =
       this.router.url.indexOf('cases') >= 0 ||
-      this.router.url.indexOf('mycases') >= 0;
+      this.router.url.indexOf('mycases') >= 0 ||
+      this.router.url.indexOf('addit-dog') >= 0;
   }
   ngAfterViewInit() {
     this.cropperOptions = {

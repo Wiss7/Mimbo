@@ -7,6 +7,11 @@ export const bodylanguage = [
       'Humping is a sexual position for dogs, but veterinarians who specialize in canine behavior say it often is done for other reasons as well.  Humping is an attempt at dominance. This can apply whether it’s a human or another dog on the receiving end. Sometimes, it’s a sign that the dog is stressed, over-stimulated, or acting out.',
   },
   {
+    action: 'Leash Aggression',
+    meaning:
+      'Leash aggression is when a dog shows aggressive behavior, such as barking or lunging, while on a leash. It is often due to frustration, fear, or feeling restrained by the leash. This behavior can result from a lack of socialization or past negative experiences. Training and behavior modification are crucial to address leash aggression and ensure safety.',
+  },
+  {
     action: 'Downward Dog',
     meaning:
       'When pups lean into this position, it typically means they’re ready for playtime',
@@ -67,6 +72,21 @@ export const bodylanguage = [
       'If a dog is wagging its tail and the rest of its body seems relaxed or is moving along with the wagging, you are probably dealing with a happy, comfortable dog. Happy, relaxed tail wagging is usually accompanied by a happy facial expression. A happy dog usually has bright eyes, a relaxed open mouth, and possibly a gentle pant.',
   },
   {
+    action: 'Yawning',
+    meaning:
+      'Yawning in dogs indicates tiredness, stress, or serves as a calming signal to avoid conflict. It is commonly observed during waking moments, as they are falling asleep, or during quiet times such as early mornings or late nights.. Yawning increases in stressful situations such as car rides, vet visits, or during thunderstorms, often accompanied by panting and whining. Additionally, dogs use yawning as a strategy to diffuse potential conflicts and avoid confrontation.',
+  },
+  {
+    action: 'Tightly closed mouth',
+    meaning:
+      'An open mouth typically indicates a relaxed and contented dog, while a tightly closed or clenched jaw suggests wariness or distrust towards something nearby.',
+  },
+  {
+    action: 'Avoiding eye contact',
+    meaning:
+      'When dogs avoid eye contact, it usually indicates submission, fear, anxiety, or a desire to avoid conflict. It can also suggest discomfort or uncertainty in social situations and may be a way of showing deference to a more dominant individual or signaling non-aggression.',
+  },
+  {
     action: 'Left and right tail wagging',
     meaning:
       'it has been scientifically proven that if the dog is wagging their tail to the right, they’re experiencing positive emotions while to the left – they are feeling bad about something.',
@@ -112,9 +132,19 @@ export const bodylanguage = [
       'Dogs pant to cool themselves down on hot days. They also use it as a stress reliever. A constantly panting dog is a dog full of worry.',
   },
   {
+    action: 'Sneezing',
+    meaning:
+      'Sneezing in dogs can signal various things. Occasional sneezing may result from irritation or excitement, while frequent sneezing could indicate health issues like allergies or respiratory infections. Stress or anxiety can also trigger sneezing in dogs. Owners should monitor their dog’s behavior and seek veterinary advice if sneezing persists or worsens.',
+  },
+  {
     action: 'Shivering or Trembling',
     meaning:
-      'Dogs shake and tremble for all kinds of reasons -- excitement, pain, old age, even nausea. Shivering and trembling may be symptoms of something serious -- like poisoning, kidney disease, or injury.',
+      'Dogs shiver and tremble for all kinds of reasons -- excitement, cold, pain, old age, even nausea. Shivering and trembling may be symptoms of something serious -- like poisoning, kidney disease, or injury.',
+  },
+  {
+    action: 'Shaking',
+    meaning:
+      'Shaking is an effective method for dogs to relieve stress and indicate a need for space. However, persistent shaking could potentially indicate an ear infection, so it’s important to monitor this behavior if it occurs frequently.',
   },
   {
     action: 'Circling before lying down',

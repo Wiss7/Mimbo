@@ -157,9 +157,9 @@ export class AddCasePage implements OnInit, OnDestroy {
       return -1;
     }
     const authData = JSON.parse(value);
-    if (authData.tokenExpirationDate <= new Date()) {
-      return -1;
-    }
+    // if (authData.tokenExpirationDate <= new Date()) {
+    //   return -1;
+    // }
     this.fullName = authData.firstName + ' ' + authData.lastName;
     this.email = authData.email;
     return authData.id;

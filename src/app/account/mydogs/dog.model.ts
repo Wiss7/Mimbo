@@ -4,6 +4,7 @@ export class Dog {
     public name: string,
     public breed: string,
     public gender: string,
-    public dateOfBirth: Date
+    public dateOfBirth: Date,
+    public imageUrl: string
   ) {}
 }

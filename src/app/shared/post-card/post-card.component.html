@@ -16,7 +16,7 @@
       <ion-text style="margin-right: 16px">{{ post.likesCount }}</ion-text>
       <ion-button
         fill="clear"
-        (click)="ViewComments(post.id)"
+        (click)="ViewComments(post.id, post.userid)"
         color="darkmimbo"
       >
         <ion-icon name="chatbubble-outline"></ion-icon>

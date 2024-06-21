@@ -47,7 +47,7 @@ export class CaseCardComponent implements OnInit {
 
   async ngOnInit() {
     this.userId = await this.isLoggedIn();
-    this.hideDelete = this.router.url.toLowerCase().includes('lost-found');
+    this.hideDelete = this.router.url.toLowerCase().includes('/cases');
     switch (this.casee.type) {
       case 'adoption': {
         this.caseType = 'FOR ADOPTION';
@@ -91,9 +91,9 @@ export class CaseCardComponent implements OnInit {
       return -1;
     }
     const authData = JSON.parse(value);
-    if (authData.tokenExpirationDate <= new Date()) {
-      return -1;
-    }
+    // if (authData.tokenExpirationDate <= new Date()) {
+    //   return -1;
+    // }
     return authData.id;
   }
   formatDate(myDate: Date) {
@@ -103,7 +103,7 @@ export class CaseCardComponent implements OnInit {
     return formattedDate[0];
   }
 
-  ViewComments(caseId: number) {
+  ViewComments(caseId: number, caseUserId: number) {
     if (this.userId <= 0) {
       this.openSignInPopup();
       return;
@@ -114,6 +114,7 @@ export class CaseCardComponent implements OnInit {
         componentProps: {
           caseId,
           userId: this.userId,
+          postUserId: caseUserId,
           source: 'case',
         },
       })

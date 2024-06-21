@@ -16,6 +16,7 @@ export class CommentsModalComponent implements OnInit, OnDestroy {
   @Input() caseId;
   @Input() userId;
   @Input() source;
+  @Input() postUserId;
   comments: Comment[] = [];
   NewComment = '';
   isLoading = true;

@@ -6,7 +6,7 @@ export const countrycodes = [
   },
   {
     name: 'Afghanistan',
-    flag: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Afghanistan_Flag.svg',
+    flag: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Flag_of_Afghanistan_%282013%E2%80%932021%29.svg',
     number: '+93',
   },
   {

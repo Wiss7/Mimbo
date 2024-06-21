@@ -21,7 +21,11 @@
       ></ion-icon>
     </ion-button>
 
-    <ion-button fill="clear" color="darkmimbo" (click)="ViewComments(casee.id)">
+    <ion-button
+      fill="clear"
+      color="darkmimbo"
+      (click)="ViewComments(casee.id, casee.userid)"
+    >
       <ion-icon name="chatbubble-outline"></ion-icon>
       <ion-text>{{ casee.commentsCount }} </ion-text>
     </ion-button>

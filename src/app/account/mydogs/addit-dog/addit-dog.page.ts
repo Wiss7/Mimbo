@@ -5,6 +5,7 @@ import {
   AlertController,
   IonModal,
   LoadingController,
+  ModalController,
   ToastController,
 } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -12,6 +13,9 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DogService } from '../dogs.service';
 import { AddDogDTO, UpdateDogDTO } from '../mydogs.dto';
+import { Capacitor } from '@capacitor/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { ImageCropperComponent } from 'src/app/shared/image-cropper/image-cropper.component';
 @Component({
   selector: 'app-addit-dog',
   templateUrl: './addit-dog.page.html',
@@ -21,6 +25,51 @@ export class AdditDogPage implements OnInit, OnDestroy {
   @ViewChild('genderpopup') genderModal: IonModal;
   @ViewChild('dobpopup') dobModal: IonModal;
   @ViewChild('breedpopup') breedModal: IonModal;
+  isActionSheetOpen = false;
+  showImage = false;
+  imageSrc = 'https://freesvg.org/img/DogProfile.png';
+  uploadedImage: string;
+  //https://codepen.io/rdelafuente/pen/xxqMXX
+  public actionSheetButtons = [
+    {
+      text: 'View Picture',
+      icon: 'eye-outline',
+      handler: () => {
+        this.viewImage();
+      },
+    },
+    {
+      text: 'Choose from gallery',
+      icon: 'image-outline',
+      handler: () => {
+        this.onPickImageFromCamera('Gallery');
+      },
+    },
+    {
+      text: 'Take new picture',
+      icon: 'camera-outline',
+      handler: () => {
+        this.onPickImageFromCamera('Camera');
+      },
+    },
+    {
+      text: 'Remove current picture',
+      icon: 'trash-outline',
+      handler: () => {
+        this.uploadedImage = this.imageSrc;
+      },
+    },
+  ];
+
+  viewImage() {
+    this.showImage = true;
+  }
+  closeImage() {
+    this.showImage = false;
+  }
+  setOpen(isOpen: boolean) {
+    this.isActionSheetOpen = isOpen;
+  }
   title = 'Add New Dog';
   isLoading = true;
   name: string;
@@ -43,7 +92,8 @@ export class AdditDogPage implements OnInit, OnDestroy {
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private modalCtrl: ModalController
   ) {}
   ngOnInit(): void {}
   ionViewWillEnter() {
@@ -67,10 +117,16 @@ export class AdditDogPage implements OnInit, OnDestroy {
         this.dobPopupVal = dog.dateOfBirth;
         this.title = `Edit ${this.name}'s Info`;
         this.isLoading = false;
+        if (dog.imageUrl.length > 0) {
+          this.uploadedImage = dog.imageUrl;
+        } else {
+          this.uploadedImage = this.imageSrc;
+        }
       });
     } else {
       this.title = 'Add New Dog';
       this.isLoading = false;
+      this.uploadedImage = this.imageSrc;
     }
   }
 
@@ -125,6 +181,51 @@ export class AdditDogPage implements OnInit, OnDestroy {
       this.dob = formatDate(myDate, format, locale);
     }
   }
+
+  async onPickImageFromCamera(from: string) {
+    if (!Capacitor.isPluginAvailable('Camera')) {
+      return;
+    }
+    let source: any;
+    if (from === 'Camera') {
+      source = CameraSource.Camera;
+    } else {
+      source = CameraSource.Photos;
+    }
+
+    Camera.getPhoto({
+      quality: 70,
+      source,
+      correctOrientation: true,
+      resultType: CameraResultType.Base64,
+      allowEditing: false,
+    })
+      .then((image) => {
+        this.uploadedImage = image.base64String;
+        this.openImageCropper();
+      })
+      .catch((err) => {});
+  }
+
+  openImageCropper() {
+    this.modalCtrl
+      .create({
+        component: ImageCropperComponent,
+        componentProps: {
+          uploadedImage: 'data:image/png;base64, ' + this.uploadedImage,
+        },
+      })
+      .then((modalEl) => {
+        modalEl.onDidDismiss().then((modalData) => {
+          if (!modalData.data) {
+            return;
+          }
+          this.uploadedImage = modalData.data['imageUrl'];
+        });
+        modalEl.present();
+      });
+  }
+
   save() {
     this.loadingCtrl
       .create({
@@ -139,6 +240,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
             breed: this.breed,
             dateOfBirth: this.dob,
             gender: this.gender,
+            imageUrl: this.uploadedImage,
             id: this.dogId,
           };
           this.updateSub = this.dogService.updateDog(updateDogDTO).subscribe({
@@ -175,6 +277,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
             dateOfBirth: this.dob,
             gender: this.gender,
             userId: this.userId,
+            imageUrl: this.uploadedImage,
           };
           this.addSub = this.dogService.addDog(addDogDTO).subscribe({
             next: async (res) => {

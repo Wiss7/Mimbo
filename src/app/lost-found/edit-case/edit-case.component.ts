@@ -186,9 +186,9 @@ export class EditCaseComponent implements OnInit, OnDestroy {
       return -1;
     }
     const authData = JSON.parse(value);
-    if (authData.tokenExpirationDate <= new Date()) {
-      return -1;
-    }
+    // if (authData.tokenExpirationDate <= new Date()) {
+    //   return -1;
+    // }
     return authData.id;
   }
   addImage() {

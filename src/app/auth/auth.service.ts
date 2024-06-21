@@ -115,9 +115,9 @@ export class AuthService {
           return null;
         }
         const user = JSON.parse(storedData.value) as User;
-        if (user.tokenExpirationDate <= new Date()) {
-          return null;
-        }
+        // if (user.tokenExpirationDate <= new Date()) {
+        //   return null;
+        // }
         return user;
       }),
       tap((user) => {

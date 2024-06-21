@@ -35,7 +35,14 @@ export class DogService {
         const dogs = [];
         res.forEach((dog) => {
           dogs.push(
-            new Dog(dog.id, dog.name, dog.breed, dog.gender, dog.dateOfBirth)
+            new Dog(
+              dog.id,
+              dog.name,
+              dog.breed,
+              dog.gender,
+              dog.dateOfBirth,
+              dog.imageUrl
+            )
           );
         });
         return dogs;
@@ -51,7 +58,14 @@ export class DogService {
         const dogs = [];
         res.forEach((dog) => {
           dogs.push(
-            new Dog(dog.id, dog.name, dog.breed, dog.gender, dog.dateOfBirth)
+            new Dog(
+              dog.id,
+              dog.name,
+              dog.breed,
+              dog.gender,
+              dog.dateOfBirth,
+              dog.imageUrl
+            )
           );
         });
         return dogs;

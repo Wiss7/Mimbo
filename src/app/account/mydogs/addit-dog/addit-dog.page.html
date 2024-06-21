@@ -16,6 +16,14 @@
       <ion-grid>
         <ion-row>
           <ion-col sizeSm="8" offsetSm="2">
+            <ion-avatar class="avatar" (click)="setOpen(true)">
+              <img [src]="uploadedImage" width="120px" />
+              <ion-icon name="add-circle" color="darkmimbo"></ion-icon>
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2">
             <ion-list>
               <ion-item color="lightmimbo">
                 <ion-label position="floating">Dog Name</ion-label>
@@ -175,4 +183,17 @@
       </ng-template>
     </ion-modal>
   </div>
+
+  <ion-action-sheet
+    [isOpen]="isActionSheetOpen"
+    [buttons]="actionSheetButtons"
+    (didDismiss)="setOpen(false)"
+  ></ion-action-sheet>
 </ion-content>
+<ion-backdrop *ngIf="showImage" (ionBackdropTap)="closeImage()"> </ion-backdrop>
+<img
+  [src]="uploadedImage"
+  class="fullscreen-image"
+  *ngIf="showImage"
+  (click)="closeImage()"
+/>

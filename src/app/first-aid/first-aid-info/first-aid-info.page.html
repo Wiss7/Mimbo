@@ -374,6 +374,56 @@
         </p>
       </ion-text>
     </div>
+    <div *ngIf="type === 'Burns'">
+      <ion-text>
+        <b>Step 1: Assess the Situation</b>
+        <p>
+          Before approaching your dog, ensure the area is safe for both you and
+          your pet. If the burn is caused by a chemical, ensure you're wearing
+          gloves to avoid contact with the substance.
+        </p>
+        <b>Step 2: Cool the Burn</b>
+        <p>
+          Use cool, running water to gently cool the burn for about 10-15
+          minutes. Avoid using ice-cold water or ice directly on the burn, as
+          this can worsen tissue damage. If possible, hold the affected area
+          under a gentle stream of water or use a clean cloth soaked in cool
+          water to cool the burn.
+        </p>
+        <b>Step 3: Remove Constrictive Items</b>
+        <p>
+          If your dog has a burn caused by a hot object or liquid, carefully
+          remove any constrictive items like collars or clothing near the burn
+          site. This prevents further damage if there's swelling.
+        </p>
+        <b>Step 4: Protect the Burn</b>
+        <p>
+          Once the burn is cooled, cover it with a clean, non-stick dressing.
+          Avoid using cotton balls or fibers that can stick to the wound and
+          cause further irritation. Secure the dressing loosely to prevent
+          constriction.
+        </p>
+        <b>Step 5: Seek Veterinary Care</b>
+        <p>
+          Even if the burn seems minor, it's important to seek veterinary care
+          as soon as possible. Your vet can assess the severity of the burn,
+          provide appropriate pain relief, and recommend further treatment.
+        </p>
+        <b>Step 6: Monitor for Signs of Infection</b>
+        <p>
+          Keep an eye on the burn for any signs of infection, such as increased
+          redness, swelling, discharge, or odor. If you notice any of these
+          signs, contact your vet promptly.
+        </p>
+        <b>Step 7: Prevent Further Injury</b>
+        <p>
+          Prevent your dog from licking or chewing the burn area, as this can
+          lead to infection or further damage. You may need to use an
+          Elizabethan collar or other protective measures to keep your dog from
+          irritating the wound.
+        </p>
+      </ion-text>
+    </div>
     <div *ngIf="type === 'Fractures & Broken Bones'">
       <ion-text>
         <b>Step 1: Minimize Movement</b>
@@ -778,7 +828,7 @@
           Evaluate the water's depth and current before attempting a rescue. If
           the water conditions are hazardous or the current is strong, do not
           enter the water. Instead, try to reach the dog with a long object
-          (such as a stick or rope) from the shoreline or a safe distance.p>
+          (such as a stick or rope) from the shoreline or a safe distance.
         </p>
         <b>Step 3: Reach or Throw, Don't Go </b>
         <p>
@@ -799,7 +849,7 @@
           not have a pulse, you may need to perform CPR (Cardiopulmonary
           Resuscitation) if you are trained to do so. If you're unfamiliar with
           CPR, continue to the next step and transport the dog to a veterinary
-          clinic immediately./p>
+          clinic immediately.
         </p>
         <b>Step 6: Transport to the Veterinarian </b>
         <p>
@@ -823,7 +873,68 @@
         complications.</ion-text
       >
     </div>
-
+    <div *ngIf="type === 'Hypothermia'">
+      <ion-text>
+        <b>Step 1: Move to a Warm Area </b>
+        <p>
+          If your dog is showing signs of hypothermia, move them to a warm, dry
+          area immediately. Indoors is best, but if that's not possible, shield
+          them from the wind and cold as much as you can.
+        </p>
+        <b>Step 2: Wrap in Warm Blankets</b>
+        <p>
+          Cover your dog with warm blankets or towels to help raise their body
+          temperature. You can also use your own body heat by snuggling with
+          them if necessary.
+        </p>
+        <b>Step 3: Avoid Heating Devices </b>
+        <p>
+          Do not use heating pads, hot water bottles, or hair dryers to warm
+          your dog. These can cause burns, especially if your dog's circulation
+          is compromised.
+        </p>
+        <b>Step 4: Gradually Warm </b>
+        <p>
+          Warm your dog slowly and gently. Avoid sudden temperature changes, as
+          this can cause shock. If they're wet, gently towel dry them first.
+        </p>
+        <b>Step 5: Monitor Temperature </b>
+        <p>
+          Check your dog's temperature regularly using a rectal thermometer.
+          Normal body temperature for dogs is around 38 to 39.2°C (100.5 to
+          102.5°F). Seek veterinary attention if their temperature drops below
+          36.7°C (98°F) or if they show signs of severe hypothermia.
+        </p>
+        <b>Step 6: Provide Warm Fluids </b>
+        <p>
+          Offer your dog warm (not hot) fluids like chicken or beef broth to
+          help warm them from the inside out. Make sure they're able to swallow
+          safely and don't force them to drink.
+        </p>
+        <b>Step 7: Massage Limbs </b>
+        <p>
+          Gently massage your dog's limbs to improve circulation and help warm
+          them up. Be careful not to apply too much pressure, especially if
+          they're showing signs of frostbite.
+        </p>
+        <b>Step 8: Handle with Care </b>
+        <p>
+          Be gentle when handling your dog, especially if they're unconscious or
+          showing signs of shock. Keep them calm and comfortable to minimize
+          stress.
+        </p>
+        <b>Step 9: Seek Veterinary Care </b>
+        <p>
+          If your dog's condition doesn't improve within 30 minutes, or if they
+          show signs of moderate to severe hypothermia (such as lethargy,
+          shallow breathing, or loss of consciousness), seek immediate
+          veterinary attention.If your dog's condition doesn't improve within 30
+          minutes, or if they show signs of moderate to severe hypothermia (such
+          as lethargy, shallow breathing, or loss of consciousness), seek
+          immediate veterinary attention.
+        </p></ion-text
+      >
+    </div>
     <div *ngIf="type === 'Eye Injuries'">
       <ion-text>
         <b>Step 1: Approach Calmly </b>
