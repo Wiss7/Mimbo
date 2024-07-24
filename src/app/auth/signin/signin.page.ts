@@ -5,6 +5,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { LoginDTO } from '../auth.dto';
 import { AuthService } from '../auth.service';
+import { MessagingService } from 'src/app/shared/services/messaging.service';
 
 @Component({
   selector: 'app-signin',
@@ -19,7 +20,8 @@ export class SigninPage implements OnInit, OnDestroy {
     private authService: AuthService,
     private alertCtrl: AlertController,
     private route: ActivatedRoute,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private messagingService: MessagingService
   ) {}
 
   ngOnInit() {}
@@ -47,6 +49,7 @@ export class SigninPage implements OnInit, OnDestroy {
           next: (resp) => {
             if (resp.isLoginSuccessful) {
               loadingEl.dismiss();
+              this.messagingService.requestNotificationPermission();
               const params = this.route.snapshot.queryParams;
               if (params.redirectURL) {
                 this.redirectURL = params.redirectURL;

@@ -10,6 +10,11 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { AuthinterceptorInterceptor } from './interceptors/authinterceptor.interceptor';
 import { ErrorinterceptorInterceptor } from './interceptors/errorinterceptor.interceptor';
+
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -17,6 +22,8 @@ import { ErrorinterceptorInterceptor } from './interceptors/errorinterceptor.int
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireMessagingModule,
   ],
   providers: [
     NativeAudio,

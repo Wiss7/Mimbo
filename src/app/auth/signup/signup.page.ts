@@ -11,6 +11,7 @@ import { RegistrationDto } from '../auth.dto';
 import { AuthService } from '../auth.service';
 import { countrycodes } from '../../shared/phone-codes/countrycodes';
 import { PhoneCodesComponent } from 'src/app/shared/phone-codes/phone-codes.component';
+import { MessagingService } from 'src/app/shared/services/messaging.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -31,7 +32,8 @@ export class SignupPage implements OnInit, OnDestroy {
     private alertCtrl: AlertController,
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private messagingService: MessagingService
   ) {
     this.countrycodes = countrycodes;
   }
@@ -72,6 +74,7 @@ export class SignupPage implements OnInit, OnDestroy {
         this.registerSub = this.authService.register(registerDTO).subscribe({
           next: (resp) => {
             if (resp.isRegistrationSuccessful) {
+              this.messagingService.requestNotificationPermission();
               loadingEl.dismiss();
               const params = this.route.snapshot.queryParams;
               if (params.redirectURL) {

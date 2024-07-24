@@ -17,6 +17,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AddReminderDTO, UpdateReminderDTO } from '../reminder.dto';
 import { ReminderService } from '../reminder.service';
 import { Reminder } from '../reminder.model';
+import { MessagingService } from 'src/app/shared/services/messaging.service';
 @Component({
   selector: 'app-addit-reminders',
   templateUrl: './addit-reminders.page.html',
@@ -57,7 +58,8 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     private reminderService: ReminderService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private messagingService: MessagingService
   ) {}
 
   ngOnInit() {
@@ -193,6 +195,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     this.router.navigateByUrl('/account/mydogs/addit-dog?fromReminder=1');
   }
   save(f: NgForm) {
+    this.messagingService.requestNotificationPermission();
     if (this.eventId > 0) {
       this.updateReminder();
     } else {
