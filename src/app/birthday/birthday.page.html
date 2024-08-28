@@ -1,13 +1,89 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>birthday</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Happy Birthday!!</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [routerLink]="['/account']"
+        ><ion-icon name="settings-outline" slot="icon-only"></ion-icon
+      ></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">birthday</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="ion-padding ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div class="content" *ngIf="!isLoading">
+    <div class="container">
+      <img class="img" [src]="dogImage" *ngIf="dogImage.length>0" />
+      <h1>Happy Birthday, {{name}}!</h1>
+      <h2>
+        Sending birthday barks and wags your way! May {{name}}’s special day be
+        filled with everything they love!
+      </h2>
+    </div>
+
+    <div class="stars">
+      <div
+        class="star"
+        style="
+          top: 10%;
+          left: 15%;
+          width: 20px;
+          height: 20px;
+          animation-duration: 4s;
+        "
+      ></div>
+      <div
+        class="star"
+        style="
+          top: 30%;
+          left: 50%;
+          width: 30px;
+          height: 30px;
+          animation-duration: 6s;
+        "
+      ></div>
+      <div
+        class="star"
+        style="
+          top: 50%;
+          left: 85%;
+          width: 25px;
+          height: 25px;
+          animation-duration: 5s;
+        "
+      ></div>
+      <div
+        class="star"
+        style="
+          top: 70%;
+          left: 25%;
+          width: 35px;
+          height: 35px;
+          animation-duration: 7s;
+        "
+      ></div>
+      <div
+        class="star"
+        style="
+          top: 90%;
+          left: 60%;
+          width: 30px;
+          height: 30px;
+          animation-duration: 6s;
+        "
+      ></div>
+    </div>
+
+    <div class="floating-bones">
+      <div class="bone">🦴</div>
+      <div class="bone">🦴</div>
+      <div class="bone">🦴</div>
+      <div class="bone">🦴</div>
+    </div>
+  </div>
 </ion-content>

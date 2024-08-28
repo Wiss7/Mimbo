@@ -103,7 +103,7 @@ const routes: Routes = [
       import('./doggogram/doggogram.module').then((m) => m.DoggogramPageModule),
   },
   {
-    path: 'birthday',
+    path: 'birthday/:id',
     loadChildren: () =>
       import('./birthday/birthday.module').then((m) => m.BirthdayPageModule),
   },
