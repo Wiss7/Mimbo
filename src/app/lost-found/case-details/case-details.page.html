@@ -36,6 +36,22 @@
           </div>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col>
+          <a [href]="'tel:'+ selectedCase.phoneCode + selectedCase.phoneNumber"
+            ><ion-button shape="round"
+              ><ion-icon name="call-outline" slot="start"></ion-icon
+              >Call</ion-button
+            ></a
+          >
+          <a [href]="'mailto:' + selectedCase.email"
+            ><ion-button shape="round"
+              ><ion-icon name="mail-outline" slot="start"></ion-icon
+              >Email</ion-button
+            ></a
+          >
+        </ion-col>
+      </ion-row>
       <ion-row
         ><ion-col>
           <ion-text class="subtitle"> <b>Case Information</b> </ion-text>

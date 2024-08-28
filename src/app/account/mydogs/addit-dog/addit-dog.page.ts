@@ -16,6 +16,7 @@ import { AddDogDTO, UpdateDogDTO } from '../mydogs.dto';
 import { Capacitor } from '@capacitor/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ImageCropperComponent } from 'src/app/shared/image-cropper/image-cropper.component';
+
 @Component({
   selector: 'app-addit-dog',
   templateUrl: './addit-dog.page.html',
@@ -78,6 +79,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
   gender: string;
   breed: string;
   dateToday: string;
+  isCastrated: boolean = false;
   genderPopupVal = '';
   dogId = 0;
   userId: number;
@@ -115,6 +117,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
         const locale = 'en-US';
         this.dob = formatDate(dog.dateOfBirth, format, locale);
         this.dobPopupVal = dog.dateOfBirth;
+        this.isCastrated = dog.isCastrated;
         this.title = `Edit ${this.name}'s Info`;
         this.isLoading = false;
         if (dog.imageUrl.length > 0) {
@@ -241,6 +244,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
             dateOfBirth: this.dob,
             gender: this.gender,
             imageUrl: this.uploadedImage,
+            isCastrated: this.isCastrated,
             id: this.dogId,
           };
           this.updateSub = this.dogService.updateDog(updateDogDTO).subscribe({
@@ -278,6 +282,7 @@ export class AdditDogPage implements OnInit, OnDestroy {
             gender: this.gender,
             userId: this.userId,
             imageUrl: this.uploadedImage,
+            isCastrated: this.isCastrated,
           };
           this.addSub = this.dogService.addDog(addDogDTO).subscribe({
             next: async (res) => {
@@ -315,6 +320,64 @@ export class AdditDogPage implements OnInit, OnDestroy {
             error: () => loadingEl.dismiss(),
           });
         }
+      });
+  }
+
+  deleteDog() {
+    this.alertCtrl
+      .create({
+        header: 'Delete Dog?',
+        message:
+          'Are you sure you wish to delete this dog? This action cannot be undone!',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.alertCtrl.dismiss();
+            },
+          },
+          {
+            text: 'Delete',
+            cssClass: 'confirm-delete',
+            handler: () => {
+              this.performDelete();
+              this.alertCtrl.dismiss();
+            },
+          },
+        ],
+      })
+      .then((alertEl) => alertEl.present());
+  }
+
+  performDelete() {
+    this.loadingCtrl
+      .create({
+        keyboardClose: true,
+        message: 'Please wait...',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.dogService.deleteDog(this.dogId).subscribe({
+          next: async (res) => {
+            const toast = await this.toastController.create({
+              color: 'primary',
+              duration: 2000,
+              message: 'Dog deleted successfully.',
+            });
+            loadingEl.dismiss();
+            await toast.present();
+            this.router.navigate(['account', 'mydogs']);
+          },
+          error: async () => {
+            loadingEl.dismiss();
+            const toast = await this.toastController.create({
+              color: 'danger',
+              duration: 2000,
+              message: 'Could not perform action. Please try again later.',
+            });
+            await toast.present();
+          },
+        });
       });
   }
 }

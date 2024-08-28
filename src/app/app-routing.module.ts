@@ -4,6 +4,11 @@ import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
@@ -96,6 +101,16 @@ const routes: Routes = [
     path: 'doggogram',
     loadChildren: () =>
       import('./doggogram/doggogram.module').then((m) => m.DoggogramPageModule),
+  },
+  {
+    path: 'birthday',
+    loadChildren: () =>
+      import('./birthday/birthday.module').then((m) => m.BirthdayPageModule),
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
   },
 ];
 

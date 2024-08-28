@@ -41,7 +41,8 @@ export class DogService {
               dog.breed,
               dog.gender,
               dog.dateOfBirth,
-              dog.imageUrl
+              dog.imageUrl,
+              dog.isCastrated
             )
           );
         });
@@ -64,7 +65,8 @@ export class DogService {
               dog.breed,
               dog.gender,
               dog.dateOfBirth,
-              dog.imageUrl
+              dog.imageUrl,
+              dog.isCastrated
             )
           );
         });

@@ -5,6 +5,7 @@ export interface AddDogDTO {
   gender: string;
   userId: number;
   imageUrl: string;
+  isCastrated: boolean;
 }
 
 export interface AddDogResponseDTO {
@@ -15,6 +16,7 @@ export interface AddDogResponseDTO {
   dateOfBirth: Date;
   gender: string;
   imageUrl: string;
+  isCastrated: boolean;
   isDogAdded: boolean;
 }
 
@@ -25,6 +27,7 @@ export interface UpdateDogDTO {
   dateOfBirth: string;
   gender: string;
   imageUrl: string;
+  isCastrated: boolean;
 }
 
 export interface GetDogResponseDTO {
@@ -34,4 +37,5 @@ export interface GetDogResponseDTO {
   dateOfBirth: Date;
   gender: string;
   imageUrl: string;
+  isCastrated: boolean;
 }

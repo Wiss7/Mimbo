@@ -34,10 +34,11 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   setCompleteSub: Subscription;
   updateReminderSub: Subscription;
   getReminderSub: Subscription;
-  title = 'Add New Event';
+  title = 'Add New Reminder';
   eventId = 0;
   typeId = 0;
   userId = 0;
+  isComplete = false;
   isLoading = true;
   reminderType = '';
   reminderTypes = [];
@@ -47,6 +48,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
   dateToday: string;
   dogName = '';
   dogId = 0;
+  dogImgUrl = '';
   reminderMins = '0';
   notes = '';
   repeatEvery = '-1';
@@ -102,6 +104,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                 .subscribe((reminder: Reminder) => {
                   this.dogName = reminder.dogName;
                   this.dogId = reminder.dogId;
+                  this.dogImgUrl = reminder.typeImageName;
                   this.notes = reminder.notes;
                   this.typeId = reminder.typeId;
                   this.reminderType = this.reminderTypes.find(
@@ -110,6 +113,7 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
                   this.datePopupVal = reminder.reminderDateTime;
                   this.reminderMins = reminder.remindMeBefore.toString();
                   this.repeatEvery = reminder.repeatEvery.toString();
+                  this.isComplete = reminder.isComplete;
                   const format = 'dd-MMM-yyyy h:mm a';
                   const locale = 'en-US';
                   const formattedDate = formatDate(
@@ -187,6 +191,9 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     if (ev.detail.role === 'confirm') {
       this.dogId = +ev.detail.data;
       this.dogName = this.loadedDogs.find((r) => r.id === this.dogId).name;
+      this.dogImgUrl = this.loadedDogs.find(
+        (r) => r.id === this.dogId
+      ).imageUrl;
     }
   }
 
@@ -322,6 +329,89 @@ export class AdditRemindersPage implements OnInit, OnDestroy {
     // });
   }
 
+  deleteReminder() {
+    this.alertCtrl
+      .create({
+        header: 'Delete Reminder?',
+        message:
+          'Are you sure you wish to delete this reminder? This action cannot be undone!',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.alertCtrl.dismiss();
+            },
+          },
+          {
+            text: 'Delete',
+            cssClass: 'confirm-delete',
+            handler: () => {
+              this.performDelete();
+              this.alertCtrl.dismiss();
+            },
+          },
+        ],
+      })
+      .then((alertEl) => alertEl.present());
+  }
+
+  performDelete() {
+    this.loadingCtrl
+      .create({
+        keyboardClose: true,
+        message: 'Please wait...',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.reminderService.deleteReminder(this.eventId).subscribe({
+          next: async (res) => {
+            const toast = await this.toastController.create({
+              color: 'primary',
+              duration: 2000,
+              message: 'Reminder deleted successfully.',
+            });
+            loadingEl.dismiss();
+            await toast.present();
+            this.router.navigate(['reminders']);
+          },
+          error: async () => {
+            loadingEl.dismiss();
+            const toast = await this.toastController.create({
+              color: 'danger',
+              duration: 2000,
+              message: 'Could not perform action. Please try again later.',
+            });
+            await toast.present();
+          },
+        });
+      });
+  }
+
+  confirmComplete() {
+    this.alertCtrl
+      .create({
+        header: 'Mark As Complete?',
+        message:
+          'you will no longer receive future notifications for this reminder!',
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: () => {
+              this.alertCtrl.dismiss();
+            },
+          },
+          {
+            text: 'Mark As Complete',
+            cssClass: 'confirm-complete',
+            handler: () => {
+              this.setComplete();
+              this.alertCtrl.dismiss();
+            },
+          },
+        ],
+      })
+      .then((alertEl) => alertEl.present());
+  }
   setComplete() {
     this.loadingCtrl
       .create({

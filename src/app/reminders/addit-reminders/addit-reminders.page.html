@@ -17,6 +17,13 @@
         <ion-row>
           <ion-col sizeSm="8" offsetSm="2">
             <ion-list>
+              <ion-item
+                color="lightmimbo"
+                lines="none"
+                *ngIf="dogImgUrl.length>0"
+              >
+                <ion-img class="dog-profile" [src]="dogImgUrl"></ion-img>
+              </ion-item>
               <ion-item color="lightmimbo">
                 <ion-label position="floating">Type</ion-label>
                 <ion-input
@@ -55,7 +62,6 @@
                   [(ngModel)]="reminderMins"
                 >
                   <ion-select-option value="0">As scheduled</ion-select-option>
-                  <ion-select-option value="-1">Never</ion-select-option>
                   <ion-select-option value="15"
                     >15 minutes before</ion-select-option
                   >
@@ -108,16 +114,29 @@
             >
           </ion-col>
         </ion-row>
-        <ion-row *ngIf="eventId>0">
+        <ion-row *ngIf="eventId>0 && isComplete == false">
           <ion-col sizeSm="8" offsetSm="2">
             <ion-button
               color="primary"
               expand="block"
               type="button"
               fill="outline"
-              (click)="setComplete()"
+              (click)="confirmComplete()"
               ><ion-icon name="checkmark-done-outline" slot="start"></ion-icon
               >Mark As Completed</ion-button
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="eventId>0">
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-button
+              color="primary"
+              expand="block"
+              type="button"
+              color="danger"
+              (click)="deleteReminder()"
+              ><ion-icon name="trash-outline" slot="start"></ion-icon>Delete
+              Reminder</ion-button
             >
           </ion-col>
         </ion-row>
@@ -219,7 +238,9 @@
               color="lightmimbo"
               *ngFor="let dog of loadedDogs"
               (click)="setDog(dog.id)"
-              >{{dog.name}}</ion-item
+              ><ion-avatar class="avatar">
+                <img [src]="dog.imageUrl" /> </ion-avatar
+              ><ion-text class="dog-name">{{dog.name}}</ion-text></ion-item
             >
 
             <ion-item (click)="addNewDog()" color="lightmimbo"

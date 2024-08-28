@@ -34,4 +34,9 @@ export const reminderTypes = [
     name: 'Other',
     imageName: 'Other.png',
   },
+  {
+    id: '8',
+    name: 'Birthday',
+    imageName: 'Other.png',
+  },
 ];

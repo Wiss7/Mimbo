@@ -49,3 +49,20 @@
 ion-list {
   background-color: var(--ion-color-lightmimbo);
 }
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--ion-color-darkmimbo);
+}
+
+.dog-name {
+  margin-left: 24px;
+  font-size: 24px;
+}
+
+.dog-profile {
+  margin: auto;
+  margin-bottom: 24px;
+  // max height and width for website
+}

@@ -1,12 +1,10 @@
 /* eslint-disable no-undef */
-debugger;
-/* eslint-disable no-undef */
 // Give the service worker access to Firebase Messaging.
 importScripts(
-  "https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"
+  "https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"
 );
 importScripts(
-  "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
+  "https://www.gstatic.com/firebasejs/10.12.3/firebase-messaging-compat.js"
 );
 
 const firebaseApp = firebase.initializeApp({
@@ -20,27 +18,42 @@ const firebaseApp = firebase.initializeApp({
 });
 const messaging = firebase.messaging();
 
-// onMessage(messaging, (payload) => {
-//   console.log("Message received. ", payload);
-//   const notificationTitle = payload.notification.title;
-//   const notificationOptions = {
-//     body: payload.notification.body,
-//     icon: "/firebase-logo.png",
-//   };
+messaging.onMessage((payload) => {
+  console.log("Message received. ", payload);
+  const notificationTitle = payload.data.title;
+  const notificationOptions = {
+    body: payload.data.body,
+    icon: "/assets/icon/favicon.png",
+    data: {
+      url: payload.data.url,
+    },
+  };
 
-//   self.registration.showNotification(notificationTitle, notificationOptions);
-// });
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
 
 messaging.onBackgroundMessage((payload) => {
   console.log(
     "[firebase-messaging-sw.js] Received background message ",
     payload
   );
-  const notificationTitle = payload.notification.title;
+  const notificationTitle = payload.data.title;
   const notificationOptions = {
-    body: payload.notification.body,
-    icon: "/firebase-logo.png",
+    body: payload.data.body,
+    icon: "/assets/icon/favicon.png",
+    data: {
+      url: payload.data.url,
+    },
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  // Handle notification click action
+  const url = event.notification.data.url;
+  if (url) {
+    clients.openWindow(url);
+  }
 });

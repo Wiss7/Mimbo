@@ -77,6 +77,15 @@
                   #dobCtrl="ngModel"
                 ></ion-input>
               </ion-item>
+              <ion-item color="lightmimbo">
+                <ion-label position="stacked">Spayed/Neutered</ion-label>
+                <ion-checkbox
+                  name="castrated"
+                  labelPlacement="stacked"
+                  [(ngModel)]="isCastrated"
+                  #castratedCtrl="ngModel"
+                ></ion-checkbox
+              ></ion-item>
             </ion-list>
           </ion-col>
         </ion-row>
@@ -89,6 +98,19 @@
               (click)="save()"
               [disabled]="!f.valid"
               ><ion-icon name="save" slot="start"></ion-icon>Save</ion-button
+            >
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="dogId>0">
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-button
+              color="primary"
+              expand="block"
+              type="button"
+              color="danger"
+              (click)="deleteDog()"
+              ><ion-icon name="trash-outline" slot="start"></ion-icon>Delete
+              Dog</ion-button
             >
           </ion-col>
         </ion-row>
@@ -167,10 +189,6 @@
                 <ion-item color="lightmimbo">
                   <ion-label>Male</ion-label>
                   <ion-radio slot="end" value="Male"></ion-radio>
-                </ion-item>
-                <ion-item color="lightmimbo">
-                  <ion-label>Other</ion-label>
-                  <ion-radio slot="end" value="Other"></ion-radio>
                 </ion-item>
               </ion-radio-group>
             </ion-list>

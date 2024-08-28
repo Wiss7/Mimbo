@@ -5,6 +5,7 @@ export class Dog {
     public breed: string,
     public gender: string,
     public dateOfBirth: Date,
-    public imageUrl: string
+    public imageUrl: string,
+    public isCastrated: boolean
   ) {}
 }

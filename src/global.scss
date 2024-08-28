@@ -29,6 +29,9 @@ button.alert-button.ion-focusable.ion-activatable.confirm-delete {
   color: var(--ion-color-danger);
 }
 
+button.alert-button.ion-focusable.ion-activatable.confirm-complete {
+  color: var(--ion-color-primary);
+}
 .ion-color-darkmimbo {
   --ion-color-base: var(--ion-color-darkmimbo) !important;
   --ion-color-base-rgb: var(--ion-color-darkmimbo-rgb) !important;

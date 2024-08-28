@@ -72,6 +72,7 @@ export class ReminderService {
           const typeImageName = this.reminderTypes.find(
             (r) => r.id === reminder.typeId.toString()
           ).imageName;
+
           reminders.push(
             new Reminder(
               reminder.id,
