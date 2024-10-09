@@ -20,8 +20,9 @@ import { AuthPopupComponent } from '../auth-popup/auth-popup.component';
 import { Preferences } from '@capacitor/preferences';
 import { CaseService } from 'src/app/lost-found/case.service';
 import { EditCaseComponent } from 'src/app/lost-found/edit-case/edit-case.component';
-import { App } from '@capacitor/app';
 import { Swiper } from 'swiper/types';
+import { environment } from 'src/environments/environment';
+import { Share } from '@capacitor/share';
 @Component({
   selector: 'app-case-card',
   templateUrl: './case-card.component.html',
@@ -35,6 +36,12 @@ export class CaseCardComponent implements OnInit {
   hideDelete = true;
   caseType = '';
   userId = 0;
+  toggleValue = false;
+
+  onToggleChanged(event: any) {
+    this.toggleValue = event.detail.checked;
+    // Additional logic
+  }
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
@@ -269,8 +276,55 @@ export class CaseCardComponent implements OnInit {
       });
   }
 
+  toggleClosed(caseId: number) {
+    this.loadingCtrl
+      .create({
+        keyboardClose: true,
+        message: 'Please wait...',
+      })
+      .then((loadingEl) => {
+        loadingEl.present();
+        this.caseService.toggleClosed(caseId).subscribe({
+          next: async (res) => {
+            if (res) {
+              const index = this.cases.findIndex((p) => p.id === caseId);
+              this.cases[index].isClosed = !this.cases[index].isClosed;
+              loadingEl.dismiss();
+              const toast = await this.toastController.create({
+                color: 'primary',
+                duration: 2000,
+                message: 'Case updated successfully.',
+              });
+              await toast.present();
+            } else {
+              loadingEl.dismiss();
+              const toast = await this.toastController.create({
+                color: 'danger',
+                duration: 2000,
+                message: 'Could not perform action. Please try again later.',
+              });
+              await toast.present();
+            }
+          },
+          error: async () => {
+            loadingEl.dismiss();
+            const toast = await this.toastController.create({
+              color: 'danger',
+              duration: 2000,
+              message: 'Could not perform action. Please try again later.',
+            });
+            await toast.present();
+          },
+        });
+      });
+  }
+
   async shareCase(id: number) {
-    const { url } = await App.getLaunchUrl();
-    console.log(url);
+    const url = environment.appUrl + this.router.url + '/' + id;
+    await Share.share({
+      title: 'Help Needed',
+      text: 'Can you help with this case?',
+      url: url,
+    });
   }
 }

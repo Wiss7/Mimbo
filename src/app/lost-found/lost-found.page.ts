@@ -14,6 +14,8 @@ export class LostFoundPage implements OnInit, OnDestroy {
   isLoading = true;
   cases: Case[];
   HasMoreData = true;
+  filter = 'All';
+
   constructor(private caseService: CaseService) {}
   ngOnInit() {
     this.casesSub = this.caseService.cases.subscribe((cases) => {
@@ -55,5 +57,9 @@ export class LostFoundPage implements OnInit, OnDestroy {
         if (hasLastPost === undefined) event.target.complete();
         else this.HasMoreData = false;
       });
+  }
+
+  filterCases() {
+    console.log(this.filter);
   }
 }

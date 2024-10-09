@@ -35,9 +35,14 @@
   <ion-list *ngIf="!isLoading && loadedDogs.length>0">
     <ion-item-sliding *ngFor="let dog of loadedDogs">
       <ion-item detail [routerLink]="'addit-dog/' + dog.id" color="lightmimbo"
-        ><ion-avatar class="avatar"> <img [src]="dog.imageUrl" /> </ion-avatar>
-        <ion-text class="dog-name">{{dog.name}}</ion-text></ion-item
-      >
+        ><ion-avatar class="avatar">
+          <img [src]="dog.imageUrl" />
+        </ion-avatar>
+        <ion-text class="dog-name"
+          >{{dog.name}}<br />
+          <ion-text class="dog-breed">{{dog.breed}}</ion-text></ion-text
+        >
+      </ion-item>
       <ion-item-options>
         <ion-item-option color="danger" (click)="deleteDog(dog.id)"
           ><ion-icon name="trash-outline" slot="start"></ion-icon

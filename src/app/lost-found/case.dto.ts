@@ -40,6 +40,7 @@ export interface GetCaseResponseDTO {
   medical: string;
   size: string;
   gender: string;
+  isClosed: boolean;
 }
 
 export interface UpdateCaseDTO {

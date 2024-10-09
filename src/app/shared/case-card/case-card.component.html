@@ -6,21 +6,17 @@
   </swiper-container>
   <ion-text
     ><div class="footer">
-      <span class="username">@{{ casee.username }}</span>
+      <span class="username">&#64;{{ casee.username }}</span>
+      <span class="date">{{ formatDate(casee.createdDate) }}</span>
     </div></ion-text
   >
-  <ion-card-title class="type">{{ caseType }}</ion-card-title>
+  <ion-card-title class="solved" *ngIf="hideDelete && casee.isClosed">
+    Solved
+  </ion-card-title>
+  <ion-card-title class="type">{{ caseType }} </ion-card-title>
   <ion-card-subtitle class="location">{{ casee.location }}</ion-card-subtitle>
   <ion-card-content class="info">{{ casee.details }}</ion-card-content>
   <div class="interact">
-    <ion-button fill="clear" color="darkmimbo" (click)="shareCase(casee.id)">
-      <ion-icon
-        name="share-social-outline"
-        class="share"
-        slot="icon-only"
-      ></ion-icon>
-    </ion-button>
-
     <ion-button
       fill="clear"
       color="darkmimbo"
@@ -29,7 +25,17 @@
       <ion-icon name="chatbubble-outline"></ion-icon>
       <ion-text>{{ casee.commentsCount }} </ion-text>
     </ion-button>
-    <ion-text class="date">{{ formatDate(casee.createdDate) }}</ion-text>
+
+    <ion-button
+      expand="full"
+      fill="clear"
+      color="primary"
+      (click)="shareCase(casee.id)"
+      size="small"
+      class="share"
+      ><ion-icon name="share-social-outline" slot="start"></ion-icon
+      ><ion-text>Share</ion-text></ion-button
+    >
   </div>
 
   <ion-button
@@ -37,9 +43,20 @@
     fill="clear"
     color="primary"
     (click)="viewDetails(casee.id)"
+    *ngIf="hideDelete"
+    size="small"
     ><ion-icon name="eye-outline" slot="start"></ion-icon>View Case
     Details</ion-button
   >
+  <div class="div-toggle">
+    <ion-toggle
+      [checked]="casee.isClosed"
+      labelPlacement="end"
+      *ngIf="!hideDelete"
+      (ionChange)="toggleClosed(casee.id)"
+      >Solved Case</ion-toggle
+    >
+  </div>
   <ion-button
     color="primary"
     class="ion-text-center"
@@ -47,9 +64,11 @@
     fill="clear"
     *ngIf="!hideDelete"
     (click)="editCase(casee.id)"
-    ><ion-icon name="pencil-outline" slot="start"></ion-icon>Edit
+    size="small"
+    ><ion-icon name="pencil-outline" slot="start"></ion-icon>View/Edit
     Case</ion-button
   >
+
   <ion-button
     (click)="deleteCase(casee.id)"
     color="danger"
@@ -57,6 +76,8 @@
     expand="full"
     fill="clear"
     *ngIf="!hideDelete"
+    size="small"
+    class="delete"
     ><ion-icon name="trash-outline" slot="start"></ion-icon>Delete
     Case</ion-button
   >

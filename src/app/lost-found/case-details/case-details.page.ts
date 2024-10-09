@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CaseService } from '../case.service';
 import { Case } from '../case.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Share } from '@capacitor/share';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-case-details',
   templateUrl: './case-details.page.html',
@@ -14,7 +16,8 @@ export class CaseDetailsPage implements OnInit {
   isLoading = true;
   constructor(
     private caseService: CaseService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -57,6 +60,15 @@ export class CaseDetailsPage implements OnInit {
         }
       }
       this.isLoading = false;
+    });
+  }
+
+  async shareCase() {
+    const url = environment.appUrl + this.router.url;
+    await Share.share({
+      title: 'Help Needed',
+      text: 'Can you help with this case?',
+      url: url,
     });
   }
 }

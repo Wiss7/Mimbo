@@ -67,7 +67,8 @@ export class CaseService {
               [...images],
               casee.commentsCount,
               casee.createdDate,
-              casee.isLastPost
+              casee.isLastPost,
+              casee.isClosed
             )
           );
         });
@@ -108,7 +109,8 @@ export class CaseService {
           [...images],
           casee.commentsCount,
           casee.createdDate,
-          casee.isLastPost
+          casee.isLastPost,
+          casee.isClosed
         );
         return selectedCase;
       })
@@ -150,7 +152,8 @@ export class CaseService {
               [...images],
               casee.commentsCount,
               casee.createdDate,
-              casee.isLastPost
+              casee.isLastPost,
+              casee.isClosed
             )
           );
         });
@@ -195,5 +198,10 @@ export class CaseService {
   deleteCase(caseId: number) {
     const url = environment.apiUrl + '/api/case/delete/' + caseId;
     return this.http.delete<Boolean>(url);
+  }
+
+  toggleClosed(caseId: number) {
+    const url = environment.apiUrl + '/api/case/toggleclosed/' + caseId;
+    return this.http.post<Boolean>(url, {});
   }
 }

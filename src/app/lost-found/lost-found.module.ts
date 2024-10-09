@@ -10,6 +10,7 @@ import { LostFoundPage } from './lost-found.page';
 import { SharedModule } from '../shared/shared.module';
 import { EditCaseComponent } from './edit-case/edit-case.component';
 import { FilterDeletedPipe } from './filterdeleted.pipe';
+import { CasesFilterPipe } from './cases-filter.pipe';
 
 @NgModule({
   imports: [
@@ -19,7 +20,12 @@ import { FilterDeletedPipe } from './filterdeleted.pipe';
     LostFoundPageRoutingModule,
     SharedModule,
   ],
-  declarations: [LostFoundPage, EditCaseComponent, FilterDeletedPipe],
+  declarations: [
+    LostFoundPage,
+    EditCaseComponent,
+    FilterDeletedPipe,
+    CasesFilterPipe,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LostFoundPageModule {}

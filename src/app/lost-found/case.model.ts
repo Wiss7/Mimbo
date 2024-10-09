@@ -20,7 +20,8 @@ export class Case {
     public images: CaseImage[],
     public commentsCount: number,
     public createdDate: Date,
-    public isLastPost: boolean
+    public isLastPost: boolean,
+    public isClosed: boolean
   ) {}
 }
 

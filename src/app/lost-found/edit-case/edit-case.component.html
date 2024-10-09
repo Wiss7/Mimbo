@@ -36,9 +36,14 @@
                 <ion-img
                   (click)="changeCountryCode()"
                   [src]="codeImage"
+                  name="codeImage"
                 ></ion-img>
                 <ion-icon name="caret-down-outline"></ion-icon>
-                <input type="hidden" [value]="selectedCode" />
+                <input
+                  type="hidden"
+                  [ngModel]="selectedCode"
+                  name="selectedCode"
+                />
               </div>
               <ion-input
                 class="phonenumber"
@@ -291,7 +296,7 @@
             <p>
               If you have any questions or concerns about these terms and
               conditions, please contact us at
-              <a href="mailto:mimboapp@gmail.com">mimboapp@gmail.com</a>.
+              <a href="mailto:mimboapp@gmail.com">mimboapp&#64;gmail.com</a>.
             </p>
           </ion-col>
         </ion-row>

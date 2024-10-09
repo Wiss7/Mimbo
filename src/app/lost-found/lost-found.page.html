@@ -29,6 +29,18 @@
     <ion-spinner color="primary"></ion-spinner>
   </div>
   <div *ngIf="!isLoading">
+    <ion-segment value="All" [(ngModel)]="filter" (ionChange)="filterCases()">
+      <ion-segment-button value="All">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="0">
+        <ion-label>OnGoing</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-label>Solved</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
     <div class="ion-padding ion-text-center" *ngIf="cases.length ===0">
       <ion-text color="darkmimbo"
         >There are no posts yet. You can start by adding your own.</ion-text
@@ -37,7 +49,7 @@
 
     <div *ngIf="cases.length >0">
       <app-case-card
-        *ngFor="let casee of cases"
+        *ngFor="let casee of cases| casesFilter:filter"
         [cases]="cases"
         [casee]="casee"
       ></app-case-card>

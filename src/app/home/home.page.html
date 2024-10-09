@@ -11,6 +11,18 @@
 <ion-content>
   <ion-grid class="no-padding background-color">
     <ion-row>
+      <ion-col>
+        <div class="ion-text-center">
+          <ion-button
+            (click)="requestNotificationPermission()"
+            class="ion-text-center"
+            *ngIf="showNotificationButton"
+            >Enable Notifications</ion-button
+          >
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col sizeLg="6" offsetLg="3">
         <ion-img
           src="../../../assets/images/HomeSlogan.png"
