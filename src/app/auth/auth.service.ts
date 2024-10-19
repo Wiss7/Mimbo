@@ -136,12 +136,28 @@ export class AuthService {
     Preferences.remove({ key: 'authData' });
   }
 
+  async isAdmin() {
+    const { value } = await Preferences.get({ key: 'authData' });
+    if (value == null) {
+      return false;
+    }
+    const authData = JSON.parse(value);
+    const tok = authData._token;
+    const jwtData = tok.split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    const role =
+      decodedJwtData[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ];
+    return role === 'Admin';
+  }
+
   updateProfile(data: UpdateProfileDTO) {
     const url = environment.apiUrl + '/api/auth/update';
     return this.token.pipe(
       take(1),
-      switchMap((res) => {
-        const token = res;
+      switchMap(() => {
         return this.http.post(url, data).pipe(
           tap((resp: UpdateProfileResponseDTO) => {
             const user = new User(

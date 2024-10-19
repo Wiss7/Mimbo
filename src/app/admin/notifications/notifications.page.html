@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="lightmimbo">
+  <ion-grid>
+    <form #notificationForm="ngForm" (ngSubmit)="onSubmit(notificationForm)">
+      <ion-row>
+        <ion-col sizeMd="8" offsetMd="2">
+          <ion-item color="lightmimbo">
+            <ion-label position="floating">Topic</ion-label>
+            <ion-input name="topic" ngModel required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeMd="8" offsetMd="2">
+          <ion-item color="lightmimbo">
+            <ion-label position="floating">URL</ion-label>
+            <ion-input name="url" ngModel></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeMd="8" offsetMd="2">
+          <ion-item color="lightmimbo">
+            <ion-label position="floating">Title</ion-label>
+            <ion-input name="title" ngModel required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeMd="8" offsetMd="2">
+          <ion-item color="lightmimbo">
+            <ion-label position="floating">Message</ion-label>
+            <ion-textarea
+              name="message"
+              ngModel
+              required
+              rows="10"
+              placeholder="Enter your message here..."
+            ></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col sizeMd="8" offsetMd="2" class="ion-text-center">
+          <ion-button type="submit" [disabled]="!notificationForm.valid"
+            >Send Notification</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

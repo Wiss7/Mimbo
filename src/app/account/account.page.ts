@@ -16,6 +16,7 @@ export class AccountPage implements OnInit, OnDestroy {
   deleteSub: Subscription;
   userSub: Subscription;
   isDeleting = true;
+  isAdmin = false;
   userId: number;
   constructor(
     private authService: AuthService,
@@ -24,10 +25,11 @@ export class AccountPage implements OnInit, OnDestroy {
     private loadingCtrl: LoadingController
   ) {}
 
-  ngOnInit() {
-    this.userSub = this.authService.user.subscribe((user) => {
+  async ngOnInit() {
+    this.userSub = this.authService.user.subscribe(async (user) => {
       if (user) {
         this.userId = user.id;
+        this.isAdmin = await this.authService.isAdmin();
       }
     });
   }
