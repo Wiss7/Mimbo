@@ -1,13 +1,174 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>facts</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button size="large" id="newfact-modal"
+        ><ion-icon
+          slot="icon-only"
+          name="add-outline"
+          style="font-size: 38px"
+        ></ion-icon
+      ></ion-button>
+    </ion-buttons>
+    <ion-title>Daily Facts</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">facts</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content color="lightmimbo">
+  <div class="ion-text-center ion-padding" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+  <div
+    class="ion-text-center ion-padding"
+    *ngIf="!isLoading && loadedFacts.length===0"
+  >
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img
+            src="../../../assets/images/MimboLogo.png"
+            class="logo"
+          ></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-text color="darkmimbo"
+      >You have not added any facts yet. <br />
+    </ion-text>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeSm="8" offsetSm="2">
+        <ion-item color="mimbolight">
+          <ion-select
+            label="Filter Facts"
+            placeholder="All"
+            [(ngModel)]="filter"
+          >
+            <ion-select-option [value]="null">All</ion-select-option>
+            <ion-select-option [value]="true">Sent</ion-select-option>
+            <ion-select-option [value]="false">Not Sent</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list *ngIf="!isLoading && loadedFacts.length>0">
+    <div *ngFor="let fact of loadedFacts">
+      <ion-item-sliding *ngIf="fact.isSent == filter || filter==null">
+        <ion-item detail color="lightmimbo" (click)="ViewFact(fact.id)">
+          <ion-text class="ion-padding-top ion-padding-bottom"
+            >{{fact.fact}}<br />
+          </ion-text>
+        </ion-item>
+        <ion-item-options>
+          <ion-item-option color="danger" (click)="deleteFact(fact.id)"
+            ><ion-icon name="trash-outline" slot="start"></ion-icon
+            >Delete</ion-item-option
+          >
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+  </ion-list>
 </ion-content>
+
+<ion-modal trigger="newfact-modal" #factsModal>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()"
+            ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+          ></ion-button>
+        </ion-buttons>
+        <ion-title>Add Fact</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding" color="lightmimbo">
+      <div class="question">
+        <ion-text class="modal-text">Add New Daily Fact</ion-text>
+      </div>
+      <ion-grid>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-item color="mimbolight">
+              <ion-textarea rows="10" placeholder="Enter Fact..." #txtFact>
+              </ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2" class="ion-text-center">
+            <ion-button class="ion-padding-top" (click)="AddFact(txtFact.value)"
+              ><ion-icon name="save-outline" slot="start"></ion-icon>
+              Add Fact
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal trigger="updatefact-modal" #updatefactModal>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-button (click)="CancelUpdate()"
+            ><ion-icon name="arrow-back-outline" slot="icon-only"> </ion-icon
+          ></ion-button>
+        </ion-buttons>
+        <ion-title>Update Fact</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding" color="lightmimbo">
+      <ion-grid>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-item color="mimbolight">
+              <ion-textarea
+                label="Doggy Fact"
+                labelPlacement="floating"
+                rows="10"
+                #txtUpdatedFact
+                [value]="selectedFact.fact"
+              >
+              </ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-item color="mimbolight">
+              <ion-checkbox
+                #chkSent
+                labelPlacement="start"
+                [checked]="selectedFact.isSent"
+                >Sent</ion-checkbox
+              >
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2">
+            <ion-item color="mimbolight">
+              <ion-text>Sent Date: {{selectedFact.sentDate }}</ion-text>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col sizeSm="8" offsetSm="2" class="ion-text-center">
+            <ion-button
+              class="ion-padding-top"
+              (click)="UpdateFact(chkSent.checked, txtUpdatedFact.value)"
+              ><ion-icon name="save-outline" slot="start"></ion-icon> Update
+              Fact
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -131,6 +131,7 @@ export class EditCaseComponent implements OnInit, OnDestroy {
       })
       .then(async (loadingEl) => {
         loadingEl.present();
+        debugger;
         const updateCaseDTO: UpdateCaseDTO = {
           id: this.selectedCase.id,
           details: this.details,
